@@ -47,3 +47,42 @@ console.log( resultado2 );
 console.log( resultado3 );
 console.log( resultado4 );
 console.log( resultado5 );
+
+
+//===========================================
+// 17. Funciones con objetos como argumentos
+//===========================================
+
+// Definimos una interface
+interface PersonajeLOR {
+
+    nombre: string;
+    pv: number;
+    // Ahora para indicar en mi interfaz que esto es una función hacemos lo siguiente:
+    mostrarHp: () => void;
+    // Y de la misma forma podemos indicar los paráemtros, su tipo y su retorno como por ejemplo:
+    //mostrarHp: ( a: number, b: string, c: boolean ) => void;
+
+
+}
+
+// Cuando indico el retorno de la función lo que estoy indicando es que la función no va a retornar nada
+function curar( personaje: PersonajeLOR, curarX: number ): void {
+
+    personaje.pv += curarX;
+    
+}
+
+const nuevoPersonaje: PersonajeLOR = {
+
+    nombre: 'Strider',
+    pv: 50,
+    mostrarHp() {
+        console.log( 'Puntos de vida:', this.pv );
+    }
+
+}
+
+curar( nuevoPersonaje, 20 );
+
+nuevoPersonaje.mostrarHp();
