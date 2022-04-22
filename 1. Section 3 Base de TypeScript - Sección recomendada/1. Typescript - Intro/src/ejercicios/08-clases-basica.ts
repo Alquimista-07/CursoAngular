@@ -77,3 +77,53 @@ const spiderman: Personaje2 = {}
 //ironman.edad
 
 console.log( ironman );
+
+
+//===========================================
+// 24. Constructor de una clase
+//===========================================
+
+class Heroe2 {
+
+    alterEgo: string;
+    edad: number;
+    nombreReal: string;
+
+    // NOTA: El constructor de la clase no es más que una función que se va a llamar
+    //       cuando creo una instancia de una clase. Pero esto de ver clases en typescript
+    //       definidas de esta forma ya que usualmente voy a ocupar que las propiedades
+    //       tengan un valor y siempre tengan esa data y a la vez sería tedioso enviar en 
+    //       el constructos como parametro e inicializar cada uno de los atributos
+    constructor( alterEgo: string ) {
+        console.log( 'Hey!!!...' );
+        // Como se observa esto se ejecuta antes del console.log ya que
+        // se creo y ejecuto cuando creamos la instancia de la clase y por
+        // esto el constructor es un punto interesante para poder inicializar 
+        // las propiedades de la clase.
+        this.alterEgo = alterEgo;
+    }
+
+}
+
+// Creamos la instancia de la clase
+const ironman2 = new Heroe2( 'Ironman' );
+
+console.log( ironman2 );
+
+//----------------------------------------------------------------------------------------
+//NOTA: Hay una forma corta que se recomienda y se ve bastante la cual es la siguiente:
+//----------------------------------------------------------------------------------------
+class Heroe3 {
+
+    constructor(
+        public alterEgo: string,
+        // Y de la misma forma puedo usar las propiedades opcionales, obligatorias y con valor por defecto
+        public edad?: number,
+        public nombreReal?: string
+     ){}
+
+}
+
+const ironman3 = new Heroe3( 'Ironman', 45, 'Tony Stark' );
+
+console.log( ironman3 );
