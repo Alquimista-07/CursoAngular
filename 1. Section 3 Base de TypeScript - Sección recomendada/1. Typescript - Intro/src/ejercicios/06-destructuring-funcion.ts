@@ -10,7 +10,10 @@ console.log('Hola Mundo!!!...');
 // 21. Desestructuración de argumentos
 //===========================================
 
-interface Producto {
+// NOTA: Para la clase 22. Importaciones y exportaciones ocupamos primero exportar la interface con el fin de que 
+//       pueda ser importada y usada en los demás archivos donde la necesitemos. Para exportarla hacemos lo siguiente:
+
+export interface Producto {
 
     desc: string;
     precio: number;
@@ -31,11 +34,13 @@ const tableta: Producto= {
 
 }
 
+// NOTA: Ahora también para el ejercicio de la clase 22. Importaciones y exportaciones ocupamos exportar
+//       de la misma manera la función para poderla usar en los demás archivos que sea requerida. 
 // function calculaISV( productos: Producto[] ): number {
 //------------------------------------------------------------------------------------
 // Como tambien puedo regresar un arreglo podemos hacer lo siguiente
 //------------------------------------------------------------------------------------
-function calculaISV( productos: Producto[] ): [ number, number ] {
+export function calculaISV( productos: Producto[] ): [ number, number ] {
 
     let total = 0;
 
