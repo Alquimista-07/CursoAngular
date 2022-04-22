@@ -127,3 +127,45 @@ class Heroe3 {
 const ironman3 = new Heroe3( 'Ironman', 45, 'Tony Stark' );
 
 console.log( ironman3 );
+
+//===========================================
+// 25. Extender una clase
+//===========================================
+
+// Extender se hace para añadir ciertas funcionalidades, ciertas
+// propiedades a una clase existente.
+
+// Para el ejercicio vamos a crear otra clase pero también podría ser una
+// interface ya que estas también se pueden extender
+
+class PersonaNormal {
+
+    constructor ( 
+        public nombre: string, 
+        public direccion: string 
+        ){}
+
+}
+
+// Entonces la idea es que yo pueda añadir o expander la clase Heroe4 con todas las propiedades
+// y métodos que persona normal tiene y para ello usamos la palabra reservada extends
+class Heroe4 extends PersonaNormal {
+
+    constructor(
+        public alterEgo: string,
+        public edad: number,
+        public nombreReal:string
+    ){
+        // La llamada al super es en pocas palabras es llamar al constructor de la clase a la cual 
+        // extiende (PersonaNormal). Y le pasamos los parametros que tenga definidos el constructor
+        super( nombreReal, 'New York, USA' ); // Acá pasamos sin el this ya que estamos es haciendo 
+                                              // referencia al argumento que estoy recibiendo en el
+                                              // constructor
+    }
+
+}
+
+// Instanciamos la clase
+const ironman4 = new Heroe4( 'Ironman', 45, 'Tony Stark' );
+
+console.log( ironman4 );
