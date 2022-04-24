@@ -5,35 +5,35 @@
 
 <!--Si quisiera mostrar por ejemplo el valor title que tenemos en el archivo de typescript
     app.component.ts hacemos lo siguiente:-->
-<h1>{{ titulo }}</h1>
+<!-- <h1>{{ titulo }}</h1> -->
 <!--No necesariamente acá solo podemos colocar propiedades que provengan del archivo app.component.ts
     sino que también podemos colocar cualquier expresión de JavaScript por ejemplo-->
-    <h1>{{ 1 + 3 }}</h1>
-    <h1>{{ 'Hola Mundo' }}</h1>
+    <!-- <h1>{{ 1 + 3 }}</h1>
+    <h1>{{ 'Hola Mundo' }}</h1> -->
 
 <!--======================================================================================================================-->
 <!--CLASE: 38. Contador App-->
 <!--======================================================================================================================-->
     
 <!--Como necesito imprimir el valor actual del contador acá agregamos lo siguiente: -->
-<h1>{{ titulo }}</h1> <!--Agregue nuevamente el titulo para el ejercicio pero no es necesario-->
+<!--<h1>{{ titulo }}</h1> <!--Agregue nuevamente el titulo para el ejercicio pero no es necesario-->
 
 <!--Colocamos un botón el cual tien su estilo dentro del styles.css-->
 <!--Adicionalmente usamos los eventos con Angular y los cuales se especifican dentro de (), y en este caso usamos el evento click-->
 <!--Y acá es donde aparece la magia de Angular ya que es capaz de reconocer y redibujar lo que se esta haciendo-->
 <!--NOTA: Esto es para efectos ilustrativos ya que no es recomendable colocar mucha lógica en la parte del template sino que esto debería ir de lado de typescript
           otra cosa es que podríamos usar la expresion numero += 1 pero nos marca error y es porque esto no se acostubra hacer en el ado del template html-->
-<button (click)=" numero = numero + 1; "> + 1 </button>
+<!-- <button (click)=" numero = numero + 1; "> + 1 </button> -->
           
 <!--Usamos la propiedad que creamos en el app.component.ts-->
-<span> {{ numero }} </span> 
+<!-- <span> {{ numero }} </span>  -->
 
 <!--Colocamos un botón el cual tien su estilo dentro del styles.css-->
 <!--Adicionalmente usamos los eventos con Angular y los cuales se especifican dentro de (), y en este caso usamos el evento click-->
 <!--Y acá es donde aparece la magia de Angular ya que es capaz de reconocer y redibujar lo que se esta haciendo-->
 <!--NOTA: Esto es para efectos ilustrativos ya que no es recomendable colocar mucha lógica en la parte del template sino que esto debería ir de lado de typescript
           otra cosa es que podríamos usar la expresion numero += 1 pero nos marca error y es porque esto no se acostubra hacer en el ado del template html-->
-<button (click)=" numero = numero - 1; "> - 1 </button>
+<!-- <button (click)=" numero = numero - 1; "> - 1 </button> -->
 
 <!--======================================================================================================================-->
 <!--CLASE: 39. Métodos en el componente-->
@@ -42,35 +42,47 @@
     con el fin de dejar mucha lógica de este lado del template-->
 <!--======================================================================================================================-->
 
-<h1>{{ titulo }}</h1>
+<!-- <h1>{{ titulo }}</h1> -->
 
-<button (click)="sumar()"> + 1 </button>
+<!-- <button (click)="sumar()"> + 1 </button> -->
           
-<span> {{ numero2 }} </span> 
+<!-- <span> {{ numero2 }} </span>  -->
 
-<button (click)="restar()"> - 1 </button>
+<!-- <button (click)="restar()"> - 1 </button> -->
 
 <!--Ahora para el ejmplo en el cual solo usamos una función para realizar las 2 acciones
     hacemos lo siguiente-->
 
-<h1> {{titulo}} </h1>
+<!-- <h1> {{titulo}} </h1> -->
 
-<button (click)="acumular(+2)"> + 2 </button>
+<!-- <button (click)="acumular(+2)"> + 2 </button> -->
 
-<span> {{numero3}} </span>
+<!-- <span> {{numero3}} </span> -->
 
-<button (click)="acumular(-2)"> - 2 </button>
+<!-- <button (click)="acumular(-2)"> - 2 </button> -->
 
 <!--======================================================================================================================-->
 <!--40. Tarea con el contador-->
 <!--======================================================================================================================-->
 
-<h1> Tarea Contador </h1>
+<!-- <h1> Tarea Contador </h1> -->
 
-<h3>La base es: <strong> {{base}} </strong></h3>
+<!-- <h3>La base es: <strong> {{base}} </strong></h3> -->
 
-<button (click)="acumular2( base )"> + {{base}}</button>
+<!-- <button (click)="acumular2( base )"> + {{base}}</button> -->
 
-<span> {{numero4}} </span>
+<!-- <span> {{numero4}} </span> -->
 
-<button (click)="acumular2( -base )"> - {{base}} </button>
+<!-- <button (click)="acumular2( -base )"> - {{base}} </button> -->
+
+<!--======================================================================================================================-->
+<!--41. Crear un componente manualmente-->
+<!--======================================================================================================================-->
+<!--Ahora vamos a tomar el componente app-contador que creamos manualemente para usarlo acá-->
+<app-contador></app-contador>
+
+<!--Ahora cual es la ventaja de esto. Es que si necesitara más instancias de este modulo, es decir,
+    si necesitara volver a usar ese componente o modulo lo puedo hacer y manejan su estado de manera
+    independiente, pero si necesitara que compartieran su información esto se puede hacer-->
+<app-contador></app-contador>
+<app-contador></app-contador>
