@@ -5,5 +5,25 @@
 <h1>{{ titulo }}</h1>
 <!--No necesariamente acá solo podemos colocar propiedades que provengan del archivo app.component.ts
     sino que también podemos colocar cualquier expresión de JavaScript por ejemplo-->
-<h1>{{ 1 + 3 }}</h1>
-<h1>{{ 'Hola Mundo' }}</h1>
+    <h1>{{ 1 + 3 }}</h1>
+    <h1>{{ 'Hola Mundo' }}</h1>
+    
+<!--Como necesito imprimir el valor actual del contador acá agregamos lo siguiente: -->
+<h1>{{ titulo }}</h1> <!--Agregue nuevamente el titulo para el ejercicio pero no es necesario-->
+
+<!--Colocamos un botón el cual tien su estilo dentro del styles.css-->
+<!--Adicionalmente usamos los eventos con Angular y los cuales se especifican dentro de (), y en este caso usamos el evento click-->
+<!--Y acá es donde aparece la magia de Angular ya que es capaz de reconocer y redibujar lo que se esta haciendo-->
+<!--NOTA: Esto es para efectos ilustrativos ya que no es recomendable colocar mucha lógica en la parte del template sino que esto debería ir de lado de typescript
+          otra cosa es que podríamos usar la expresion numero += 1 pero nos marca error y es porque esto no se acostubra hacer en el ado del template html-->
+<button (click)=" numero = numero + 1; "> + 1 </button>
+          
+<!--Usamos la propiedad que creamos en el app.component.ts-->
+<span> {{ numero }} </span> 
+
+<!--Colocamos un botón el cual tien su estilo dentro del styles.css-->
+<!--Adicionalmente usamos los eventos con Angular y los cuales se especifican dentro de (), y en este caso usamos el evento click-->
+<!--Y acá es donde aparece la magia de Angular ya que es capaz de reconocer y redibujar lo que se esta haciendo-->
+<!--NOTA: Esto es para efectos ilustrativos ya que no es recomendable colocar mucha lógica en la parte del template sino que esto debería ir de lado de typescript
+          otra cosa es que podríamos usar la expresion numero += 1 pero nos marca error y es porque esto no se acostubra hacer en el ado del template html-->
+<button (click)=" numero = numero - 1; "> - 1 </button>

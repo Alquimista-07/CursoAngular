@@ -25,4 +25,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   titulo: string = 'Contador App'; // Acá agregamos el tipado ya que es algo común
+  // Creo una propiedad nueva con su respectivo tipo
+  numero:number = 10;
 }
