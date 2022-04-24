@@ -54,4 +54,19 @@ export class AppComponent {
   acumular( valor: number ): void{
     this.numero3 += valor;
   }
+
+  //======================================================================================================================
+  // CLASE: 40. Tarea con el contador-->
+  //======================================================================================================================
+
+  // Creamos unas nuevas propiedades
+  numero4: number = 55;
+  base   : number = 5;
+
+  // Creamos una nueva función
+  acumular2( valor:number ): void{
+
+    this.numero4 += valor;
+
+  }
 }
