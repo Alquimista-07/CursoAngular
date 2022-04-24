@@ -1,3 +1,6 @@
+<!--======================================================================================================================-->
+<!--CLASE: 37. App Component-->
+<!--======================================================================================================================-->
 <!-- <h1>Hola Mundo!!!...</h1> -->
 
 <!--Si quisiera mostrar por ejemplo el valor title que tenemos en el archivo de typescript
@@ -7,6 +10,10 @@
     sino que también podemos colocar cualquier expresión de JavaScript por ejemplo-->
     <h1>{{ 1 + 3 }}</h1>
     <h1>{{ 'Hola Mundo' }}</h1>
+
+<!--======================================================================================================================-->
+<!--CLASE: 38. Contador App-->
+<!--======================================================================================================================-->
     
 <!--Como necesito imprimir el valor actual del contador acá agregamos lo siguiente: -->
 <h1>{{ titulo }}</h1> <!--Agregue nuevamente el titulo para el ejercicio pero no es necesario-->
@@ -27,3 +34,29 @@
 <!--NOTA: Esto es para efectos ilustrativos ya que no es recomendable colocar mucha lógica en la parte del template sino que esto debería ir de lado de typescript
           otra cosa es que podríamos usar la expresion numero += 1 pero nos marca error y es porque esto no se acostubra hacer en el ado del template html-->
 <button (click)=" numero = numero - 1; "> - 1 </button>
+
+<!--======================================================================================================================-->
+<!--CLASE: 39. Métodos en el componente-->
+<!--======================================================================================================================-->
+<!--Acá agrego el código nuevamente para la explicación con los métodos que se crean del lado de typscript
+    con el fin de dejar mucha lógica de este lado del template-->
+<!--======================================================================================================================-->
+
+<h1>{{ titulo }}</h1>
+
+<button (click)="sumar()"> + 1 </button>
+          
+<span> {{ numero2 }} </span> 
+
+<button (click)="restar()"> - 1 </button>
+
+<!--Ahora para el ejmplo en el cual solo usamos una función para realizar las 2 acciones
+    hacemos lo siguiente-->
+
+<h1> {{titulo}} </h1>
+
+<button (click)="acumular(+2)"> + 2 </button>
+
+<span> {{numero3}} </span>
+
+<button (click)="acumular(-2)"> - 2 </button>

@@ -27,4 +27,31 @@ export class AppComponent {
   titulo: string = 'Contador App'; // Acá agregamos el tipado ya que es algo común
   // Creo una propiedad nueva con su respectivo tipo
   numero:number = 10;
+
+  //======================================================================================================================
+  // CLASE: 39. Métodos en el componente-->
+  //======================================================================================================================
+
+  // Creo otra propiedad para que no choque con el anterior ejercicio
+  numero2:number = 20;
+
+  // Acá podríamos crearnos unos métodos para el contador ya que como se mencionó no es muy aconsejable
+  // meter mucha lógica del lado del template
+  sumar(){
+
+    this.numero2 += 1;
+  }
+
+  restar(){
+    this.numero2 -= 1;
+  }
+
+  // Otra forma que podríamos hacerlo es simplmente creando una sola función que haga las 2 acciones
+  // entonces para esto hacemos lo siguiente:
+
+  numero3:number = 30;
+
+  acumular( valor: number ): void{
+    this.numero3 += valor;
+  }
 }
