@@ -9,12 +9,14 @@ import { contadorComponent } from './contador/contador.component';
 
 // Impoertamos el heroe component
 import { HeroeComponent } from './heroes/heroe/heroe.component';
+import { ListadoComponent } from './heroes/listado/listado.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     contadorComponent,
-    HeroeComponent
+    HeroeComponent,
+    ListadoComponent
   ],
   imports: [
     BrowserModule
