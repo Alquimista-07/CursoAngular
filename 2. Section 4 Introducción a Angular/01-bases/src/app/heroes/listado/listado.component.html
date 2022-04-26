@@ -1,10 +1,17 @@
 <p>listado De Héroes</p>
 
-<div *ngIf=" heroeBorrado ">
+<div *ngIf=" heroeBorrado; else noBorrado ">
 <!--La siguiente opción también sirve-->
 <!-- <div *ngIf=" heroeBorrado !== '' "> -->
     <h3>Heroe Borrado: <small>{{ heroeBorrado }}</small></h3>
 </div>
+
+<!--Ahora para complementar el else agregado en el anterior div, vamos a ocupar lo que se conoce como una referencia
+    local, la cual la identificamos porque lleva el símbolo # y en el siguiente ejemplo se llama $noBorrado-->
+<ng-template #noBorrado>
+    <h3>No ha borrado nada.</h3>
+</ng-template>
+
 
 <button (click)="borrarHeroe()">
     Borrar Héroe
