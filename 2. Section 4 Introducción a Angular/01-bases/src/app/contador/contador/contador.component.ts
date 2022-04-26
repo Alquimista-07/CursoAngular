@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
 })
 
 // Creamos la clase manualmente y la exportamos para usarla en otros lugares
-export class contadorComponent {
+export class ContadorComponent {
 
   titulo: string = 'Contador App';
 

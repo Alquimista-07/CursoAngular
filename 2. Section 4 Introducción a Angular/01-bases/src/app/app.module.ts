@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { ContadorModule } from './contador/contador.module';
 
 // Importamos el componente ya que si no lo agregamos al module nos va a dar error
 // cuando tratemos de usarlo en el template del app.component
-import { contadorComponent } from './contador/contador.component';
+// import { contadorComponent } from './contador/contador/contador.component';
 
 // Importamos el modulo HeroesModule que creamos en el archivo heroes.module.ts
 import { HeroesModule } from './heroes/heroes.module';
+
+// Tarea:
+// Crear un nuevo módulo llamado contadorModule
+// declaraciones y exportaciones 
 
 // Comentamos lo siguiente ya que los tenemos ya creados e importados en el modulo que creamos
 // llamado heroes.module.ts
@@ -19,7 +24,7 @@ import { HeroesModule } from './heroes/heroes.module';
 @NgModule({
   declarations: [
     AppComponent,
-    contadorComponent,
+    //contadorComponent,
     // Comentamos lo siguiente ya que los tenemos ya creados e importados en el modulo que creamos
     // llamado heroes.module.ts
     //HeroeComponent
@@ -29,7 +34,9 @@ import { HeroesModule } from './heroes/heroes.module';
     BrowserModule,
     // Ahora recordando que los imports indica que acá adentro van modulos entonces
     // importamos el modulo HeroesModule que creamos en el archivo heroes.module.ts
-    HeroesModule
+    HeroesModule,
+    // importar aqui el contador
+    ContadorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

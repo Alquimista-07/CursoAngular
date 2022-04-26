@@ -21,6 +21,9 @@ import { ListadoComponent } from './listado/listado.component';
     // Cuanto veamos esto imports indica que acá adentro van modulos, ya que usualmente solo
     // modulos son objetos que se colocan en los imports
     imports: [
+        // Entonces si nosotros estamos usando el *ngIf, el *NgFor entre otras cosas en ese modulo de nuestra alicación
+        // (En este caso en el componente listado.component.html) nos va a dar error si no usamos el
+        // CommonModule
         CommonModule
     ]
 })
