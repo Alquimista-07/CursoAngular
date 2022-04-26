@@ -7,6 +7,18 @@ import { Component } from "@angular/core"
 
 export class HeroeComponent {
 
-    
+    nombre: string = 'Ironnman';
+    edad  : number = 45;
+
+    // Creamos un getter
+    get nombreCapitalizado(){
+        return this.nombre.toUpperCase();
+    }
+
+    obtenerNombre(): string{
+
+        return `${ this.nombre } - ${ this.edad }`;
+
+    }
 
 }
