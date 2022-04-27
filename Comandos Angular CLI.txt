@@ -54,3 +54,9 @@ COMANDOS ANGULAR CLI
 
 	ng generate module nombreModulo    -> Este es el comando completo
 	ng g m nombreModulo                -> Esta es la forma corta
+
+	************************************************************************************************
+	NOTA: OJO si quiero empaquetar en modulos los componentes y que se agreguen automaticamente
+	      en el modulo tengo que crear primero el modulo y luego si crear los componente haciendo
+	      referencia a la ruta del modulo.
+	************************************************************************************************
