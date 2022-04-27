@@ -17,12 +17,15 @@
         <h3>Agregar</h3>
         <hr>
 
-        <form>
+        <!--Angular dispone de un módulo cuando nosotros necesitamos trabajar con formularios
+            y de hecto tiene varios módulos para el manejo de formularios, los formularios normales
+            y los formularios reactivos-->
+        <form (ngSubmit)="agregar()">
             <input type="text" placeholder="Nombre"/>
 
             <input type="number" placeholder="Poder"/>
 
-            <button>
+            <button type="submit">
                 Agregar
             </button>
         </form>
