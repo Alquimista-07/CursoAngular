@@ -1,0 +1,37 @@
+COMANDOS ANGULAR CLI
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un componente
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate component nombreComponente       -> Esta es el comando completo
+	ng g c nombreComponente                      -> Esta es la forma corta
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un componente en un directorio en específico
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate component directorio/nombreComponente      -> Este es el comando completo
+	ng g c directorio/nombreComponente                     -> Esta es la forma corta
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un componente obviando que me cree el archivo de pruebas
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate component nombreComponente --skipTests     -> Este es el comando completo
+	ng g c nombreComponente --skipTests                    -> Esta es la forma corta
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un componente obviando que me cree el archivo de pruebas
+  y lo coloque en un directorio en específico
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate component directorio/nombreComponente --skipTests     -> Este es el comando completo
+	ng g c directorio/nombreComponente --skipTests                    -> Esta es la forma corta
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un modulo
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate module nombreModulo    -> Este es el comando completo
+	ng g m nombreModulo                -> Esta es la forma corta
