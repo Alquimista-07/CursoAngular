@@ -31,6 +31,8 @@ export class MainPageComponent {
   agregarNuevoPersonaje( argumento: Personaje ){
     console.log( 'Main Page Component' );
     console.log( argumento );
+    // La siguiente palabra reservada nos permite pausar para depurar el codigo
+    //debugger;
     this.personajes.push( argumento );
   }
 
