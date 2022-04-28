@@ -6,8 +6,12 @@
     <div class="col">
 
         <!--Vamos a dividir aún más la aplicación en componentes hijos para evitar que el html crezca mucho-->
-        <app-personajes></app-personajes>
-        
+        <!--Acá asociamos la propiedad usando las [] y lo que estamos haciendo es decirle que haga referencia a mi propiedad 
+            personajes que se encuentra dentro de mi archivo main-page.component.ts-->
+        <!-- <app-personajes [data]="personajes"> -->
+        <app-personajes [personajes]="personajes">
+        </app-personajes>
+
     </div>
 
     <div class="col">

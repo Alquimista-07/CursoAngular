@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Personaje {
-  nombre: string;
-  poder: number;
-}
+// Importamos la interface
+import { Personaje } from '../interfaces/dbz.interface';
 
 @Component({
   selector: 'app-main-page',

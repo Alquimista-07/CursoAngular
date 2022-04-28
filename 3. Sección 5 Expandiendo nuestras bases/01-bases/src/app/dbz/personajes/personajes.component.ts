@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+// Importamos la interface
+import { Personaje } from '../interfaces/dbz.interface';
 
 @Component({
   selector: 'app-personajes',
@@ -6,6 +9,10 @@ import { Component } from '@angular/core';
 })
 export class PersonajesComponent {
 
-  personajes: any[] = [];
+  // Ahora vamos a usar lo siguiente para pasarle información del componente padre 
+  // al componente hijo
+  // Ahora si quiero que externamente se llame de otra forma coloco dentro de '' el nombre
+  // @Input('data') personajes: any[] = [];
+  @Input() personajes: Personaje[] = [];
 
 }
