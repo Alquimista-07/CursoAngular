@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Importamos la interface
 import { Personaje } from '../interfaces/dbz.interface';
@@ -21,34 +21,12 @@ export class MainPageComponent {
     }
   ];
 
+  // Tarea: Definimos el nuevo acá con el valor por defecto que se quiere pasar al main.page.hml 
+  //        para que posteriormene lo pase por el input al componente agregar.component.ts
   nuevo: Personaje = {
-    nombre: '',
-    poder: 0
+    nombre: 'Maestro Roshi',
+    poder: 1000
   }
 
-  agregar(){
-
-    // Acá el .trim() sirve para borrar espacios en blanco
-    if( this.nuevo.nombre.trim().length === 0){
-      return;
-    }
-
-    console.log( 'Hey!!!... Esta es una prueba' );
-    console.log( this.nuevo );
-
-    // Tarea: Insertar al objeto personajes
-    this.personajes.push( this.nuevo );
-
-    // Tarea: Inicializarlo a un objeto vacio sin nombre y poder en cero
-    this.nuevo = {
-      nombre: '',
-      poder: 0
-    };
-
-  }
-
-  // cambiarNombre( event: any ){
-  //   console.log( event.target.value );
-  // }
 
 }

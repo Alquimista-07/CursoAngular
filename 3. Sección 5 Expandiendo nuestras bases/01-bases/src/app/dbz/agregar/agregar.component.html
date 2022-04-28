@@ -1,0 +1,44 @@
+<!--Tarea: Mover el html al nuevo componente desde el <h3> hasta el /form-->
+<h3>
+  Agregar <small>{{ nuevo.nombre }}</small>
+</h3>
+<hr />
+
+<!--Angular dispone de un módulo cuando nosotros necesitamos trabajar con formularios
+            y de hecto tiene varios módulos para el manejo de formularios, los formularios normales
+            y los formularios reactivos-->
+
+<!--*******************************************************
+            Para tener en cuenta pero acá usamos es el NgModel:
+            <!--*******************************************************
+            Lo que hacemos con las llaves [] (como lo vemos en el input [value]) es indicarle de que en el lado de
+            nuestro componente (main-page.component.ts) hay alguna propiedad, alguna variable o algún valor el cual yo 
+            quiero enlazarlo directamente en acá (main-page.component.html) acordemonos del concepto de one way data binding - enlace
+            en una sola vía-->
+<!--*******************************************************
+        
+        <!--NOTA: Cuando colocamos ngModel entre [] y () significa que quiero tanto escuchar como emitir el evento y el valor de ese evento caga
+            en la propiedad nuevo.nombre que se encuentra dentro de main-page.component.ts-->
+
+<form (ngSubmit)="agregar()">
+  <input
+    type="text"
+    placeholder="Nombre"
+    name="nombre"
+    [(ngModel)]="nuevo.nombre"
+  />
+  <!--Esto es una forma y va dentro del input: 
+                [value]="nuevo.nombre"
+                (input)="cambiarNombre( $event )" -->
+
+  <input
+    type="number"
+    placeholder="Poder"
+    name="poder"
+    [(ngModel)]="nuevo.poder"
+  />
+  <!--Esto es una forma y va dentro del input:
+                [value]="nuevo.poder" -->
+
+  <button type="submit">Agregar</button>
+</form>
