@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 // Tarea: Importamos la interface
 import { Personaje } from '../interfaces/dbz.interface';
@@ -10,7 +10,7 @@ import { Personaje } from '../interfaces/dbz.interface';
 export class AgregarComponent {
 
   // Tarea: Recibir el arreglo de personajes como un @Input
-  @Input() personajes: Personaje[] = [];
+  // @Input() personajes: Personaje[] = [];
 
   // Tarea: Mover nuevo y agregar al componente agregar,
   // adicionalmentetambién colocarlo como un @Input
@@ -18,6 +18,9 @@ export class AgregarComponent {
     nombre: '',
     poder: 0
   }
+
+  // EL @Output sirve para emitir eventos
+  @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
 
   agregar() {
 
@@ -29,8 +32,11 @@ export class AgregarComponent {
     console.log('Hey!!!... Esta es una prueba');
     console.log(this.nuevo);
 
+    // Emitimos el evento
+    this.onNuevoPersonaje.emit( this.nuevo );
+
     // Tarea: Insertar al objeto personajes
-    this.personajes.push(this.nuevo);
+    // this.personajes.push(this.nuevo);
 
     // Tarea: Inicializarlo a un objeto vacio sin nombre y poder en cero
     this.nuevo = {
@@ -38,7 +44,7 @@ export class AgregarComponent {
       poder: 0
     };
 
-    console.log( this.personajes );
+    // console.log( this.personajes );
 
   }
 

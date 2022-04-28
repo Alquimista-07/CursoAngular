@@ -20,9 +20,14 @@
         <!--       2. Pasamos los [personajes] ya que si no los pasamos estaríamos arrancando con un arreglo vacío y como lo tengo en un @Input lo podemos mandar facilmente y ya tenemos los valores-->
         <!--       3. Mandamos el [nuevo] para establecerle un valor por defecto al formulario -->
         <app-agregar 
+        [nuevo]="nuevo"
+        (onNuevoPersonaje)="agregarNuevoPersonaje( $event )"
+        ></app-agregar>
+
+        <!-- <app-agregar 
             [personajes]="personajes"
             [nuevo]="nuevo"
-        ></app-agregar>
+        ></app-agregar> -->
 
     </div>
 
