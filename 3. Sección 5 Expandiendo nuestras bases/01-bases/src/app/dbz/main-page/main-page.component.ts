@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 // Importamos la interface
 import { Personaje } from '../interfaces/dbz.interface';
 
+// Importamos el servicio
+import { DbzService } from '../services/dbz.service';
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -35,6 +38,10 @@ export class MainPageComponent {
     //debugger;
     this.personajes.push( argumento );
   }
+
+  // Definimos el constructor y hacemos una inyección de dependencias
+  // en este caso inyectamos el servicio
+  constructor( private dbzService: DbzService ){}
 
 
 }
