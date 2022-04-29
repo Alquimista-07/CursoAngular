@@ -1,0 +1,10 @@
+<h3>Personajes</h3>
+<hr />
+<!--Cargar y listar los personajes a partir del objeto personajes que viene del get personajes del archivo
+    personajes.component.ts que a su vez proviene del servicio-->
+<ul *ngFor="let personaje of personajes">
+  <li>
+    <!--Acá cuando indicamos el pipe (|) y number en el apartado personaje.poder lo que estamos haciendo es colocar la , para separar miles-->
+    {{ personaje.nombre }} - {{ personaje.poder | number }}
+  </li>
+</ul>

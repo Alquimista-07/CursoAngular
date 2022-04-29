@@ -1,0 +1,24 @@
+<h1>Dragon Ball Z</h1>
+<hr>
+
+<div class="row">
+
+    <div class="col">
+
+        <!--Vamos a dividir aún más la aplicación en componentes hijos para evitar que el html crezca mucho-->
+        <!--Entonces creamos un componente hijo que muestra la lista de personajes-->
+        <app-personajes></app-personajes>
+
+    </div>
+
+    <div class="col">
+        
+        <!--Tarea: 1. Mostramos nuevamente el formulario de agregar-->
+        <!--       2. Mandamos el [nuevo] para establecerle un valor por defecto al formulario -->
+        <app-agregar 
+        [nuevo]="nuevo"
+        ></app-agregar>
+
+    </div>
+
+</div>
