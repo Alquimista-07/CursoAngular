@@ -3,6 +3,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 // Tarea: Importamos la interface
 import { Personaje } from '../interfaces/dbz.interface';
 
+// Importamos el servicio
+import { DbzService } from '../services/dbz.service';
+
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html'
@@ -19,8 +22,11 @@ export class AgregarComponent {
     poder: 0
   }
 
+  // Inyectamos el servicio
+  constructor( private dbzService: DbzService ){}
+
   // EL @Output sirve para emitir eventos
-  @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
+  // @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
 
   agregar() {
 
@@ -33,10 +39,13 @@ export class AgregarComponent {
     console.log(this.nuevo);
 
     // Emitimos el evento
-    this.onNuevoPersonaje.emit( this.nuevo );
+    // this.onNuevoPersonaje.emit( this.nuevo );
 
     // Tarea: Insertar al objeto personajes
     // this.personajes.push(this.nuevo);
+
+    // Ya con el servicio importado e inyectado podemos hacer referencia al método agregarPersonaje
+    this.dbzService.agregarPersonaje( this.nuevo );
 
     // Tarea: Inicializarlo a un objeto vacio sin nombre y poder en cero
     this.nuevo = {

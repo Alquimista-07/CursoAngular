@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { Personaje } from "../interfaces/dbz.interface";
+import { Personaje } from '../interfaces/dbz.interface';
 
 // NOTA: Este servicio a pasar de que ya lo importamos en el modulo dbz solo se va a ejecutar
 //       hasta que alguien lo requiera y cuando sea requerido se va a crear la primera instancia
@@ -10,6 +10,9 @@ import { Personaje } from "../interfaces/dbz.interface";
 //NOTA: El servicio es una clase abstracta donde vamos a colocar la información y los métodos para 
 //      interactuar con fuentes externas o manipular el estado de la data de la aplicación, y nos
 //      permite de una manera centralizarlos
+
+//NOTA: Generalmente en los servicios se definen primero las propiedades, luego getters y setters, luego
+//      el constructor y abajo del constructor vienen los métodos
 @Injectable()
 export class DbzService {
 
@@ -34,7 +37,14 @@ export class DbzService {
       }
 
     constructor(){
-        console.log( 'Servicio Inicializado!!!...' );
+        // console.log( 'Servicio Inicializado!!!...' );
+    }
+
+    // Creamos el método para agregar personajes
+    agregarPersonaje( personaje: Personaje ){
+
+        this._personajes.push( personaje );
+
     }
 
 }
