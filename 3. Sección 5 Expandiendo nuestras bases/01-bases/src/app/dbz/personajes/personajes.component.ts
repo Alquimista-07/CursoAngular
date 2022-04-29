@@ -16,7 +16,12 @@ export class PersonajesComponent {
   // al componente hijo
   // Ahora si quiero que externamente se llame de otra forma coloco dentro de '' el nombre
   // @Input('data') personajes: any[] = [];
-  @Input() personajes: Personaje[] = [];
+  // @Input() personajes: Personaje[] = [];
+
+  // Accedemos a los personajes retornando el getter que se creo en el servicio
+  get personajes(){
+    return this.dbzService.personajes;
+  }
 
   // Definimos el constructor y hacemos una inyección de dependencias
   // en este caso inyectamos el servicio

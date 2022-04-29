@@ -6,28 +6,17 @@
     <div class="col">
 
         <!--Vamos a dividir aún más la aplicación en componentes hijos para evitar que el html crezca mucho-->
-        <!--Acá asociamos la propiedad usando las [] y lo que estamos haciendo es decirle que haga referencia a mi propiedad 
-            personajes que se encuentra dentro de mi archivo main-page.component.ts-->
-        <!-- <app-personajes [data]="personajes"> -->
-        <app-personajes [personajes]="personajes">
-        </app-personajes>
+        <app-personajes></app-personajes>
 
     </div>
 
     <div class="col">
         
         <!--Tarea: 1. Mostramos nuevamente el formulario-->
-        <!--       2. Pasamos los [personajes] ya que si no los pasamos estaríamos arrancando con un arreglo vacío y como lo tengo en un @Input lo podemos mandar facilmente y ya tenemos los valores-->
-        <!--       3. Mandamos el [nuevo] para establecerle un valor por defecto al formulario -->
+        <!--       2. Mandamos el [nuevo] para establecerle un valor por defecto al formulario -->
         <app-agregar 
         [nuevo]="nuevo"
-        (onNuevoPersonaje)="agregarNuevoPersonaje( $event )"
         ></app-agregar>
-
-        <!-- <app-agregar 
-            [personajes]="personajes"
-            [nuevo]="nuevo"
-        ></app-agregar> -->
 
     </div>
 
