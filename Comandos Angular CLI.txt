@@ -60,3 +60,10 @@ COMANDOS ANGULAR CLI
 	      en el modulo tengo que crear primero el modulo y luego si crear los componente haciendo
 	      referencia a la ruta del modulo.
 	************************************************************************************************
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite generar la versión de producción
+-----------------------------------------------------------------------------------------------------------
+
+	ng build --prod
+
