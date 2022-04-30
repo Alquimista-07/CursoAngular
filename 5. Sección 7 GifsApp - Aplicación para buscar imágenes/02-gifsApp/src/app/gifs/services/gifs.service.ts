@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { HttpClient } from '@angular/common/http';
+
 // Este providedIn es una característica añadida a Angular la cual permite que los servicios
 // puedan estar definidos en el momneto en que se contruye bunddle de la aplicación.
 // NOTA: Y al especificar este providedIn: 'oot' en el decorador le dice a Angular que no importa en
@@ -11,6 +13,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GifsService {
+
+  // API Key que creamos en GHIPY Developers
+  // Web Oficial: https://developers.giphy.com/
+  private apiKey: string = 'IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6';
 
   // Creamos una propiedad privada para manejar los strings del litado o historia
   // que se muestra en nuestra aplicación
@@ -25,6 +31,9 @@ export class GifsService {
     return [...this._historial];
 
   }
+
+  // Inyectamos el servicio que viene en el modulo de angular y que me permite hacer peticiones http
+  constructor( private http: HttpClient ){ }
 
   // Creamos la función para insertar valores al hitorial
   // Y obligamos a que la función siempre va a tener un valor
@@ -44,13 +53,21 @@ export class GifsService {
 
       // Insertamos al inicio con unshift
       this._historial.unshift( query );
+      // NOTA: Limitamos la cantidad de inserciones que tenemos en el historial a 10.
+      //       Hay varias formas de hacer esto, pero una sencilla es que cuando alguien
+      //       intente obtener el historial, lo podemos cortar con splice
+      this._historial = this._historial.splice( 0, 10 );
 
     }
 
-    // NOTA: Limitamos la cantidad de inserciones que tenemos en el historial a 10.
-    //       Hay varias formas de hacer esto, pero una sencilla es que cuando alguien
-    //       intente obtener el historial, lo podemos cortar con splice
-    this._historial = this._historial.splice( 0, 10 );
+    // Usamos un objeto de Angular que nos permite hacer peticiones http,
+    // por lo tanto en nuestro app.module.ts importamos el modulo para las
+    // peticiones http. Y posteriormente vamos a usar un observador.
+    // NOTA: El subscribe se va a ejecutar cuando tengamos la resolución del get
+    this.http.get( 'https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=dbz&limit=10' )
+        .subscribe( ( resp: any ) => {
+          console.log( resp.data );
+        });
 
     console.log( this._historial );
 

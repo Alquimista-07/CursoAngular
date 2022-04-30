@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// Importamos el modulo de Angular para hacer peticiones http
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -12,6 +14,8 @@ import { GifsModule } from './gifs/gifs.module';
   ],
   imports: [
     BrowserModule,
+    // Importamos el modulo de Angular para hacer peticiones http
+    HttpClientModule,
     // Agregamos el modulo share
     SharedModule,
     // Agegamos el modulo de gifs
