@@ -1,2 +1,11 @@
 <h5>Buscar:</h5>
-<input type="text" class="form-control" placeholder="Buscar gifs..." />
+<!-- Como no estamos manejando formularios (NgForms) debido a que solo es una simple caja de texto
+     vamos a manejar el evento de otra forma para cuando presione enter -->
+<!-- Adicionalmente cramos una referencia local (#txtBuscar) para obtener la información de la caja de texto -->
+<input 
+    type="text" 
+    class="form-control" 
+    placeholder="Buscar gifs..."
+    (keyup.enter)="buscar()"
+    #txtBuscar
+    />
