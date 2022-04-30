@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
+import { GifsService } from '../services/gifs.service';
+
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
@@ -16,12 +18,17 @@ export class BusquedaComponent {
 //       Para ver más documentación podemos visitar: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator
 @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>;
 
+  // Inyectamos el servicio
+  constructor( private gifsService: GifsService ){ }
+
   // Función para buscar 
   buscar() {
 
     //console.log( this.txtBuscar );
     const valor = this.txtBuscar.nativeElement.value;
-    console.log( valor );
+    //console.log( valor );
+
+    this.gifsService.buscarGifs( valor );
 
     // Mandamos como vacío para que se limpie loa caja de texto
     this.txtBuscar.nativeElement.value = '';    
