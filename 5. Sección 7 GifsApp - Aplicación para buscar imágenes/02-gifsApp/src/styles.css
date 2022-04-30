@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Definimos atributos en el html y el body */
+html, body {
+    height: 100%;
+}
+
+/* Definimos atributos al sidebar haciendo referencia por el id */
+#sidebar {
+    height: 100%; /* El tamaño máximo es toda la pantalla */
+    min-height: 100vh; /* Tamaño mínimo es todo lo que ete en la pantalla */
+    min-width: 180px;
+}
