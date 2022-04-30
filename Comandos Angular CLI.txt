@@ -68,8 +68,15 @@ COMANDOS ANGULAR CLI
 	ng build --prod
 
 -----------------------------------------------------------------------------------------------------------
-* El siguiente comando me permite generar un componente si el archivo de pruebas ni el archivo de css
+* El siguiente comando me permite generar un servicio
 -----------------------------------------------------------------------------------------------------------
 
-	ng g c nombreComponente --skipTests -is
+	ng generate service nombreServicio           -> Este es el comando completo
+	ng g s nombreServicio                        -> Esta es la forma corta
 	
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite generar un servicio en un directorio especifico
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate service ruta/nombreServicio      -> Este es el comando completo
+	ng g s directorio/nombreServicio             -> Esta es la forma corta
