@@ -22,6 +22,10 @@ export class GifsService {
   // que se muestra en nuestra aplicación
   private _historial: string[] = [];
 
+  // Almacenamos la data que obtenemos de la api al realizar la busqueda
+  // TODO: Cambiar any por su tipo correspondiente
+  public resultados: any[] = [];
+
   // Obtenemos el historial y rompemos la relación usando los spreds "..."
   // para regresar un nuevo arreglo como habíamos visto en videos anteriores 
   // y que sirve para que evitemos alterar la propiedad de manera herrada y alteremos 
@@ -64,9 +68,10 @@ export class GifsService {
     // por lo tanto en nuestro app.module.ts importamos el modulo para las
     // peticiones http. Y posteriormente vamos a usar un observador.
     // NOTA: El subscribe se va a ejecutar cuando tengamos la resolución del get
-    this.http.get( 'https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=dbz&limit=10' )
+    this.http.get( `https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=${ query }&limit=10` )
         .subscribe( ( resp: any ) => {
           console.log( resp.data );
+          this.resultados = resp.data;
         });
 
     console.log( this._historial );
