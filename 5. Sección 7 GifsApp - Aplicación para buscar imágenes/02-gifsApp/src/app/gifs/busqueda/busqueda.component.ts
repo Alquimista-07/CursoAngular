@@ -28,6 +28,12 @@ export class BusquedaComponent {
     const valor = this.txtBuscar.nativeElement.value;
     //console.log( valor );
 
+    // Controlamos para que no haga nada cuando no coloquemos nada 
+    // en la caja de texto y le demos enter
+    if( valor.trim().length === 0 ){
+      return;
+    }
+
     this.gifsService.buscarGifs( valor );
 
     // Mandamos como vacío para que se limpie loa caja de texto

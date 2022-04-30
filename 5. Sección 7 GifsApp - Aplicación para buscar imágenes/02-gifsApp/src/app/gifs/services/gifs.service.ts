@@ -27,10 +27,30 @@ export class GifsService {
   }
 
   // Creamos la función para insertar valores al hitorial
-  buscarGifs( query: string ){
+  // Y obligamos a que la función siempre va a tener un valor
+  // y lo estoy indicando cuando coloco el igual a '';
+  buscarGifs( query: string = '' ) {
 
-    // Insrtamos al inicio con unshift
-    this._historial.unshift( query );
+    // Ahora ya que al ingresar la misma palabra en minúscula o mayúscula e teoría son diferentes
+    // pero no quiero que esto suceda ya que dicen lo mismo, entonces lo que voya a hacer es validar 
+    // para convertir y almacenar todo en minúscula.
+    // NOTA: Uso el trim() para borrar espacios adelante y atrás
+    query = query.trim().toLocaleLowerCase();
+
+    // Validamos para evitar ingresar valores repetidos, y para eso preguntamos que si no lo 
+    // incluye lo inserte, de lo contrario no hace nada. Es decir lo voy a insertar si y solo 
+    // si no existe.
+    if ( !this._historial.includes( query ) ) {
+
+      // Insertamos al inicio con unshift
+      this._historial.unshift( query );
+
+    }
+
+    // NOTA: Limitamos la cantidad de inserciones que tenemos en el historial a 10.
+    //       Hay varias formas de hacer esto, pero una sencilla es que cuando alguien
+    //       intente obtener el historial, lo podemos cortar con splice
+    this._historial = this._historial.splice( 0, 10 );
 
     console.log( this._historial );
 
