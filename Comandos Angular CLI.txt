@@ -67,3 +67,9 @@ COMANDOS ANGULAR CLI
 
 	ng build --prod
 
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite generar un componente si el archivo de pruebas ni el archivo de css
+-----------------------------------------------------------------------------------------------------------
+
+	ng g c nombreComponente --skipTests -is
+	
