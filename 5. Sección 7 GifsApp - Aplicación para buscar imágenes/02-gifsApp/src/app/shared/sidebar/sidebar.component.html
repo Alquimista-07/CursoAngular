@@ -8,6 +8,7 @@
       <!-- Cuando mandamos el pipe titlecase lo que hace es capitalizarnos correctamente la primera letra
            de la palabra incluso cuando son palabras compuestas -->
       <a *ngFor="let item of historial" 
+      (click)="buscar( item )"
       href="#" class="list-group-item list-group-item-action">
         {{ item | titlecase }}
       </a>

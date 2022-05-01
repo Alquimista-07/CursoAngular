@@ -16,4 +16,9 @@ export class SidebarComponent {
   // Inyectamos el servicios
   constructor( private gifsService: GifsService ){ }
 
+  buscar( termino: string ){
+    console.log( termino );
+    this.gifsService.buscarGifs( termino );
+  }
+
 }
