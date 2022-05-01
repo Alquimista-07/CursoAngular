@@ -53,6 +53,10 @@ export class GifsService {
     //NOTA: Otra forma de hacer lo mismo del anterior código es:
     // this._historial = JSON.parse( localStorage.getItem( 'historial' )! ) || [];
 
+    // Ahora obtenemos los resultados del localStorage para que cuando se recargue o se cierre
+    // el navegador no se pierdan
+    this.resultados = JSON.parse( localStorage.getItem( 'resultados' )! ) || [];
+
   }
 
   // Creamos la función para insertar valores al hitorial
@@ -94,6 +98,11 @@ export class GifsService {
         .subscribe( ( resp ) => {
           console.log( resp.data );
           this.resultados = resp.data;
+
+          // Grabamos los resultados en el localStorage para que cuando recargue la página
+          // no se pierdan las imágenes que ya teníamos cargadas
+          localStorage.setItem( 'resultados', JSON.stringify( this.resultados ) );
+
         });
 
     console.log( this._historial );
