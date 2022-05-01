@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+// Importamos la interface
+import { SearchGifsResponse, Gif } from '../interfaces/gifs.interface';
+
 // Este providedIn es una característica añadida a Angular la cual permite que los servicios
 // puedan estar definidos en el momneto en que se contruye bunddle de la aplicación.
 // NOTA: Y al especificar este providedIn: 'oot' en el decorador le dice a Angular que no importa en
@@ -23,8 +26,7 @@ export class GifsService {
   private _historial: string[] = [];
 
   // Almacenamos la data que obtenemos de la api al realizar la busqueda
-  // TODO: Cambiar any por su tipo correspondiente
-  public resultados: any[] = [];
+  public resultados: Gif[] = [];
 
   // Obtenemos el historial y rompemos la relación usando los spreds "..."
   // para regresar un nuevo arreglo como habíamos visto en videos anteriores 
@@ -68,8 +70,10 @@ export class GifsService {
     // por lo tanto en nuestro app.module.ts importamos el modulo para las
     // peticiones http. Y posteriormente vamos a usar un observador.
     // NOTA: El subscribe se va a ejecutar cuando tengamos la resolución del get
-    this.http.get( `https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=${ query }&limit=10` )
-        .subscribe( ( resp: any ) => {
+    // NOTA 2: Ahora ajustamos el get para que no sea de tipo generico y le asignamos la interface
+    //         y de esta manera evitamos cometer errores con la data
+    this.http.get <SearchGifsResponse> ( `https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=${ query }&limit=10` )
+        .subscribe( ( resp ) => {
           console.log( resp.data );
           this.resultados = resp.data;
         });
