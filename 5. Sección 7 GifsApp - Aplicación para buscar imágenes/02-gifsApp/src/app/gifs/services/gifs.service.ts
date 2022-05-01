@@ -39,7 +39,21 @@ export class GifsService {
   }
 
   // Inyectamos el servicio que viene en el modulo de angular y que me permite hacer peticiones http
-  constructor( private http: HttpClient ){ }
+  constructor( private http: HttpClient ){
+
+    // Este es el lugar ideal para cargar del localstorege ya que el constructor se va a ejectar solo una vez.
+    // Adicionalmente como la el parse nos da error debido a que puede regresar null entonces para quitarlo 
+    // usamos el simbolo ! que en teoria le estoy diciendo a Angular confia en mi ya valide y no viene vacío 
+    // dejalo pasar
+    if( localStorage.getItem( 'historial' ) ){
+
+      this._historial = JSON.parse( localStorage.getItem( 'historial' )! );
+
+    }
+    //NOTA: Otra forma de hacer lo mismo del anterior código es:
+    // this._historial = JSON.parse( localStorage.getItem( 'historial' )! ) || [];
+
+  }
 
   // Creamos la función para insertar valores al hitorial
   // Y obligamos a que la función siempre va a tener un valor
@@ -63,6 +77,10 @@ export class GifsService {
       //       Hay varias formas de hacer esto, pero una sencilla es que cuando alguien
       //       intente obtener el historial, lo podemos cortar con splice
       this._historial = this._historial.splice( 0, 10 );
+
+      // Grabamos el historial en el LocalStorage para evitar perderlo cuando se cierre el
+      // navegador
+      localStorage.setItem( 'historial', JSON.stringify( this._historial ) );
 
     }
 
