@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 // Importamos la interface
 import { SearchGifsResponse, Gif } from '../interfaces/gifs.interface';
@@ -20,6 +20,10 @@ export class GifsService {
   // API Key que creamos en GHIPY Developers
   // Web Oficial: https://developers.giphy.com/
   private apiKey: string = 'IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6';
+
+  // Creamos una nueva propiedad para asignar la url base de la api, con el
+  // fin de ordenar un poco más el código y que sea más fácil de mantener
+  private servicioUrl  : string = 'https://api.giphy.com/v1/gifs';
 
   // Creamos una propiedad privada para manejar los strings del litado o historia
   // que se muestra en nuestra aplicación
@@ -88,13 +92,24 @@ export class GifsService {
 
     }
 
+    // Creamos los parametros para ajustar la petición a la api con la ayuda de un objeto de angular
+    const params = new HttpParams()
+          .set( 'api_key', this.apiKey )
+          .set( 'limit', '10' )
+          .set('q', query);
+    
+    console.log( params.toString() );
+
     // Usamos un objeto de Angular que nos permite hacer peticiones http,
     // por lo tanto en nuestro app.module.ts importamos el modulo para las
     // peticiones http. Y posteriormente vamos a usar un observador.
     // NOTA: El subscribe se va a ejecutar cuando tengamos la resolución del get
     // NOTA 2: Ahora ajustamos el get para que no sea de tipo generico y le asignamos la interface
     //         y de esta manera evitamos cometer errores con la data
-    this.http.get <SearchGifsResponse> ( `https://api.giphy.com/v1/gifs/search?api_key=IA8v6sH5FDxm1QlU1PLuagJqdsx5dtu6&q=${ query }&limit=10` )
+    // NOTA 3: En ES6 poner una propiedad en un objeto cuya llave sea igual al valor (En el caso de params)
+    //         que es la variable que tenemos definida es redundante, entonces simplemente podemos dejar
+    //         uno solo (Por ejemplo { params } y no { params: params }
+    this.http.get <SearchGifsResponse> ( `${ this.servicioUrl }/search`, { params } )
         .subscribe( ( resp ) => {
           console.log( resp.data );
           this.resultados = resp.data;
