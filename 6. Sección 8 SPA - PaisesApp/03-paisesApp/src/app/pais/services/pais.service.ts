@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 //import { Observable, of } from 'rxjs';
 //import { catchError } from 'rxjs/operators';
 
+import { Country } from '../interfaces/pais.interface';
+
 
 // NOTA: El providedIn es una característica añadida a Angular la cual permite que los servicios
 //       puedan estar definidos en el momneto en que se contruye bunddle de la aplicación.
@@ -25,14 +27,15 @@ export class PaisService {
   // Ahora iniciamos a manejar el tema de las peticiones a la API
 
   // Buscar Pais
-  // TODO: Retorna un Observable de tipo any de momento ya que luego se debe
-  //       cambiar por su tipo correspondiente
-  buscarPais( terminoBusqueda: string ): Observable<any> {
+  // NOTA: Ahora si asignamos el tipo correspondiente al observable
+  //       pero si no colocamos [] significaría que solo regresa un pais 
+  //       y no un arreglo entonces por eso se le colocaron las []
+  buscarPais( terminoBusqueda: string ): Observable<Country[]> {
 
     // Construimos la url del endpoint para buscar pais
     const url = `${ this.apiURL }/name/${ terminoBusqueda }`
 
-    return this.http.get( url );
+    return this.http.get<Country[]>( url );
     
     //===================================================================================================================================
     // NOTA:

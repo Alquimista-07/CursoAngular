@@ -24,8 +24,8 @@ export class PorPaisComponent {
 
     // Entonces para que un observable se dispare por lo menos tiene que tener un subscribe
     this.paisService.buscarPais( this.terminoBusqueda )
-        .subscribe( resp => {
-          console.log( resp );
+        .subscribe( paises => {
+          console.log( paises );
         },
         (err) => {
           // console.log( 'Error!!!...' );
