@@ -6,7 +6,9 @@
         <!--El autocomplete="off" evita que me muestre sugerencias-->
         <!--También menjamos el posteo (cuando da enter) con el evento ngSubmit-->
         <!--Usamos el ngmodel en el input para el manejo del formulario sin olvidarnos que hay que importar el FormsModule en el pais.module.ts-->
-        <app-pais-input></app-pais-input>
+        <app-pais-input
+            (onEnter)="buscar( $event )"
+        ></app-pais-input>
     </div>
 </div>
 

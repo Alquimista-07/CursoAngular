@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pais-input',
@@ -8,10 +8,15 @@ import { Component } from '@angular/core';
 })
 export class PaisInputComponent {
 
+  // Ahora para emitir y conectar nuevamente la funcionalidad de buscar lo vamos
+  // a hacer a través de un @Output
+  @Output() onEnter: EventEmitter<string> = new EventEmitter();
+
   terminoBusqueda: string = ''; 
 
   buscar(){
-    console.log( this.terminoBusqueda );
+    // console.log( this.terminoBusqueda );
+    this.onEnter.emit( this.terminoBusqueda );
   }
 
 }

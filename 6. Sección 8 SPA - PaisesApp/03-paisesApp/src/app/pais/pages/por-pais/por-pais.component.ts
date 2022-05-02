@@ -23,12 +23,14 @@ export class PorPaisComponent {
   constructor( private paisService: PaisService ) { }
 
   // Implementamos el metodo de buscar para cuando se haga el posteo del temino de búsqueda
-  buscar(){
+  buscar( terminoBusqueda: string ){
+
     this.hayError = false;
+    this.terminoBusqueda = terminoBusqueda
     console.log( this.terminoBusqueda );
 
     // Entonces para que un observable se dispare por lo menos tiene que tener un subscribe
-    this.paisService.buscarPais( this.terminoBusqueda )
+    this.paisService.buscarPais( terminoBusqueda )
         .subscribe( paises => {
           console.log( paises );
           this.paises = paises;
