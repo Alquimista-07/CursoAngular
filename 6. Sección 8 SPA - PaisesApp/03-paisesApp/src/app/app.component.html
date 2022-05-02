@@ -1,39 +1,7 @@
 <div class="row container mt-4">
 
     <div class="col-3">
-        <h2>Busquedas</h2>
-        <hr>
-        <!--Ahora para el manejo de los enlaces a las rutas vamos a usar el routerLink de Angular para pasar 
-            la ruta y de esta forma evitar hacer full refresh que es algo que es un inconveniente ya que 
-            podríamos tener por ejemplo algo en memoria y perderlo y de hecho ese full refresh ya es algo anticuado-->
-
-        <!--NOTA: Ahora para el tema de añadir la clase active lo hacemos usando otro atributo de angular el cual es 
-                  el routerLinkActive y lo asignamos a cada uno de los items.
-
-                  Adicionalemente como definimos en el app-routing.module.ts la ruta inicial como pathMatch: 'full'
-                  y es un path vacío nos va a presentar un error con el active entonces para ello se agrega el 
-                  routerLinkActiveOptions y se le indica que tiene que ser exácto-->
-
-        <ul class="list-group">
-            <li routerLink=""
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="list-group-item">
-                Buscar País
-            </li>
-
-            <li routerLink="region"
-                routerLinkActive="active"
-                class="list-group-item">
-                Por Región
-            </li>
-
-            <li routerLink="capital"
-                routerLinkActive="active"
-                class="list-group-item">
-                Por Capital
-            </li>
-        </ul>
+        <app-sidebar></app-sidebar>
     </div>
 
     <div class="col">
