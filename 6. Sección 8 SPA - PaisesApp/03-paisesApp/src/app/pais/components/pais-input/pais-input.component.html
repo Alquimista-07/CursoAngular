@@ -1,8 +1,10 @@
+<!--También menjamos el posteo (cuando da enter) con el evento ngSubmit-->
+<!--Usamos el ngmodel en el input para el manejo del formulario sin olvidarnos que hay que importar el FormsModule en el pais.module.ts-->
 <form (ngSubmit)="buscar()" autocomplete="off">
     <input class="form-control" 
            type="text" 
            name="terminoBusqueda" 
            [(ngModel)]="terminoBusqueda"
            (input)="teclaPresionada()"
-           placeholder="Buscar País...">
+           [placeholder]="placeholder">
 </form>

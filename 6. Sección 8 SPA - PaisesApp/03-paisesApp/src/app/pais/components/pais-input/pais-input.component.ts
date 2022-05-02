@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 
 import { debounceTime, Subject } from 'rxjs';
 
@@ -17,6 +17,9 @@ export class PaisInputComponent implements OnInit{
   // Para el tema del debounce (sugerencias) vamos a crear otro evento @Output
   // y el cual se va a emitir cuando la persona deje de escribir
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+
+  // Recibimos el placeholder par que cambie en el input según donde estemos
+  @Input() placeholder: string = '';
 
   // NOTA: Si estuvieramos trabajando con formularios reactivos ya viene una forma de hacerlo más fácil,
   //       pero en este proyecto no los vamos a manejar. Entonces vamos a usar un observable espacial de

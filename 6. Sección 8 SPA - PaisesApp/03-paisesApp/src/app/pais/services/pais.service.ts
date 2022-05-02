@@ -62,5 +62,14 @@ export class PaisService {
       
   }
 
+  // Metodo para buscar por capital
+  buscarCapital( terminoBusqueda: string ): Observable<Country[]> {
+
+    const url = `${ this.apiURL }/capital/${ terminoBusqueda }`
+
+    return this.http.get<Country[]>( url );
+
+  }
+
 
 }

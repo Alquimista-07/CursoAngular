@@ -1,1 +1,32 @@
-<p>por-capital works!</p>
+<h2>Por Capital</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!--El autocomplete="off" evita que me muestre sugerencias-->
+        <app-pais-input
+            (onEnter)="buscarCapital( $event )"
+            placeholder="Buscar capital..."
+        ></app-pais-input>
+    </div>
+</div>
+
+<hr>
+
+<!--Colocamos un tipo de error o retroalimentación en caso de que el término
+    de búsqueda no exista-->
+<div *ngIf="hayError" 
+    class="alert alert-danger">
+    No Se Encontro Nada Con El Término {{ terminoBusqueda }}
+</div>
+
+<!--Entonces si no tenemos un error lo que vamos a mostrar es esto-->
+<!--Ahora mostramos la tabla si no hay error, lo cual lo vamos a hacer con un
+    ngIf pero esto se podría hacer con un ng-template-->
+<div *ngIf="capitales.length > 0" class="row">
+    <div class="col">
+        <!--La información no se va a mostrar hasta que yo no la envíe y lo hacemos
+            agregando el [paises]="paises" al componente-->
+        <app-pais-tabla [paises]="capitales" ></app-pais-tabla>
+    </div>
+</div>
