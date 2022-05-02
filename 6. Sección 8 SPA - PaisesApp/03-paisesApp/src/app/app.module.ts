@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -16,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     // Importamos el modulo de las rutas
     AppRoutingModule,
+    // Importamos el modulo para el manejo de las peticionea HTTP a la API
+    HttpClientModule,
     PaisModule,
     SharedModule,
   ],
