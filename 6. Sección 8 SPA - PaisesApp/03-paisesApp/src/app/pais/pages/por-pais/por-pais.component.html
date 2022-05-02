@@ -20,12 +20,15 @@
 
 <!--Colocamos un tipo de error o retroalimentación en caso de que el término
     de búsqueda no exista-->
-<div class="alert alert-danger">
-    No Se Encontro Nada Con El Término ABC
+<div *ngIf="hayError" 
+    class="alert alert-danger">
+    No Se Encontro Nada Con El Término {{ terminoBusqueda }}
 </div>
 
 <!--Entonces si no tenemos un error lo que vamos a mostrar es esto-->
-<div class="row">
+<!--Ahora mostramos la tabla si no hay error, lo cual lo vamos a hacer con un
+    ngIf pero esto se podría hacer con un ng-template-->
+<div *ngIf="!hayError" class="row">
     <div class="col">
         <table class="table table-hover">
             <thead>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+//import { Observable, of } from 'rxjs';
+//import { catchError } from 'rxjs/operators';
 
 
 // NOTA: El providedIn es una característica añadida a Angular la cual permite que los servicios
@@ -31,7 +33,30 @@ export class PaisService {
     const url = `${ this.apiURL }/name/${ terminoBusqueda }`
 
     return this.http.get( url );
-
+    
+    //===================================================================================================================================
+    // NOTA:
+    //===================================================================================================================================
+    // Otra forma de manejar el error bien interesante es mendiante los operadores de rxjs
+    // (extensiones reactivas) y es dependiendo de lo que queramos hacer por ejemplo si recibo 
+    // un error al hacer la petición http yo no quiero que regrese el error y simplemente quiero 
+    // que regrese un arreglo vacío indicando que no se encontro nada con eso. Adicionalmente esto
+    // lo veremos más adelante en el curso.
+    // 
+    // Los operadores no son más que unas funciones que se van a ejecutar en base al producto
+    // de la petición http
+    //
+    /*
+    return this.http.get( url )
+              .pipe(
+              // El of es una función que genera observables, el cual transforma lo que sea que se ponga
+              // en los paretesis en un nuevo observable
+                catchError( err => of([]) )
+              );
+    */
+    //
+    //===================================================================================================================================
+      
   }
 
 
