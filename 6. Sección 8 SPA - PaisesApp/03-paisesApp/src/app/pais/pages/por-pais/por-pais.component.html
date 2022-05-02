@@ -8,6 +8,7 @@
         <!--Usamos el ngmodel en el input para el manejo del formulario sin olvidarnos que hay que importar el FormsModule en el pais.module.ts-->
         <app-pais-input
             (onEnter)="buscar( $event )"
+            (onDebounce)="sugerencias( $event )"
         ></app-pais-input>
     </div>
 </div>
