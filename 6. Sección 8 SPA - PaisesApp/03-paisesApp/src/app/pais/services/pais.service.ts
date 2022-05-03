@@ -71,5 +71,16 @@ export class PaisService {
 
   }
 
+  // Metodo para obtener la información del pais por id
+  // y retornamos unicamente un pais, por lo tanto no se
+  // colocan los [] en Country
+  getPaisAlpha( idPais: string ): Observable<Country> {
+
+    const url = `${ this.apiURL }/alpha/${ idPais }`
+
+    return this.http.get<Country>( url );
+
+  }
+
 
 }
