@@ -26,12 +26,44 @@
         <div class="col">
             <h3>Información</h3>
             <ul class="list-group">
+
                 <li class="list-group-item">
                     <strong>Población</strong> {{ pais.population | number }}
                 </li>
+
+                <li class="list-group-item">
+                    <strong>Códgio Numérico</strong> {{ pais.ccn3 }}
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Código Alpha3</strong> {{ pais.cca3 }}
+                </li>
+
             </ul>
         </div>
 
+    </div>
+
+    <h3>Traducciones</h3>
+    <div class="row">
+
+        <div class="col">
+            <span
+                *ngFor="let trans of pais.translations | keyvalue"        
+                class="badge bg-primary mr-5">          
+                {{ trans.value.official }}   
+            </span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <h3 class="mt-3">Visualizar Objeto JSON Usando El Pipe json De Angular</h3>
+        <div class="col ratio ratio-1x1">
+        <pre class="mt-2">
+            {{ pais | json }}
+        </pre>
+    </div>
     </div>
 
 </ng-template>
