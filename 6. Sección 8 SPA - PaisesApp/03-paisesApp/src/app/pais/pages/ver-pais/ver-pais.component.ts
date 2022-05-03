@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { PaisService } from '../../services/pais.service';
+import { Country } from '../../interfaces/pais.interface';
 
 @Component({
   selector: 'app-ver-pais',
@@ -12,6 +13,12 @@ import { PaisService } from '../../services/pais.service';
   ]
 })
 export class VerPaisComponent implements OnInit {
+
+  // Acá me arroja errojaría un error si no le indico el signo !
+  // al pais debido a que esto de momento va a ser null. Es decir
+  // al indicar el signo ! le estoy diciendo a typescript que pais 
+  // puede ser nulo
+  pais!: Country;
 
   // Inyectamos el ActivatedRoute el cual viene con todo lo necesario para poder suscribirnos
   // a cualquier cambio de la URL.
@@ -52,13 +59,19 @@ export class VerPaisComponent implements OnInit {
       // del observable
       .pipe(
         // NOTA: Acá dentro del pipe puedo especificar cualquier cantidad de operadores que van a 
-        //       trabjar con el producto del observable. Y vamos a usar el switchMap el cual permite
-        //       recibir un observable y regresar otro observable
-        switchMap( ({ idPais }) => this.paisService.getPaisAlpha( idPais ) )
+        //       trabjar con el producto del observable activatedRoute. Y vamos a usar el switchMap 
+        //       el cual permite recibir un observable y regresar otro observable.
+        switchMap( ({ idPais }) => this.paisService.getPaisAlpha( idPais ) ),
+        // NOTA: Ahora acá vamos a usar otro operador de rxjs que es el tap el cual dispara un efecto secundario.
+        //       Entonces lo que hace es recibir el producto del observable switchMap e imprime lo que responda
+        //       en consola.
+        tap( console.log )
+        //--------------------------------------
+        // La forma larga sería la siguiente:
+        // tap( resp => console.log( resp ) )
+        //--------------------------------------
       )
-      .subscribe( resp => {
-        console.log( resp );
-      });
+      .subscribe( pais => this.pais = pais[0] );
 
   }
 
