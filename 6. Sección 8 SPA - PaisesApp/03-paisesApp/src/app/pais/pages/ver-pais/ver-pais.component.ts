@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -27,6 +29,7 @@ export class VerPaisComponent implements OnInit {
     // destructuring.
     // NOTA: Hay que tener en cuenta que hay una mejor forma de hacer esto 
     //       pero eso ya involucra trabajar con otro operador de rxjs.
+    /*
     this.activatedRoute.params
         .subscribe( ({ idPais }) => {
           console.log( idPais );
@@ -39,6 +42,23 @@ export class VerPaisComponent implements OnInit {
               });
 
         });
+
+  */
+  // NOTA: Ahora para resumir todo lo que se realizo en el anterior codigo en el cual teníamos un observable
+  //       que luego dentro teniamos otro observable y como se mencionó se puede hacer de una mejor forma usando
+  //       rxjs entonces vamos a hacer lo siguiente:
+  this.activatedRoute.params
+      // Entonces lo que vamos a hacer es usar un operador de rxjs que me va a permitir trabajar con el producto
+      // del observable
+      .pipe(
+        // NOTA: Acá dentro del pipe puedo especificar cualquier cantidad de operadores que van a 
+        //       trabjar con el producto del observable. Y vamos a usar el switchMap el cual permite
+        //       recibir un observable y regresar otro observable
+        switchMap( ({ idPais }) => this.paisService.getPaisAlpha( idPais ) )
+      )
+      .subscribe( resp => {
+        console.log( resp );
+      });
 
   }
 
