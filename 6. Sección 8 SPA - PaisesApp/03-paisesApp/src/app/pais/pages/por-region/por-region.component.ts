@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { Country } from '../../interfaces/pais.interface';
+
+import { PaisService } from '../../services/pais.service';
+
 @Component({
   selector: 'app-por-region',
   templateUrl: './por-region.component.html',
@@ -7,6 +11,7 @@ import { Component } from '@angular/core';
     `
       button {
         margin-right: 5px;
+        margin-top: 5px;
       }
     `
   ]
@@ -15,10 +20,12 @@ export class PorRegionComponent {
 
   // Creamos un arreglo para almacenar las regiones
   // NOTA: Debido al cambio de la versión en la API fue necesario ajustar los codigos de las regiones
-  regiones: string[] = ['EU', 'EFTA', 'CARICOM', 'PA', 'AU', 'USAN', 'EEU', 'AL', 'ASEAN', 'CAIS', 'CEFTA', 'NAFTA', 'SAARC']
+  regiones: string[] = ['eu', 'efta', 'caricom', 'pa', 'au', 'usan', 'eeu', 'al', 'asean', 'cais', 'cefta', 'nafta', 'saarc']
   regionActiva: string = '';
+  paises: Country[] = [];
 
-  constructor() { }
+  // Inyectamos el servicio
+  constructor( private paisService: PaisService ) { }
 
   // Ahora incluiso como el manejo de la clase para el botón se vuelve algo complejo
   // y lo recomendado es dejar la menor cantidad de lógica del lado del html entonces
@@ -33,10 +40,13 @@ export class PorRegionComponent {
 
   activarRegion( region: string ) {
 
+    if ( region === this.regionActiva ){ return; }
+
     this.regionActiva = region;
+    this.paises = [];
 
-    // TODO: Hacer llamado al servicio
-
+    this.paisService.buscarRegion( region )
+        .subscribe( paises => this.paises = paises );
   }
 
 

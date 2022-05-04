@@ -17,15 +17,16 @@ import { Country } from '../interfaces/pais.interface';
   providedIn: 'root'
 })
 export class PaisService {
-
+  
   // Definimos la base de la url de la api
   private apiURL: string = 'https://restcountries.com/v3.1';
-
+  private apiUrlV2: string = 'https://restcountries.com/v2';
+  
   // Inyectoamos el servicio http
   constructor( private http: HttpClient ) { }
-
+  
   // Ahora iniciamos a manejar el tema de las peticiones a la API
-
+  
   // Buscar Pais
   // NOTA: Ahora si asignamos el tipo correspondiente al observable
   //       pero si no colocamos [] significaría que solo regresa un pais 
@@ -79,6 +80,15 @@ export class PaisService {
     const url = `${ this.apiURL }/alpha/${ idPais }`
 
     return this.http.get<Country>( url );
+
+  }
+
+  // Creamos el metodo para obtener la información de las regiones
+  buscarRegion( region: string ): Observable<Country[]> {
+
+    const url = `${ this.apiUrlV2 }/regionalbloc/${ region }`;
+
+    return this.http.get<Country[]>( url );
 
   }
 
