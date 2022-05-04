@@ -19,8 +19,12 @@ import { PaisService } from '../../services/pais.service';
 export class PorRegionComponent {
 
   // Creamos un arreglo para almacenar las regiones
-  // NOTA: Debido al cambio de la versión en la API fue necesario ajustar los codigos de las regiones
-  regiones: string[] = ['eu', 'efta', 'caricom', 'pa', 'au', 'usan', 'eeu', 'al', 'asean', 'cais', 'cefta', 'nafta', 'saarc']
+  //------------------------------------------------------------------------------------------------------------------------------------------
+  // NOTA: Debido al cambio de la versión en la API fue necesario ajustar los codigos de las regiones.
+  // NOTA : Se cambio nuevamente la api para evitar usar 2 api diferentes las cuales generan conflictos 
+  // regiones: string[] = ['eu', 'efta', 'caricom', 'pa', 'au', 'usan', 'eeu', 'al', 'asean', 'cais', 'cefta', 'nafta', 'saarc']
+  //------------------------------------------------------------------------------------------------------------------------------------------
+  regiones: string[] = ['africa', 'americas', 'asia', 'europe', 'oceania'];
   regionActiva: string = '';
   paises: Country[] = [];
 

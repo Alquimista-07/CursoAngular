@@ -20,7 +20,10 @@ export class PaisService {
   
   // Definimos la base de la url de la api
   private apiURL: string = 'https://restcountries.com/v3.1';
-  private apiUrlV2: string = 'https://restcountries.com/v2';
+  //-----------------------------------------------------------------------------------------------------
+  // NOTA : Se cambio nuevamente la api para evitar usar 2 api diferentes las cuales generan conflictos 
+  // private apiUrlV2: string = 'https://restcountries.com/v2';
+  //-----------------------------------------------------------------------------------------------------
   
   // Inyectoamos el servicio http
   constructor( private http: HttpClient ) { }
@@ -86,7 +89,7 @@ export class PaisService {
   // Creamos el metodo para obtener la información de las regiones
   buscarRegion( region: string ): Observable<Country[]> {
 
-    const url = `${ this.apiUrlV2 }/regionalbloc/${ region }`;
+    const url = `${ this.apiURL }/region/${ region }`;
 
     return this.http.get<Country[]>( url );
 
