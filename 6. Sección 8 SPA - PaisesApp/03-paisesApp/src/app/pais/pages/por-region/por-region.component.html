@@ -1,4 +1,4 @@
-<h3>Buscar Por Region <small>{{ regionActiva | titlecase }}</small></h3>
+<h3>Buscar Por Región <small>{{ regionActiva | titlecase }}</small></h3>
 <hr>
 <h5>Seleccione La Región</h5>
 
@@ -19,12 +19,26 @@
         'btn-outline-primay': regionActiva !== region
     }" -->
 
+<!--Un pequeño inconveniente que tiene la anterior usando el ngClass es que va a validar las dos condiciones, y aunque
+    Angular es bastante eficiente esto podría ser un poco molesto.
+    Entonces otra forma de poner las clases de forma condicional sería colocando el [class] y a lo que lo 
+    igualemos tiene que ser una evaluación de JavaScript.
+
+    Entonces en el caso del ejericio lo vamos a hacer a traves de un operador ternario
+    en el cual se pregunta si la region es exactamente igual a regionActiva coloquele btn btn-primary
+    en caso contrario asignele btn btn-outline-primary-->
+
+    <!-- <button [class]=" (region === regionActiva) ? 'btn btn-primary' : 'btn btn-outline-primary'" -->
+
+<!--Ahora también existe otra forma de hacer lo mismo que queremos hacer anteriormente solo que esta vez va del
+    lado de typescrip con la ayuda de una función que nosotros mismos creamos-->
+
 <div class="row">
     <div class="col">
-        <button class="btn btn-outline-primary"
+        <button [class]="getClaseCSS( region )"
                 *ngFor="let region of regiones"
                 (click)="activarRegion( region )">
-            {{ region }}
+            {{ region | titlecase }}
         </button>
     </div>
 </div>
