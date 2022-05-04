@@ -1,1 +1,30 @@
-<p>por-region works!</p>
+<h3>Buscar Por Region <small>{{ regionActiva | titlecase }}</small></h3>
+<hr>
+<h5>Seleccione La Región</h5>
+
+<!--Ahora si quiero que el botón activo sea el que se mantenga como encendido lo que vamoa a hacer
+    es alterar la clase usando el [class.nombreClase]="true" entonces cuando este en true el objeto 
+    va a tener la clase que para el ejemplo es nombreClase-->
+
+<!--Ahora por ejemplo se puede validar para hacer lo que queremos hacer que es encender el botón que 
+    este seleccionado usando una clase de bootstrap-->
+    
+    <!-- [class.btn-primary]="region === regionActiva" -->
+
+<!--Existe otra forma de hacer lo anterior de encender el botón y es usar el ngClass igualado a un objeto
+    de JavaScript-->
+
+    <!-- [ngClass]="{
+        'btn-primary': regionActiva === region,
+        'btn-outline-primay': regionActiva !== region
+    }" -->
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-primary"
+                *ngFor="let region of regiones"
+                (click)="activarRegion( region )">
+            {{ region }}
+        </button>
+    </div>
+</div>
