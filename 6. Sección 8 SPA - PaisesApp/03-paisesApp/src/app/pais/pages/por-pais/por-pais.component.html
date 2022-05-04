@@ -15,6 +15,26 @@
             ></app-pais-input>
         </div>
     </div>
+    
+    <!--Contruimos la caja donde se van a mostrar la sugetencias-->
+
+    <ul *ngIf="mostrarSugerencias"
+        class="list-group">
+        <!--Agregamos la clase de bootstrap list-group-item-action para que se pueda hacer click en el list-->
+        <li *ngFor="let pais of paisesSugeridos"
+            class="list-group-item list-group-item-action">
+            <a class="nav-link"
+                [routerLink]="['/pais', pais.cca2]">
+                {{ pais.name.common }}
+            </a>
+        </li>
+        <li class="list-group-item list-group-item-action"
+            (click)="buscarSugerido( terminoBusqueda )">
+            <a class="nav-link">
+                Buscar "{{ terminoBusqueda }}"
+            </a>
+        </li>
+    </ul>
 
     <hr>
 
