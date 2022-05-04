@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 //import { Observable, of } from 'rxjs';
-//import { catchError } from 'rxjs/operators';
+//import { catchError, tap } from 'rxjs/operators';
 
 import { Country } from '../interfaces/pais.interface';
 
@@ -27,6 +27,12 @@ export class PaisService {
   
   // Inyectoamos el servicio http
   constructor( private http: HttpClient ) { }
+
+  get httpParams(){
+    
+    return new HttpParams().set( 'fields', 'name,capital,cca2,flags,population' );
+
+  }
   
   // Ahora iniciamos a manejar el tema de las peticiones a la API
   
@@ -39,7 +45,7 @@ export class PaisService {
     // Construimos la url del endpoint para buscar pais
     const url = `${ this.apiURL }/name/${ terminoBusqueda }`
 
-    return this.http.get<Country[]>( url );
+    return this.http.get<Country[]>( url, { params: this.httpParams } );
     
     //===================================================================================================================================
     // NOTA:
@@ -71,7 +77,7 @@ export class PaisService {
 
     const url = `${ this.apiURL }/capital/${ terminoBusqueda }`
 
-    return this.http.get<Country[]>( url );
+    return this.http.get<Country[]>( url, { params: this.httpParams } );
 
   }
 
@@ -89,9 +95,21 @@ export class PaisService {
   // Creamos el metodo para obtener la información de las regiones
   buscarRegion( region: string ): Observable<Country[]> {
 
+    //=======================================================================================================================
+    // NOTA: Esto es una forma de pasar los parámetros pero por ahora como los vamos a usar para diferentes
+    //       métodos lo que vamos a hacer es crear un metodo get httpParams que nos va a ayudar en esto para 
+    //       no estar copiando y pegando código
+    // const httpParams = new HttpParams()
+    //     .set( 'fields', 'name,capital,cca2,flags,population' );
+    //=======================================================================================================================
+
+    // const url = `${ this.apiURL }/region/${ region }?fields=name,capital,cca2,flags,population`;
     const url = `${ this.apiURL }/region/${ region }`;
 
-    return this.http.get<Country[]>( url );
+    return this.http.get<Country[]>( url, { params : this.httpParams } )
+              .pipe( 
+                tap( console.log )
+              );
 
   }
 
