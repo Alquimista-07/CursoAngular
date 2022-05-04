@@ -1,46 +1,50 @@
-<h3>Buscar Por Región <small>{{ regionActiva | titlecase }}</small></h3>
-<hr>
-<h5>Seleccione La Región</h5>
-
-<!--Ahora si quiero que el botón activo sea el que se mantenga como encendido lo que vamoa a hacer
-    es alterar la clase usando el [class.nombreClase]="true" entonces cuando este en true el objeto 
-    va a tener la clase que para el ejemplo es nombreClase-->
-
-<!--Ahora por ejemplo se puede validar para hacer lo que queremos hacer que es encender el botón que 
-    este seleccionado usando una clase de bootstrap-->
+<div class="animate__animated animate__fadeIn animate__faster">
     
-    <!-- [class.btn-primary]="region === regionActiva" -->
+    <h3>Buscar Por Región <small>{{ regionActiva | titlecase }}</small></h3>
+    <hr>
+    <h5>Seleccione La Región</h5>
 
-<!--Existe otra forma de hacer lo anterior de encender el botón y es usar el ngClass igualado a un objeto
-    de JavaScript-->
+    <!--Ahora si quiero que el botón activo sea el que se mantenga como encendido lo que vamoa a hacer
+        es alterar la clase usando el [class.nombreClase]="true" entonces cuando este en true el objeto 
+        va a tener la clase que para el ejemplo es nombreClase-->
 
-    <!-- [ngClass]="{
-        'btn-primary': regionActiva === region,
-        'btn-outline-primay': regionActiva !== region
-    }" -->
+    <!--Ahora por ejemplo se puede validar para hacer lo que queremos hacer que es encender el botón que 
+        este seleccionado usando una clase de bootstrap-->
 
-<!--Un pequeño inconveniente que tiene la anterior usando el ngClass es que va a validar las dos condiciones, y aunque
-    Angular es bastante eficiente esto podría ser un poco molesto.
-    Entonces otra forma de poner las clases de forma condicional sería colocando el [class] y a lo que lo 
-    igualemos tiene que ser una evaluación de JavaScript.
+        <!-- [class.btn-primary]="region === regionActiva" -->
 
-    Entonces en el caso del ejericio lo vamos a hacer a traves de un operador ternario
-    en el cual se pregunta si la region es exactamente igual a regionActiva coloquele btn btn-primary
-    en caso contrario asignele btn btn-outline-primary-->
+    <!--Existe otra forma de hacer lo anterior de encender el botón y es usar el ngClass igualado a un objeto
+        de JavaScript-->
 
-    <!-- <button [class]=" (region === regionActiva) ? 'btn btn-primary' : 'btn btn-outline-primary'" -->
+        <!-- [ngClass]="{
+            'btn-primary': regionActiva === region,
+            'btn-outline-primay': regionActiva !== region
+        }" -->
 
-<!--Ahora también existe otra forma de hacer lo mismo que queremos hacer anteriormente solo que esta vez va del
-    lado de typescrip con la ayuda de una función que nosotros mismos creamos-->
+    <!--Un pequeño inconveniente que tiene la anterior usando el ngClass es que va a validar las dos condiciones, y aunque
+        Angular es bastante eficiente esto podría ser un poco molesto.
+        Entonces otra forma de poner las clases de forma condicional sería colocando el [class] y a lo que lo 
+        igualemos tiene que ser una evaluación de JavaScript.
 
-<div class="row">
-    <div class="col">
-        <button [class]="getClaseCSS( region )"
-                *ngFor="let region of regiones"
-                (click)="activarRegion( region )">
-            {{ region | titlecase }}
-        </button>
+        Entonces en el caso del ejericio lo vamos a hacer a traves de un operador ternario
+        en el cual se pregunta si la region es exactamente igual a regionActiva coloquele btn btn-primary
+        en caso contrario asignele btn btn-outline-primary-->
+
+        <!-- <button [class]=" (region === regionActiva) ? 'btn btn-primary' : 'btn btn-outline-primary'" -->
+
+    <!--Ahora también existe otra forma de hacer lo mismo que queremos hacer anteriormente solo que esta vez va del
+        lado de typescrip con la ayuda de una función que nosotros mismos creamos-->
+
+    <div class="row">
+        <div class="col">
+            <button [class]="getClaseCSS( region )"
+                    *ngFor="let region of regiones"
+                    (click)="activarRegion( region )">
+                {{ region | titlecase }}
+            </button>
+        </div>
     </div>
+
 </div>
 
 <div  *ngIf="paises.length > 0" class="row">

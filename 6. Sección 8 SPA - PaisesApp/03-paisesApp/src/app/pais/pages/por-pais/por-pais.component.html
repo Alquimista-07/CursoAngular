@@ -1,20 +1,24 @@
-<h2>Por País</h2>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
 
-<div class="row">
-    <div class="col">
-        <!--El autocomplete="off" evita que me muestre sugerencias-->
-        <!--También menjamos el posteo (cuando da enter) con el evento ngSubmit-->
-        <!--Usamos el ngmodel en el input para el manejo del formulario sin olvidarnos que hay que importar el FormsModule en el pais.module.ts-->
-        <app-pais-input
-            (onEnter)="buscar( $event )"
-            (onDebounce)="sugerencias( $event )"
-            placeholder="Buscar país..."
-        ></app-pais-input>
+    <h2>Por País</h2>
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <!--El autocomplete="off" evita que me muestre sugerencias-->
+            <!--También menjamos el posteo (cuando da enter) con el evento ngSubmit-->
+            <!--Usamos el ngmodel en el input para el manejo del formulario sin olvidarnos que hay que importar el FormsModule en el pais.module.ts-->
+            <app-pais-input
+                (onEnter)="buscar( $event )"
+                (onDebounce)="sugerencias( $event )"
+                placeholder="Buscar país..."
+            ></app-pais-input>
+        </div>
     </div>
-</div>
 
-<hr>
+    <hr>
+
+</div>
 
 <!--Colocamos un tipo de error o retroalimentación en caso de que el término
     de búsqueda no exista-->

@@ -1,17 +1,21 @@
-<h2>Por Capital</h2>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
+    
+    <h2>Por Capital</h2>
+    <hr>
 
-<div class="row">
-    <div class="col">
-        <!--El autocomplete="off" evita que me muestre sugerencias-->
-        <app-pais-input
-            (onEnter)="buscarCapital( $event )"
-            placeholder="Buscar capital..."
-        ></app-pais-input>
+    <div class="row">
+        <div class="col">
+            <!--El autocomplete="off" evita que me muestre sugerencias-->
+            <app-pais-input
+                (onEnter)="buscarCapital( $event )"
+                placeholder="Buscar capital..."
+            ></app-pais-input>
+        </div>
     </div>
-</div>
 
-<hr>
+    <hr>
+
+</div>
 
 <!--Colocamos un tipo de error o retroalimentación en caso de que el término
     de búsqueda no exista-->
