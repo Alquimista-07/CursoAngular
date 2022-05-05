@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-// PrimeNg
-// Importamos el modulo de PrimeNg para usar los botones
-import { ButtonModule } from 'primeng/button';
-// Importamos el modulo de PrimeNg para usar los cards
-import { CardModule } from 'primeng/card';
+// Importamos el modulo personalizado que creamos y que nos permite mantener
+// de una forma ordenada y centralizada todas las importaciones de PrimeNg que necesitemos
+import { PrimeNgModule } from './prime-ng/prime-ng.module';
+
 
 @NgModule({
   declarations: [
@@ -15,8 +14,7 @@ import { CardModule } from 'primeng/card';
   ],
   imports: [
     BrowserModule,
-    ButtonModule,
-    CardModule
+    PrimeNgModule
   ],
   providers: [],
   bootstrap: [AppComponent]
