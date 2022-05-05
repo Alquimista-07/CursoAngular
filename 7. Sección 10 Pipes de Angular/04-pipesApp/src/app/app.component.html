@@ -35,7 +35,16 @@
   
   <button pButton 
           (click)="mostrarNombre()"
-          label="Cambiar Nombre">
+          label="Cambiar Nombre"
+          icon="pi pi-check"
+          iconPos="right"
+          class="p-button-help">
   </button>
+
+  <!--Card usando PrimeNg-->
+  <p-card [header]="nombre | titlecase"
+          subheader="Esto es un subheader">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet aliquam aliquid cumque mollitia neque, iste eum facilis eos dicta expedita soluta, officia nulla dolores magnam delectus placeat voluptatum quas itaque!
+  </p-card>
 
 </div>
