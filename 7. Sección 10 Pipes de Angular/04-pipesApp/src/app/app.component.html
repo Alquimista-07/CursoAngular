@@ -1,36 +1,41 @@
-<h1>{{ nombre | titlecase }}</h1>
-<h1>{{ valor | number }}</h1>
-<h1>{{ obj | json }}</h1>
-
-<button (click)="mostrarNombre()">
-  Cambiar Nombre
-</button>
-
 <!--
   ===================================
   NOTA INSTALACIÓN PRIMENG
   ===================================
     En este proyecto se va a usar una librería de componentes llamada PrimeNg la cual tiene su
     documentación disponible en:https://www.primefaces.org/
-
+    
     Ahora comenzar a usa PrimeNg tenemos que instalar 2 paquete usando los siguientes comandos: 
     
     npm install primeng --save
     npm install primeicons --save
-
+    
     Adicionalmente es necesario copiar y pegar los styles que nos indican en la documentación en el archivo
     angular.json dentro del objeto styles
-
+    
     Entonces para este proyecto los usados son los siguientes:
-
-     node_modules/primeicons/primeicons.css
-     node_modules/primeng/resources/themes/vela-blue/theme.css
-     node_modules/primeng/resources/primeng.min.css
-
+    
+    node_modules/primeicons/primeicons.css
+    node_modules/primeng/resources/themes/vela-blue/theme.css
+    node_modules/primeng/resources/primeng.min.css
+    
     Pero cabe resaltar que podemos elegir otros estilos y para ello solo es revisar en la documentación y colocar
     el style correspondiente que queramos usar
+    
+  -->
+  
+  <!--NOTA 2: Adicionalmente este es el enclace que nos lleva a la documentaión oficial de Angular sobre los 
+    pipes: https://angular.io/api?query=pipe-->
 
- -->
+<div class="text-layout">
+  
+  <h1>{{ nombre | titlecase }}</h1>
+  <h1>{{ valor | number }}</h1>
+  <h1>{{ obj | json }}</h1>
+  
+  <button pButton 
+          (click)="mostrarNombre()"
+          label="Cambiar Nombre">
+  </button>
 
-<!--NOTA 2: Adicionalmente este es el enclace que nos lleva a la documentaión oficial de Angular sobre los 
-            pipes: https://angular.io/api?query=pipe-->
+</div>

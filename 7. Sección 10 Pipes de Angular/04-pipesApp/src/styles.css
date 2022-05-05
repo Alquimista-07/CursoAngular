@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    margin: 10px;
+    /*Ahora como sabemos que los estilos se encuentran enla ruta 
+    node_modules/primeng/resources/themes/vela-blue/theme.css 
+    simplemente podemos ir y mirar los nombres de las variables para 
+    pasarlas al css y hacer referencia a cada una de ellas, por ejemplo
+    hacer referencia al font-family del root que se encuentra en el archivo
+    theme.css de la ruta mencionada*/
+    background-color: var( --surface-b );
+    font-family: var( --font-family );
+}
+
+.text-layout {
+    color: var( --text-color );
+}
