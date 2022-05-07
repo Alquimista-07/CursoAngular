@@ -29,4 +29,29 @@
         </p-card>
     </div>
 
+<!--NOTA: Para ver documentación respecto al currency pipe podemos visitar el siguiente enlace:
+          https://angular.io/api/common/CurrencyPipe -->
+    <div class="col-4">
+        <p-card header="Ventas Brutas"
+                subheader="del presente año">
+        <!--El primer parametro del currency indica la moneda que en el ejemplo es peso colombiano, el siguiente parámentro (symbol-narrow) 
+            permite mostrar el simbolo de forma abreviada, por ejemplo si quisieramos mostrar USD sin abreviar nos mostraría USD $ y si lo
+            abreviamos solo mostraría $-->
+        <!--Adicionalmente si queremos mostrar toda la parte entera y un número de decimales lo manejamos tal cual como se hace con el pipe 
+            number-->
+        {{ (ventasNetas + 2000000) | currency: 'COP': 'symbol-narrow': '1.4-4' }}
+        </p-card>
+    </div>
+
+<!--NOTA: Para ver documentación respecto al percent pipe podemos visitar el siguiente enlace:
+          https://angular.io/api/common/PercentPipe -->  
+    <div class="col-4">
+        <p-card header="Ganancia Porcentual"
+                subheader="del presente año">
+            <!--De la misma manera podemos especificar parametros por ejemplo para agreagar decimales y se hace de la misma manera que con los
+                números-->
+            {{ porcentaje | percent: '1.2-2' }}
+        </p-card>
+    </div>
+
 </div>
