@@ -16,8 +16,13 @@ import { VentasModule } from './ventas/ventas.module';
 // Que en este caso se eligió español Colombia pero Angular
 // nos provee de muchos paquetes en difetentes idiomas
 import localEsCo from '@angular/common/locales/es-CO';
+// Ahora si quisieramos ocupar otro idioma como el francés hacemos lo siguiente:
+import localFr from '@angular/common/locales/fr';
+
 import { registerLocaleData } from '@angular/common';
 registerLocaleData( localEsCo );
+// Ahora es necesario registrar el nuevo idioma
+registerLocaleData( localFr );
 
 @NgModule({
   declarations: [

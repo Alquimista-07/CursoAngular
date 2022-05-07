@@ -76,6 +76,16 @@
                 <li>fecha | date: 'MMMM dd ,yyyy'</li>
                 <li>fecha | date: 'w : W - dd/MM/YY, h:mm:ss - zzzz'</li>
             </ul>
+
+            <hr>
+            <ul>
+                <li>fecha | date: 'long': 'GMT-6'</li>
+                <li>fecha | date: 'long': 'GMT-4'</li>
+                <li>fecha | date: 'long': '': 'en'</li>
+                <li>fecha | date: 'long': '': 'fr'</li>
+                <li>fecha | date: 'long': 'GMT-6': 'es-Co'</li>
+            </ul>
+
         </p-card>
     </div>
 
@@ -90,6 +100,24 @@
                 <li>{{ fecha | date: 'MMMM dd ,yyyy' }}</li>
                 <li>{{ fecha | date: 'w : W - dd/MM/YY, h:mm:ss - zzzz' }}</li>
             </ul>
+
+            <hr>
+            <ul>
+                <!--Ahora trabajando con otro argumento del pipe date para cambiar el timezone hacemos lo siguiente-->
+                <li>{{ fecha | date: 'long': 'GMT-6' }}</li>
+                <li>{{ fecha | date: 'long': 'GMT-4' }}</li>
+                <!--Ahora si necesito cambiarle el idioma hacemos uso del siguiente argumento del pipe date y el cual se
+                    llama locale (Para el ejemplo cambiamos a inglés)-->
+                <li>{{ fecha | date: 'long': '': 'en' }}</li>
+                <!--Francés-->
+                <li>{{ fecha | date: 'long': '': 'fr' }}</li>
+                <!--Si queremos cambiar la zona horaria y el idioma -->
+                <!--NOTA: El locale debe recibir un valor que exista o que hayamos registrado anteriormente ya que si pasaramos por 
+                          ejemplo solo 'es' en el locale nos daría error a no ser de que lo tuvieramos registrado en el modulo que en
+                          este caso es el app.modulo o si tivieramos un modulo especializado solo para esto-->
+                <li>{{ fecha | date: 'long': 'GMT-6': 'es-Co' }}</li>
+            </ul>
+
         </p-card>
     </div>
 
