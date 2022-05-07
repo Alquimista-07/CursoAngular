@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 // Importamos el shared module que creamos
 import { SharedModule } from './shared/shared.module';
 
+// Importamos el modulo app router para poder usar las rutas
+import { AppRouterModule } from './app-router.module';
+
+
 
 @NgModule({
   declarations: [
@@ -13,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    AppRouterModule,
     SharedModule
   ],
   providers: [],
