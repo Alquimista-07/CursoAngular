@@ -1,1 +1,32 @@
-<p>numeros works!</p>
+<!--Usamos la clase text-layout que creamos en el archivo styles.css para el uso del color propio del tema vala blue de
+    PrimeNg que elegimos -->
+<!--NOTA: Para ver documentación respecto al decimal pipe podemos visitar el siguiente enlace:
+          https://angular.io/api/common/DecimalPipe -->
+<div class="text-layout">
+    <h1>DecimalPipe y Porcentaje</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module.
+    </p>
+</div>
+
+<div class="grid">
+
+    <div class="col-4">
+        <p-card header="Ventas Netas"
+                subheader="de presente año">
+            <i class="pi pi-dollar"></i>
+            <!--El siguiente ejemplo usando el pipe number adicionandole argumentos luego de los : especifica que
+                quiero toda la parte entera (1) y que quiero 2 decimales (2-2). Ahora hay que realtar que si quiero
+                específicamente 2 decimales se indica 2-2 o si quiero 4 sería 4-4 ya que si especifico por ejemplo 
+                1-4 indicaría que quiero mostrar de 1 a 4 decimales. Adicionalmente cabe resaltar que el pipe también
+                redondea el valor automáticamente y si se indican más valores de los que se tienen simplemente rellena 
+                con ceros-->
+            <!--NOTA 2: También si nos damos cuenta podemos trabajar con expresiones de JavaScript como se mira en el 
+                        siguiente ejemplo que simplemente le sumamos un millón más (se recomienda en este caso encerrar
+                        la operación entre paréntesis pero no es necesario) y entonces opera genera el resultado y a 
+                        ese resultado le aplica el respectivo pipe para aplicarlo de manera visual-->
+            {{ (ventasNetas + 1000000) | number: '1.2-2' }}
+        </p-card>
+    </div>
+
+</div>
