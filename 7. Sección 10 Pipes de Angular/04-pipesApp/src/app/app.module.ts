@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -12,7 +12,12 @@ import { SharedModule } from './shared/shared.module';
 // Importamos el modulo de ventas
 import { VentasModule } from './ventas/ventas.module';
 
-
+// Cambiar el locale de la app para el cambio de idioma.
+// Que en este caso se eligió español Colombia pero Angular
+// nos provee de muchos paquetes en difetentes idiomas
+import localEsCo from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData( localEsCo );
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { VentasModule } from './ventas/ventas.module';
     SharedModule,
     VentasModule
   ],
-  providers: [],
+  providers: [
+    // Ahora podríamos usar el parametro locale del pipe date (ver documentación oficial) pero 
+    // lo que quiero hacer es cambiar el idioma de manera global, por lo tanto lo registramos en 
+    // los providers de la siguiente forma:
+    { provide: LOCALE_ID, useValue: 'es-CO' } // Este parametro usevalue proviene del valor que especificamos arriba en la importación
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
