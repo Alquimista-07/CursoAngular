@@ -12,4 +12,7 @@ export class BasicosComponent {
   nombreUpper   : string = 'JUAN';
   nombreCompleto: string = 'jUaN hERNánDEz';
 
+  // Definimos unas propiedades para fecha
+  fecha: Date = new Date(); // El día de hoy
+
 }
