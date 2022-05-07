@@ -80,3 +80,12 @@ COMANDOS ANGULAR CLI
 
 	ng generate service ruta/nombreServicio      -> Este es el comando completo
 	ng g s directorio/nombreServicio             -> Esta es la forma corta
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear el modulo router para el manejo de rutas. Adicionalmente al agregar 
+  el --flat se evita que se cree una carpeta con el nombre del modulo.
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate module nombreModulo --flat      -> Este es el comando completo
+	ng g m nombreModulo --flat                  -> Esta es la forma corta
+
