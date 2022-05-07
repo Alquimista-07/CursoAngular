@@ -3,11 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
+// Importamos el modulo app router para poder usar las rutas
+import { AppRouterModule } from './app-router.module';
+
 // Importamos el shared module que creamos
 import { SharedModule } from './shared/shared.module';
 
-// Importamos el modulo app router para poder usar las rutas
-import { AppRouterModule } from './app-router.module';
+// Importamos el modulo de ventas
+import { VentasModule } from './ventas/ventas.module';
 
 
 
@@ -18,7 +21,8 @@ import { AppRouterModule } from './app-router.module';
   imports: [
     BrowserModule,
     AppRouterModule,
-    SharedModule
+    SharedModule,
+    VentasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,47 @@
-<p>basicos works!</p>
+<!--
+  ===================================
+  NOTA INSTALACIÓN PRIMEFLEX
+  ===================================
+    Para comenzar a usa PrimeFlex (Versión 3 en este caso) tenemos que instalar el paquete usando los siguientes comandos: 
+    
+    npm install primeflex --save
+    
+    Adicionalmente es necesario copiar y pegar el style que nos indican en la documentación en el archivo
+    angular.json dentro del objeto styles
+    
+    node_modules/primeflex/primeflex.css
+    
+    Adicionalmente este es el enclace que nos lleva a la documentaión oficial 
+    para el uso de PrimeFlex: https://www.primefaces.org/primeflex/setup
+
+    ===============================================================================================================
+-->
+
+<!--Usamos la clase text-layout que creamos en el archivo styles.css para el uso del color propio del tema vala blue de
+    PrimeNg que elegimos -->
+<div class="text-layout">
+    <h1>Pipes Básicos</h1>
+    <p>
+        Pies incluidos en Angular - Usualmente en el Common Module.
+    </p>
+</div>
+
+<!--Ahora usando las clases de flexbox grid disponibles dentro de PrimeNg creamos los contenedores
+    y demás elementos que necesitemos-->
+
+<div class="grid">
+
+    <div class="col-4">
+        <p-card header="uppercase"></p-card>
+    </div>
+
+    <div class="col-4">
+        2
+    </div>
+
+    <div class="col-4">
+        3
+    </div>
+
+</div>
+    
