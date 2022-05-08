@@ -11,18 +11,24 @@
 </div>
 
 <div class="grid">
-
+    <!--NOTA: El pipe i18nSelect sirve para elegir una serie de opciones la que coincida con el argumento
+              que se este enviando, como en el siguiente ejemplo que se tiene para elegir la palabra correcta
+              dependiendo el genero de la persona. 
+        
+              Para conocer más sobre el pipe i18nSelect podemos visitar la documentación oficial
+              en el siguiente enlace: https://angular.io/api/common/I18nSelectPipe -->
     <div class="col-12 md:col-6">
         <p-fieldset legend="i18nSelect Pipe" 
                     [toggleable]="true">
-            Content
+            Saludos {{ nombre }}, es un placer 
+            {{ genero | i18nSelect: invitacionMapa }} 
+            a nuestro evento.
         </p-fieldset>
     </div>
 
     <div class="col-12 md:col-6">
         <p-fieldset legend="i18nPlural Pipe" 
-                    [toggleable]="true"
-                    >
+                    [toggleable]="true">
             Content
         </p-fieldset>
     </div>
