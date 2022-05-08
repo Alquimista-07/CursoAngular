@@ -26,10 +26,12 @@
         </p-fieldset>
     </div>
 
+        <!--NOTA: Para conocer más sobre el pipe i18nSelect podemos visitar la documentación oficial
+                  en el siguiente enlace: https://angular.io/api/common/I18nPluralPipe -->
     <div class="col-12 md:col-6">
         <p-fieldset legend="i18nPlural Pipe" 
                     [toggleable]="true">
-            Content
+            Actualmente {{ clientes.length | i18nPlural: clientesMapa }}
         </p-fieldset>
     </div>
 
