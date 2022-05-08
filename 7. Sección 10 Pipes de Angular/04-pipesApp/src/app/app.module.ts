@@ -1,5 +1,9 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// Para poder usar el fieldset de PrimeNg es necesario importar otro modulo que es importante
+// y el cual contiene las animaciones y que son propias de Angular, entonces para ello importamos
+// el siguiente modulo
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -30,6 +34,7 @@ registerLocaleData( localFr );
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRouterModule,
     SharedModule,
     VentasModule

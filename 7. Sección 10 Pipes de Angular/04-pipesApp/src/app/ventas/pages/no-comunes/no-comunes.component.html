@@ -1,1 +1,30 @@
-<p>no-comunes works!</p>
+<!--Usamos la clase text-layout que creamos en el archivo styles.css para el uso del color propio del tema vala blue de
+    PrimeNg que elegimos -->
+<!--NOTA: Para ver documentación respecto al fieldset podemos visitar el siguiente enlace:
+          https://primefaces.org/primeng/fieldset -->
+
+<div class="text-layout">
+    <h1>Pipes No Tan Comunes</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module.
+    </p>
+</div>
+
+<div class="grid">
+
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="i18nSelect Pipe" 
+                    [toggleable]="true">
+            Content
+        </p-fieldset>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="i18nPlural Pipe" 
+                    [toggleable]="true"
+                    >
+            Content
+        </p-fieldset>
+    </div>
+
+</div>
