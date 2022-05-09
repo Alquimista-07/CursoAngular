@@ -87,11 +87,24 @@
         </p-fieldset>
     </div>
 
+    <!--El pipe json nos permite conviertir un valor en su representación en formato JSON.
+        Útil para la depuración. Para más información al respecto sobre dicho pipe podemos
+        visitar el siguiente enlace: https://angular.io/api/common/JsonPipe 
+    NOTA: El pipe json tiene una limitante y la cual es que si el objeto tiene funciones y
+          esas funciones imprimen otros objetos o regresan algo eso no lo podría graficar-->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            <pre>
+                {{ heroes | json }}
+            </pre>
+        </p-fieldset>
+    </div>
+
     <!--El pipe keyvalue nos sirve para mostrar algún objeto literal de JavaScript en el html
         o trabajar con sus propiedades. Para más información con respecto a este pipe podemos
         visitar el siguiente enlace: https://angular.io/api/common/KeyValuePipe -->
     <div class="col-12 md:col-6">
-        <p-fieldset legend="KeyValue Pipe">
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
             <ul>
                 <li *ngFor="let item of persona | keyvalue">
                     <b>{{ item.key | titlecase }}:</b> {{ item.value }}
