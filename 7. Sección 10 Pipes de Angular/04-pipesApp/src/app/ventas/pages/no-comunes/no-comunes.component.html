@@ -57,4 +57,34 @@
         </p-fieldset>
     </div>
 
+    <!--NOTA: El siguiente pipe es el slice el cual nos permite dividir expresiones como stings,
+              arreglos o lo que queramos cortar. Para más información podemos revisar la documen-
+              tación en: https://angular.io/api/common/SlicePipe -->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+            <b>Original</b>
+            <!--Esta etiqueta pre hace que aparezca estilo codigo-->
+            <pre>{{ clientes }}</pre>
+            
+            <b>Slice: 0: 2</b>
+            <!--Entonces lo que hace el slice es indicar que quiero de la posición cero y quiero que llegue hasta 
+                la posición 2 excluyendo la posición 2, es dicir ambos valores son posiciones indice e indican el 
+                inicio y el fin-->
+            <pre>{{ clientes | slice: 0: 2 }}</pre>
+
+            <b>Slice: 1:2</b>
+            <pre>{{ clientes | slice: 1: 2 }}</pre>
+
+            <b>Slice: 1: 3</b>
+            <pre>{{ clientes | slice: 1: 3 }}</pre>
+
+            <b>Slice: 3: 4</b>
+            <pre>{{ clientes | slice: 3: 4 }}</pre>
+
+            <b>Slice: 0: 4</b>
+            <pre>{{ nombre | slice: 0: 4 }}</pre>
+
+        </p-fieldset>
+    </div>
+
 </div>
