@@ -87,4 +87,17 @@
         </p-fieldset>
     </div>
 
+    <!--El pipe keyvalue nos sirve para mostrar algún objeto literal de JavaScript en el html
+        o trabajar con sus propiedades. Para más información con respecto a este pipe podemos
+        visitar el siguiente enlace: https://angular.io/api/common/KeyValuePipe -->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="KeyValue Pipe">
+            <ul>
+                <li *ngFor="let item of persona | keyvalue">
+                    <b>{{ item.key | titlecase }}:</b> {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+
 </div>
