@@ -39,4 +39,14 @@ export class NoComunesComponent {
     // el length de la variable.
     'other': 'tenemos # clientes esperando'
   }
+
+  cambiarCliente(){
+    this.nombre = "Juan";
+    this.genero = 'masculino';
+  }
+
+  borrarCliente(){
+    this.clientes.pop();
+  }
+
 }

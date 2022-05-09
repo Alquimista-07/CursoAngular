@@ -10,13 +10,17 @@ import { MenubarModule } from 'primeng/menubar'
 // Importamos el fieldset de PrimeNg
 import { FieldsetModule } from 'primeng/fieldset'
 
+// Importamos el modulo necesario para el efecto ripple de los botones
+import { RippleModule } from 'primeng/ripple';
+
 @NgModule({
   declarations: [],
   exports: [
     ButtonModule,
     CardModule,
     MenubarModule,
-    FieldsetModule
+    FieldsetModule,
+    RippleModule
   ]
 })
 export class PrimeNgModule { }

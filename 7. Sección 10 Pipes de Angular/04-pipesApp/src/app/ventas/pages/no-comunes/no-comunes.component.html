@@ -20,9 +20,20 @@
     <div class="col-12 md:col-6">
         <p-fieldset legend="i18nSelect Pipe" 
                     [toggleable]="true">
-            Saludos {{ nombre }}, es un placer 
-            {{ genero | i18nSelect: invitacionMapa }} 
-            a nuestro evento.
+            <p>
+                Saludos {{ nombre }}, es un placer 
+                {{ genero | i18nSelect: invitacionMapa }} 
+                a nuestro evento.
+            </p>
+            <!--Creamos un botón-->
+            <button pButton type="button" 
+                    pRipple
+                    class="p-button-warning p-button-raised p-button-rounded p-button-outlined"
+                    label="Cambiar Persona"
+                    icon="pi pi-refresh"
+                    iconPos="right"
+                    (click)="cambiarCliente()">
+            </button>
         </p-fieldset>
     </div>
 
@@ -31,7 +42,18 @@
     <div class="col-12 md:col-6">
         <p-fieldset legend="i18nPlural Pipe" 
                     [toggleable]="true">
-            Actualmente {{ clientes.length | i18nPlural: clientesMapa }}
+            <p>
+                Actualmente {{ clientes.length | i18nPlural: clientesMapa }}
+            </p>
+            <!--Creamos un botón-->
+            <button pButton type="button" 
+                    pRipple
+                    class="p-button-danger p-button-raised p-button-rounded p-button-outlined"
+                    label="Borrar Cliente"
+                    icon="pi pi-minus"
+                    iconPos="right"
+                    (click)="borrarCliente()">
+            </button>
         </p-fieldset>
     </div>
 
