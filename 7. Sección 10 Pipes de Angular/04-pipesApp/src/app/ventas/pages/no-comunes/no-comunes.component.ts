@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-no-comunes',
@@ -71,5 +72,17 @@ export class NoComunesComponent {
       vuela: false
     }
   ];
+
+  // Async pipe
+  // Entonces vamos a hacerlo primero con un observable que va 
+  // a estar emitiendo valores numéricos.
+  miObservable = interval( 1000 ) // 1000 milesimas de segundos. 0,1,2,3,4,5,6,...
+
+  // Ahora usando una promesa
+  valorPromesa = new Promise( (resolve, reject) => {
+    setTimeout(() => {
+        resolve( 'Tenemos data de promesa' );
+    }, 3500);
+  });
 
 }

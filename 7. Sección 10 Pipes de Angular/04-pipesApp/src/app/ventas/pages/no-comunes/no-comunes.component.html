@@ -113,4 +113,23 @@
         </p-fieldset>
     </div>
 
+    <!--El Async Pipe sirve para desenvolver un valor de una primitiva asíncrona, y los valores 
+        que a fuerza se le deben enviar tienen que ser un observable o una promesa. Para ver más 
+        información al respecto sobre dicho pipe podemos visiar el siguiente enlace: 
+        https://angular.io/api/common/AsyncPipe -->
+    <div class="col-12 md:col-6">
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <!--Entonces acá el pipe async se suscribe internamente al observable y cada una de sus emisiones es
+                lo que se va a imprimir-->
+            <span><b>Usando Observable</b></span>
+            <pre *ngIf="!(miObservable | async)">Resolviendo observable</pre>
+            <pre>{{ miObservable | async }}</pre>
+
+            <span><b>Usando Promesa</b></span>
+            <!--Si no hay ningún valor (por eso se coloca entre paréntesis) quiero la negación del mismo-->
+            <pre *ngIf="!(valorPromesa | async)">Resolviendo promesa</pre>
+            <pre>{{ valorPromesa | async }}</pre>
+        </p-fieldset>
+    </div>
+
 </div>
