@@ -10,6 +10,9 @@ import { NoComunesComponent } from './pages/no-comunes/no-comunes.component';
 import { BasicosComponent } from './pages/basicos/basicos.component';
 import { OrdenarComponent } from './pages/ordenar/ordenar.component';
 
+// Ahora para poder usar el pipe tenemos que importarlo y declararlo
+import { MayusculasPipe } from './pipes/mayusculas.pipe';
+
 
 
 @NgModule({
@@ -17,7 +20,8 @@ import { OrdenarComponent } from './pages/ordenar/ordenar.component';
     NumerosComponent,
     NoComunesComponent,
     BasicosComponent,
-    OrdenarComponent
+    OrdenarComponent,
+    MayusculasPipe
   ],
   imports: [
     CommonModule,
