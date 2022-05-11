@@ -13,6 +13,9 @@ import { OrdenarComponent } from './pages/ordenar/ordenar.component';
 // Ahora para poder usar el pipe tenemos que importarlo y declararlo
 import { MayusculasPipe } from './pipes/mayusculas.pipe';
 
+// Importamos el nuevo pipe creado
+import { VuelaPipe } from './pipes/vuela.pipe';
+
 
 
 @NgModule({
@@ -21,7 +24,8 @@ import { MayusculasPipe } from './pipes/mayusculas.pipe';
     NoComunesComponent,
     BasicosComponent,
     OrdenarComponent,
-    MayusculasPipe
+    MayusculasPipe,
+    VuelaPipe
   ],
   imports: [
     CommonModule,
