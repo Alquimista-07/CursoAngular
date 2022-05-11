@@ -13,6 +13,9 @@ export class OrdenarComponent {
 
   enMayusculas: boolean = true;
 
+  // Creamos una propiedad que me va a ayudar para determinar porque es es que se quiere ordenar
+  ordenarPor: string = '';
+
   //Creamos un arreglo que va a ser la data de la tabla
   heroes: Heroe[] = [
     {
@@ -46,6 +49,12 @@ export class OrdenarComponent {
 
     this.enMayusculas = !this.enMayusculas;
 
+  }
+
+  // Creamos el metodo para ordenar
+  cambiarOrden( valor: string ) {
+    this.ordenarPor = valor;
+    // console.log( valor );
   }
 
 }
