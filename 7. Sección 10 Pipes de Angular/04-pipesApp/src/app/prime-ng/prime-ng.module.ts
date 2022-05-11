@@ -9,6 +9,13 @@ import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar'
 // Importamos el fieldset de PrimeNg
 import { FieldsetModule } from 'primeng/fieldset'
+// Importamos el toolbar de PrimeNg
+import { ToolbarModule } from 'primeng/toolbar';
+// Importamos la tabla de primeNg
+// NOTA: Adicionalmente para usar este modulo table de PrimeNg debemos hacer una instalación
+//       obligatoria para poder usarla, entonces para poder instalarla ejecutamos el comando 
+//       npm install @angular/cdk --save
+import { TableModule } from 'primeng/table'
 
 // Importamos el modulo necesario para el efecto ripple de los botones
 import { RippleModule } from 'primeng/ripple';
@@ -20,6 +27,8 @@ import { RippleModule } from 'primeng/ripple';
     CardModule,
     MenubarModule,
     FieldsetModule,
+    ToolbarModule,
+    TableModule,
     RippleModule
   ]
 })
