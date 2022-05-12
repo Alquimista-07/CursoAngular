@@ -18,6 +18,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
   },
 
+  // Ahora agregamos la ruta para cargar las rutas hijas del modulo de heroes usando lazyload
+  {
+    path: 'heroes',
+    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule )
+  },
+
   {
     path: '404',
     component: ErrorPageComponent
