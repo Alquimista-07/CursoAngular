@@ -8,6 +8,16 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 
 const routes: Routes = [
+  // Ahora en algún punto de mis rutas principales necesito decirle a Angular que si alguien
+  // navega a cierta ruta entonces cargue ese modulo, entonces para ello nos definimso una nueva
+  // ruta principal
+  {
+    path: 'auth',
+    // Entonces por lo tanto cuando alguién entre a esta ruta va ahí si va a cargar los hijos
+    // y lo demás que se definio en las rutas hijas
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
+  },
+
   {
     path: '404',
     component: ErrorPageComponent
