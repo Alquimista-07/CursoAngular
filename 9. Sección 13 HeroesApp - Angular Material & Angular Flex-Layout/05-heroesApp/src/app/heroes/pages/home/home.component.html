@@ -1,4 +1,17 @@
-<h1>HeroesApp</h1>
-<hr>
-<!--Ahora tenemos que usar otro router-outlet para mostrar las rutas hijas-->
-<router-outlet></router-outlet>
+<!--Usamos el sidenav container de Angular Material-->
+<mat-sidenav-container fullscreen>
+    
+    <!--Usamos el sidenav de Angular Material-->
+    <mat-sidenav #sidenav>
+        <h1>Sidenav</h1>
+    </mat-sidenav>
+
+    <!--Usamos el toolbar-->
+    <mat-toolbar>
+        <button mat-icon-button 
+                (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </mat-toolbar>
+
+</mat-sidenav-container>
