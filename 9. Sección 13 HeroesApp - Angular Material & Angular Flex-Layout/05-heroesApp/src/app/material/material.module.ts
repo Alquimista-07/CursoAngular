@@ -12,6 +12,8 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 // Importamos los iconos
 import { MatIconModule } from '@angular/material/icon';
+// Importamos la lista
+import { MatListModule } from '@angular/material/list';
 // Importamos el sidenav
 import { MatSidenavModule } from '@angular/material/sidenav';
 // Importamos el toolbar
@@ -21,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
   exports: [
     MatButtonModule,
     MatIconModule,
+    MatListModule,
     MatSidenavModule,
     MatToolbarModule
   ]

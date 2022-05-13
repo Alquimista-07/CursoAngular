@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*Estilo para el botón de logout*/
+/*NOTA: Este spacer se va a encargar para que tome todo el espacio restante y empuje todo 
+        a los bordes*/
+.spacer {
+    flex: 1 1 auto;
+}
