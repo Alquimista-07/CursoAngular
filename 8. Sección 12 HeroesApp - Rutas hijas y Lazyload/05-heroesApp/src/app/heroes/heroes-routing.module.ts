@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 
 // Creamos el nuevo modulo para el manejo de rutas hijas
@@ -12,6 +13,8 @@ import { ListadoComponent } from './pages/listado/listado.component';
 const routes: Routes = [
   {
     path: '',
+    // Agregamos el componente home
+    component: HomeComponent, // En este momento el home.component es la ruta padre
     children: [
       {
         path: 'listado',
