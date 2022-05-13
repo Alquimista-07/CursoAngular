@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Importamos el flex-layout
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 // Importamos las rutas hijas para heroes
 import { HeroesRoutingModule } from './heroes-routing.module';
 
@@ -23,6 +26,7 @@ import { ListadoComponent } from './pages/listado/listado.component';
   ],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     HeroesRoutingModule
   ]
 })
