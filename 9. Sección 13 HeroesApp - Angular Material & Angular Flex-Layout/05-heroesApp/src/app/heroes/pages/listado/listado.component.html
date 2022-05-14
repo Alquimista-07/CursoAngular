@@ -5,12 +5,18 @@
 <!--Agregamos una propiedad de flex-layout para colocar en filas y adicionalmente
     agregamos la propiedad wrap para que cuando ya no quepa en el contenedor salge
     automaticamente a la siguiente línea-->
-<div fxLayout="row wrap">
+<div fxLayout="row wrap"
+     fxLayout.xs="column"
+     fxLayoytAlign="center"
+     fxLayoutGap="20px">
 
     <!--Ahora indicamos que tan grandes quiero que sean las tarjetas en porcentaje-->
-    <div fxFlex="20">
+    <div fxFlex="20"
+         fxFlex.lg="15"
+         fxFlex.sm="30"
+         *ngFor="let heroe of heroes">
 
-        <mat-card *ngFor="let heroe of heroes">
+        <mat-card>
         
             <mat-card-header>
                 <mat-card-title>
