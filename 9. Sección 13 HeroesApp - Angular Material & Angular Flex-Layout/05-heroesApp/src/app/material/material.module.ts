@@ -10,12 +10,16 @@ import { NgModule } from '@angular/core';
 
 // Importamos los botones
 import { MatButtonModule } from '@angular/material/button';
+// Importamos el grid
+import { MatGridListModule } from '@angular/material/grid-list';
 // Importamos los iconos
 import { MatIconModule } from '@angular/material/icon';
 // Importamos los card
 import { MatCardModule } from '@angular/material/card';
 // Importamos la lista
 import { MatListModule } from '@angular/material/list';
+// Importamos el progress spiner
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // Importamos el sidenav
 import { MatSidenavModule } from '@angular/material/sidenav';
 // Importamos el toolbar
@@ -25,8 +29,10 @@ import { MatToolbarModule } from '@angular/material/toolbar'
   exports: [
     MatButtonModule,
     MatCardModule,
+    MatGridListModule,
     MatIconModule,
     MatListModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule
   ]
