@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// Importamos el forms module para habilitar el ng-model
+import { FormsModule } from '@angular/forms';
 
 // Importamos el flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,6 +23,7 @@ import { ImagenPipe } from './pipes/imagen.pipe';
 
 
 
+
 @NgModule({
   declarations: [
     AgregarComponent,
@@ -34,6 +37,7 @@ import { ImagenPipe } from './pipes/imagen.pipe';
   imports: [
     CommonModule,
     FlexLayoutModule,
+    FormsModule,
     MaterialModule,
     HeroesRoutingModule
   ]

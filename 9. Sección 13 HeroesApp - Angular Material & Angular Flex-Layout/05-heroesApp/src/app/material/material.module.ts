@@ -8,10 +8,16 @@ import { NgModule } from '@angular/core';
 
 // Entonces en este modulo vamos a importar todo lo correspondiente a Angular Material
 
+// Importamos el autocomplete
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // Importamos los botones
 import { MatButtonModule } from '@angular/material/button';
+// Importamos el mat form field que también lo necesitamos para el autocomplete
+import { MatFormFieldModule } from '@angular/material/form-field';
 // Importamos el grid
 import { MatGridListModule } from '@angular/material/grid-list';
+// Importamos el input que también se necesita para el autocomplete
+import { MatInputModule } from '@angular/material/input';
 // Importamos los iconos
 import { MatIconModule } from '@angular/material/icon';
 // Importamos los card
@@ -27,9 +33,12 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 
 @NgModule({
   exports: [
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatFormFieldModule,
     MatGridListModule,
+    MatInputModule,
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
