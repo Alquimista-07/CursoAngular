@@ -33,5 +33,11 @@ export class HeroesService {
     return this.http.get<Heroe>( url );
 
   }
+
+  getSugerencias(termino: string): Observable<Heroe[]> {
+    const cantidadTerminos = 6;
+    const url = `${ this.baseUrl }/heroes?q=${termino}&_limit=${cantidadTerminos}`
+    return this.http.get<Heroe[]>(url);
+  }
   
 }

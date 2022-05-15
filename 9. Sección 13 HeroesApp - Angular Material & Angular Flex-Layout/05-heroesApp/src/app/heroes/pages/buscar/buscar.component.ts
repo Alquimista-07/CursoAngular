@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 // Importamos la interface
 import { Heroe } from '../../interfaces/heroes.interface';
 // Importamos el servicio
@@ -16,14 +17,33 @@ export class BuscarComponent implements OnInit {
 
   heroes: Heroe[] = [];
 
+  heroeSeleccionado!: Heroe;
+
   constructor( private heroesService: HeroesService ) { }
 
   ngOnInit(): void {
   }
 
   buscando() {
-    this.heroesService.getHeroes()
-        .subscribe( heroes => this.heroes = heroes);
+    if( this.termino.length >= 2 ){
+      this.heroesService.getSugerencias( this.termino )
+          .subscribe( heroes => this.heroes = heroes);
+    }
+    else{
+      this.heroes = [];
+    }
+  }
+
+  opcionSeleccionada( event: MatAutocompleteSelectedEvent  ){
+    const heroe: Heroe = event.option.value;
+    // Ahora para que no aparezca la representación de object en el input sino 
+    // el nombre entonces hacemos lo siguiente:
+    this.termino = heroe.superhero;
+    // Ahora traemos la información del héroe que se seleccionó
+    // adicionalmnete colocamos el simbolo ! ya que el heroe puede venir
+    // vacío entonces para que lo deje pasar agregamos dicho simbolo
+    this.heroesService.getHeroePorId( heroe.id! )
+        .subscribe( heroe => this.heroeSeleccionado = heroe );
   }
 
 }
