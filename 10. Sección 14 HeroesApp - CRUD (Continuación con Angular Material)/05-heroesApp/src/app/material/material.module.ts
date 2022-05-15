@@ -26,6 +26,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 // Importamos el progress spiner
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// Importamos el select
+import { MatSelectModule } from '@angular/material/select'
 // Importamos el sidenav
 import { MatSidenavModule } from '@angular/material/sidenav';
 // Importamos el toolbar
@@ -42,6 +44,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSidenavModule,
     MatToolbarModule
   ]
