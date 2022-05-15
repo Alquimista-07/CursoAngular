@@ -17,7 +17,8 @@ export class BuscarComponent implements OnInit {
 
   heroes: Heroe[] = [];
 
-  heroeSeleccionado!: Heroe;
+  // El heroe seleccionado es un heroe o puede ser undefined
+  heroeSeleccionado: Heroe | undefined;
 
   constructor( private heroesService: HeroesService ) { }
 
@@ -26,7 +27,7 @@ export class BuscarComponent implements OnInit {
 
   buscando() {
     if( this.termino.length >= 2 ){
-      this.heroesService.getSugerencias( this.termino )
+      this.heroesService.getSugerencias( this.termino.trim() )
           .subscribe( heroes => this.heroes = heroes);
     }
     else{
@@ -35,6 +36,12 @@ export class BuscarComponent implements OnInit {
   }
 
   opcionSeleccionada( event: MatAutocompleteSelectedEvent  ){
+
+    if( !event.option.value ){
+      this.heroeSeleccionado = undefined;
+      return;
+    }
+
     const heroe: Heroe = event.option.value;
     // Ahora para que no aparezca la representación de object en el input sino 
     // el nombre entonces hacemos lo siguiente:
