@@ -1,0 +1,79 @@
+<!--Usamos el sidenav container de Angular Material-->
+<mat-sidenav-container fullscreen>
+    
+    <!--Usamos el sidenav de Angular Material-->
+    <mat-sidenav #sidenav mode="push">
+        
+        <!--Colocamos otro toolbar dentro del sidenav-->
+        <!--NOTA: También podemos cambiar el color de la barra agregando el color de la siguiente forma:-->
+        <mat-toolbar color="primary">
+            
+            <span>Menú</span>
+
+            <!--Creamos una clase global usando el flex-layout para colocarla a un span que se va a encargar
+            de empujar y aliner a la derecha el botón de menú-->
+            <span class="spacer"></span>
+
+            <button mat-icon-button 
+                (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+        </mat-toolbar>
+        <!--Agregamos la lista de las opciones disponibles en el menú-->
+        <mat-nav-list>
+            
+            <!--Le agregamos el evento click sidenav.toggle() para que cuando le demos click el sidenav se cierre
+                y también le colocamos un icono y le agregamos la propiedad mat-list-icon para indicar que es un icono
+                de nuestra lista y no quede pegado y se vea feo-->
+            <a routerLink="./listado"
+               mat-list-item
+               (click)="sidenav.toggle()">
+               <mat-icon mat-list-icon>person</mat-icon>
+                <span>Listado De Héroes</span>
+            </a>
+
+            <a routerLink="./agregar"
+               mat-list-item
+               (click)="sidenav.toggle()">
+               <mat-icon mat-list-icon>add</mat-icon>
+               <span>Añadir Héroe</span>
+            </a>
+
+            <a routerLink="./buscar"
+               mat-list-item
+               (click)="sidenav.toggle()">
+               <mat-icon mat-list-icon>search</mat-icon>
+               <span>Buscar Héroe</span>
+            </a>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <!--Usamos el toolbar-->
+    <mat-toolbar>
+
+        <button mat-icon-button 
+                (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <!--Creamos una clase global usando el flex-layout para colocarla a un span que se va a encargar
+            de empujar y aliner a la derecha el botón de logout-->
+        <span class="spacer"></span>
+
+        <!--Cremos el botón para el cierre de sesión-->
+        <button mat-button>
+            <mat-icon></mat-icon>
+            Logout
+        </button>
+
+    </mat-toolbar>
+
+    <div class="container">
+        <!--Ahora tenemos que usar otro router-outlet para mostrar las rutas hijas-->
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>
