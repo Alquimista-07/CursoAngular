@@ -49,5 +49,10 @@ export class HeroesService {
     const url = `${ this.baseUrl }/heroes/${ heroe.id }`;
     return this.http.put<Heroe>( url, heroe );
   }
+
+  borrarHeroe( id: string ): Observable<any> {
+    const url = `${ this.baseUrl }/heroes/${ id }`;
+    return this.http.delete<any>( url );
+  }
   
 }

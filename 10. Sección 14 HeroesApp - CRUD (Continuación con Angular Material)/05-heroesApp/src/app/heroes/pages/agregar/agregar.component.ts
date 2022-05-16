@@ -91,4 +91,15 @@ export class AgregarComponent implements OnInit {
 
   }
 
+  borrarHeroe() {
+    // Aca nos indica que podría ser undefined pero sabemos que siempre va a tener un valor
+    // entonces le decimos a Angular que confie y le colocamos el simbolo !
+    this.heroesService.borrarHeroe( this.heroe.id! )
+        .subscribe( resp => {
+
+          this.router.navigate( ['/heroes'] );
+
+        });
+  }
+
 }
