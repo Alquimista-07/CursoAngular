@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
+import { ConfirmarComponent } from '../../components/confirmar/confirmar.component';
 
 @Component({
   selector: 'app-agregar',
@@ -48,7 +50,9 @@ export class AgregarComponent implements OnInit {
                // entonces usamos el router
                private router: Router,
                // Ahora para usar el snacbar necesitamos inyectar un servicio
-               private snackBar:MatSnackBar) { }
+               private snackBar:MatSnackBar,
+               // Inyectamos el servicio para poder usar el dialog
+               private dialogo: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -99,14 +103,19 @@ export class AgregarComponent implements OnInit {
   }
 
   borrarHeroe() {
-    // Aca nos indica que podría ser undefined pero sabemos que siempre va a tener un valor
-    // entonces le decimos a Angular que confie y le colocamos el simbolo !
-    this.heroesService.borrarHeroe( this.heroe.id! )
-        .subscribe( resp => {
 
-          this.router.navigate( ['/heroes'] );
+    this.dialogo.open( ConfirmarComponent, {
+      width: '250px'
+    });
+    
+    // // Aca nos indica que podría ser undefined pero sabemos que siempre va a tener un valor
+    // // entonces le decimos a Angular que confie y le colocamos el simbolo !
+    // this.heroesService.borrarHeroe( this.heroe.id! )
+    //     .subscribe( resp => {
 
-        });
+    //       this.router.navigate( ['/heroes'] );
+
+    //     });
   }
 
   mostrarSnackBar( mensaje: string ): void {

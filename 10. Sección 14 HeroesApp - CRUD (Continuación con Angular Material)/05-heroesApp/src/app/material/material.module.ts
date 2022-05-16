@@ -12,6 +12,8 @@ import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // Importamos los botones
 import { MatButtonModule } from '@angular/material/button';
+// Importamos el dialog 
+import { MatDialogModule } from '@angular/material/dialog';
 // Importamos el mat form field que también lo necesitamos para el autocomplete
 import { MatFormFieldModule } from '@angular/material/form-field';
 // Importamos el grid
@@ -40,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatGridListModule,
     MatInputModule,
