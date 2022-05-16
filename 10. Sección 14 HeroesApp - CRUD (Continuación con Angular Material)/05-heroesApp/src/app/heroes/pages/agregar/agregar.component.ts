@@ -8,7 +8,12 @@ import { HeroesService } from '../../services/heroes.service';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
-  styles: [
+  styles: [`
+    img {
+      width: 100%;
+      border-radius: 5px;
+    }
+  `
   ]
 })
 export class AgregarComponent implements OnInit {
@@ -43,6 +48,14 @@ export class AgregarComponent implements OnInit {
                private router: Router) { }
 
   ngOnInit(): void {
+
+    // Validamos para controlar el error que aparece en consola ya que el si no incluye el id
+    // regresa undefined por lo tanto validamos que si no lo incluye haga un return y no haga nada
+    // y en caso contrario pues significa que tenemos un id y que estamos en la pantalla de editar
+    // por lo tanto no habría problema.
+    if( !this.router.url.includes('editar') ){
+      return;
+    }
     // En el ngOnInit se aconseja hacer este tipo de peticiones para que la aplicación se construya
     // y a su vez vaya haciendo las peticiones http.
     // Entonces acá necesito verificar el url
@@ -54,6 +67,7 @@ export class AgregarComponent implements OnInit {
         // me va a cargar el formulario
         .subscribe( heroe => this.heroe = heroe );
   }
+
 
   guardar() {
     // console.log( this.heroe);
