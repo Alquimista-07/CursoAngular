@@ -44,5 +44,10 @@ export class HeroesService {
     const url = `${ this.baseUrl }/heroes`;
     return this.http.post<Heroe>( url, heroe );
   }
+
+  actualizarHeroe( heroe: Heroe ): Observable<Heroe> {
+    const url = `${ this.baseUrl }/heroes/${ heroe.id }`;
+    return this.http.put<Heroe>( url, heroe );
+  }
   
 }
