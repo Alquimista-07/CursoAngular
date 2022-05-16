@@ -104,18 +104,29 @@ export class AgregarComponent implements OnInit {
 
   borrarHeroe() {
 
-    this.dialogo.open( ConfirmarComponent, {
-      width: '250px'
+    const dialog = this.dialogo.open( ConfirmarComponent, {
+      width: '250px',
+      data: {...this.heroe}
     });
-    
-    // // Aca nos indica que podría ser undefined pero sabemos que siempre va a tener un valor
-    // // entonces le decimos a Angular que confie y le colocamos el simbolo !
-    // this.heroesService.borrarHeroe( this.heroe.id! )
-    //     .subscribe( resp => {
 
-    //       this.router.navigate( ['/heroes'] );
+    dialog.afterClosed().subscribe(
+            (result) => {
+              
+              if( result ){
+                
+                // Aca nos indica que podría ser undefined pero sabemos que siempre va a tener un valor
+                // entonces le decimos a Angular que confie y le colocamos el simbolo !
+                this.heroesService.borrarHeroe( this.heroe.id! )
+                    .subscribe( resp => {
+            
+                      this.router.navigate( ['/heroes'] );
+            
+                    });
 
-    //     });
+              }
+
+            })
+
   }
 
   mostrarSnackBar( mensaje: string ): void {
