@@ -104,3 +104,15 @@ COMANDOS ANGULAR CLI
 	ng generate guard directorio/nombreGuard --skipTests        -> Este es el comando completo
 	ng g guard directorio/nombreGuard --skipTests               -> Esta es la forma corta
 
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite ver la ayuda por ejemplo de los modulos con los comandos adicionales o
+  banderas que podemos agregar para que por ejemplo nos genere el modulo con el modulo de rutas de forma
+  automática.
+-----------------------------------------------------------------------------------------------------------
+
+	ng g m --help
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un modulo con su respectivo archivo de rutas.
+-----------------------------------------------------------------------------------------------------------
+
+	ng g m nombreModulo --routing
