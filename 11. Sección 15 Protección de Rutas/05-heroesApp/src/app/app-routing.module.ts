@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 // Importamos el componente pagina error 404
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
+// Importamos el guard
+import { AuthGuard } from './auth/guards/auth.guard';
+
 
 const routes: Routes = [
   // Ahora en algún punto de mis rutas principales necesito decirle a Angular que si alguien
@@ -21,7 +24,16 @@ const routes: Routes = [
   // Ahora agregamos la ruta para cargar las rutas hijas del modulo de heroes usando lazyload
   {
     path: 'heroes',
-    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule )
+    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule ),
+
+     // NOTA: Entonces así como los servicios debemos usar el guard, entonces en este caso lo vamos a usar
+    //       en el sistema de rutas principal, pero lo podemos usar en cualquier lugar donde tengamos rutas
+    //       definidas porque puede que necesitemos que pueda activar ciertas rutas y otras rutas no. Por lo
+    //       tanto en este caso queremos evitar que pueda cargar el modulo heroes si no esta autenticado:
+
+    canLoad: [ AuthGuard ] // Aca podemos especificar cuantos guards queramos definidos en un arreglo y el único argumento
+                           // que se especifica acá es como se llama el guard
+
   },
 
   {

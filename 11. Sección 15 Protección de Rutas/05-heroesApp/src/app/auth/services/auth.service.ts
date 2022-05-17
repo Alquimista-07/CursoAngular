@@ -33,4 +33,11 @@ export class AuthService {
                );
   }
 
+  logout() {
+
+    // Purgamos el objeto _auth
+    this._auth = undefined
+
+  }
+
 }
