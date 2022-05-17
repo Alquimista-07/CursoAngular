@@ -31,8 +31,12 @@ const routes: Routes = [
     //       definidas porque puede que necesitemos que pueda activar ciertas rutas y otras rutas no. Por lo
     //       tanto en este caso queremos evitar que pueda cargar el modulo heroes si no esta autenticado:
 
-    canLoad: [ AuthGuard ] // Aca podemos especificar cuantos guards queramos definidos en un arreglo y el único argumento
-                           // que se especifica acá es como se llama el guard
+    canLoad: [ AuthGuard ], // Aca podemos especificar cuantos guards queramos definidos en un arreglo y el único argumento
+                            // que se especifica acá es como se llama el guard.
+
+    // Entonces aca vamos a prevenir que se pueda activar así como prevenimos que se pudiera cargar
+    canActivate: [ AuthGuard ]   // Aca podemos especificar cuantos guards queramos definidos en un arreglo y el único argumento
+                                 // que se especifica acá es como se llama el guard.
 
   },
 

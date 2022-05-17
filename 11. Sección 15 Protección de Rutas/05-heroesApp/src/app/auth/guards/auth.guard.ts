@@ -11,16 +11,25 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
 
   // Inyectamos el servicio de auth
   constructor( private authService: AuthService ) { }
 
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   return true;
-  // }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    // El estado donde es el snapshop actual y al igual que el canLoad puede retornar un observable que emite un valor boolean,
+    // o una promesa que resuelve un valor boolean o puede ser en si un valor boolean.
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+      if( this.authService.auth.id ) {
+        return true;
+      }
+      
+      console.log( 'Bloqueado por el AuthGuard - CanActivate' );
+
+    return false;
+  }
 
   // Este método es si se puede cargar un módulo, y solo sirve para prevenir que el usuario cargue el modulo, ya que si ya estaba
   // previamente ccargado el modulo la persona va a poder ingresar ya que el canLoad esto es lo que restringe, solo si puede cargar
@@ -39,7 +48,7 @@ export class AuthGuard implements CanLoad {
         return true;
       }
       
-      console.log( 'Bloqueado por el AuthGuard' );
+      console.log( 'Bloqueado por el AuthGuard - CanLoad' );
 
     return false;
   }

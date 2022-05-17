@@ -29,7 +29,8 @@ export class AuthService {
                  // efectos secundarios, es decir, cuando se haga la petición antes 
                  // de llegar al subscribe que esta en el login.component.ts va 
                  // a pasar por el tap
-                 tap( auth => this._auth = auth )
+                 tap( auth => this._auth = auth ),
+                 tap( auth => localStorage.setItem( 'id', auth.id ) )
                );
   }
 
