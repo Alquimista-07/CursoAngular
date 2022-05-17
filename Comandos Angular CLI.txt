@@ -97,3 +97,10 @@ COMANDOS ANGULAR CLI
 	ng generate pipe directorio/nombrePipe --skipTests     -> Este es el comando completo
 	ng g p directorio/nombrePipe --skipTests               -> Esta es la forma corta
 
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear un guard en una ruta específica y sin archivo de pruebas.
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate guard directorio/nombreGuard --skipTests        -> Este es el comando completo
+	ng g guard directorio/nombreGuard --skipTests               -> Esta es la forma corta
+
