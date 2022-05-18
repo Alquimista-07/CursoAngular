@@ -14,16 +14,28 @@
             <!--Campo de prodcuto-->
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
-                <!--Para decirle a Angular que los campos son parte del formulario es necesario agregar el ngModel
-                    y el name y asi de esta forma podemos obtener el valor del campo-->
                 <div class="col-sm-9">
+                    <!--Para decirle a Angular que los campos son parte del formulario es necesario agregar el ngModel
+                        y el name y asi de esta forma podemos obtener el valor del campo-->
+                    <!--El minLength es propio de html pero lo va a leer angular para crear la condición, adicionalmente también
+                        tenemos el maxlength que lo podríamos poner-->
                     <input type="text"
                     class="form-control"
                     ngModel
                     name="producto"
                     placeholder="Nombre del producto"
-                    required>
-                    <span class="form-text text-danger">Debe de ser de 3 letras</span>
+                    required
+                    minlength="3">
+                    <!--Validamos la propiedad del campo con el ngIf para mostrar el texto cuando la validación del formulario
+                        no se cumpla y sea invalid y que el formulario tenga su estado touched en true-->
+                    <!--NOTA: Ahora si quisieramos hacer esto mismo del mensaje tendríamos que colocarlo para cada uno de los campos y esto es una de
+                              las desventajas de la aproximación por template ya que esto tiende a crecer mucho y el código no es tan facil de ver-->
+                    <span class="form-text text-danger"
+                          *ngIf="miFormulario.controls['producto'].invalid && 
+                                 miFormulario.controls['producto'].touched">
+                        Debe de ser de 3 letras
+                    </span>
+                
                 </div>
             </div>
 
@@ -76,8 +88,23 @@
 <div class="row">
     <div class="col">
 
+        <!--El valid indica si el formulario es válido o no, en este caso no lo es
+            ya que el producto y el precio son obligatorios-->
         <span>Valid</span>
         <pre>{{ miFormulario.valid }}</pre>
+
+        <!--NOTA: El touched y el pristine se pueden manejar de forma independiente para cada uno de los campos
+                  y en este caso lo vamos a usar así-->
+
+        <!--El pristine indica si se han cambiado alguno de los valores con los cuales se
+            presento el formulario desde que fue presentado al usuario-->
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
+
+        <!--El touched indica si el usuario ha tocado el formulario y su estado cambia con solo
+            que el usuario haga click en un campo y se salga así no haga hecho o escrito nada-->
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
 
         <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre>
