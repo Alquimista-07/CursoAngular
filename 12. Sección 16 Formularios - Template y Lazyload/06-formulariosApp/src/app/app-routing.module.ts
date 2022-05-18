@@ -7,7 +7,18 @@ import { RouterModule, Routes } from '@angular/router';
 //       app-routing.module en el app.module
 
 const routes: Routes = [
-
+  {
+    path: 'template',
+    loadChildren: () => import('./template/template.module').then( m => m.TemplateModule )
+  },
+  {
+    path: 'reactive',
+    loadChildren: () => import('./reactive/reactive.module').then( m => m.ReactiveModule )
+  },
+  {
+    path: '**',
+    redirectTo: 'template'
+  }
 ];
 
 @NgModule({
