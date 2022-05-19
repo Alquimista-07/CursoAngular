@@ -8,6 +8,9 @@ import { BasicosComponent } from './basicos/basicos.component';
 import { DinamicosComponent } from './dinamicos/dinamicos.component';
 import { SwitchesComponent } from './switches/switches.component';
 
+// Para poder usar la directiva necesitamos declararla
+import { CustomMinDirective } from './directives/custom-min.directive';
+
 // NOTA: Este archivo fue generado con ayuda del Angular CLI
 //       comando ng g m template --routing (Ver archivo de comandos)
 
@@ -15,7 +18,8 @@ import { SwitchesComponent } from './switches/switches.component';
   declarations: [
     BasicosComponent,
     DinamicosComponent,
-    SwitchesComponent
+    SwitchesComponent,
+    CustomMinDirective
   ],
   imports: [
     CommonModule,

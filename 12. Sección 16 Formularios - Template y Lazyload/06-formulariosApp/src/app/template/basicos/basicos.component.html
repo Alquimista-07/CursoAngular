@@ -70,11 +70,23 @@
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Existencias</label>
                 <div class="col-sm-9">
+                    <!--Ahora para usar la directiva personalizada debemos asignar el selector
+                        el cual vamos a llamar customMin y esta directiva personalizada puedo
+                        extender las funcionalidades que puede recibir el input y puedo controlar
+                        el input como yo quiera, es decir, cuando pase por este customMin se va a
+                        ejecutar la directiva.-->
+                    <!--Otra cosa que voy a necesitar enviar la propiedad minimo, la cual va a ser extendida
+                        por la directiva customMin-->
+                    <!--NOTA: Ojo si mandamos la propiedad que le asignamos a la directiva que en este caso se llama minimo y si lo colocamos
+                              sin llaves [] indica que estamos enviando un string y si lo mandamos entre llaves [] enviamos un valor numérico-->
                     <input type="number"
                     ngModel
                     name="existencias"
                     class="form-control"
-                    placeholder="Existencias del producto">
+                    customMin
+                    [minimo]="0"
+                    placeholder="Existencias del producto"
+                    required>
                 </div>
             </div>
 
@@ -120,6 +132,9 @@
 
         <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>CustomDirective</span>
+        <pre>{{ miFormulario.controls['existencias']?.errors | json }}</pre>
 
     </div>
 </div>
