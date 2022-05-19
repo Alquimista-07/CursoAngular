@@ -1,4 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+// Creamos las intrefaces para definir como va a lucir la data
+interface Persona {
+  nombre: string;
+  favoritos: Favorito[]
+}
+
+interface Favorito {
+  id: number;
+  nombre: string;
+}
 
 @Component({
   selector: 'app-dinamicos',
@@ -6,11 +17,21 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class DinamicosComponent implements OnInit {
+export class DinamicosComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  // Creamos el objeto inicializador del formularios
+  persona: Persona = {
+    nombre: 'Ariadna',
+    favoritos: [
+      {
+        id: 1,
+        nombre: 'Metal Gear'
+      },
+      {
+        id: 2,
+        nombre: 'Call of dutty'
+      }
+    ]
   }
 
   guardar() {

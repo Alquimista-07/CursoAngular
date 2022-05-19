@@ -18,7 +18,7 @@
 
             <input class="form-control" 
                    placeholder="Nombre de la persona"
-                   ngModel
+                   [ngModel]="persona.nombre"
                    name="nombre"
                    required>
 
@@ -58,7 +58,18 @@
         <label class="col-sm-3 col-form-label">Favoritos</label>
         <div class="col-sm-9">
 
-            <input class="form-control mb-1">
+            <!--Entonces ahora para agregar los elementos de forma dinamica voy a necesitar recorrer el objeto
+                entonces hacemos lo siguiente-->
+            <!--En cuanto al tema de asignar el name al formulario para que no quede repetido y nos muestre el mismo valor en el campo
+                también podemos hacerlo de la siguiente forma:
+                
+                [name]="'favorito_' + i"
+            -->
+            <input *ngFor="let juego of persona.favoritos; let i = index"
+                   [(ngModel)]="juego.nombre"
+                   name="favorito_{{ i }}"
+                   class="form-control mb-1"
+                   required>
 
         </div>
 
@@ -80,3 +91,6 @@
     </div>
 
 </form>
+
+<span>Persona</span>
+<pre>{{ persona | json }}</pre>
