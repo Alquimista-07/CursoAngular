@@ -38,4 +38,8 @@ export class DinamicosComponent {
     console.log( 'Formulario Posteado' )
   }
 
+  eliminar( index: number ) {
+    this.persona.favoritos.splice(index,1);
+  }
+
 }

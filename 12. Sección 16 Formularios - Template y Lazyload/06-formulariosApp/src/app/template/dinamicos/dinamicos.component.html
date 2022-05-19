@@ -58,18 +58,29 @@
         <label class="col-sm-3 col-form-label">Favoritos</label>
         <div class="col-sm-9">
 
-            <!--Entonces ahora para agregar los elementos de forma dinamica voy a necesitar recorrer el objeto
-                entonces hacemos lo siguiente-->
-            <!--En cuanto al tema de asignar el name al formulario para que no quede repetido y nos muestre el mismo valor en el campo
-                también podemos hacerlo de la siguiente forma:
-                
-                [name]="'favorito_' + i"
-            -->
-            <input *ngFor="let juego of persona.favoritos; let i = index"
-                   [(ngModel)]="juego.nombre"
-                   name="favorito_{{ i }}"
-                   class="form-control mb-1"
-                   required>
+            <div class="input-group mb-1"
+                 *ngFor="let juego of persona.favoritos; let i = index">
+
+                <!--Entonces ahora para agregar los elementos de forma dinamica voy a necesitar recorrer el objeto
+                    entonces hacemos lo siguiente-->
+                <!--En cuanto al tema de asignar el name al formulario para que no quede repetido y nos muestre el mismo valor en el campo
+                    también podemos hacerlo de la siguiente forma:
+                    
+                    [name]="'favorito_' + i"
+                -->
+                <input [(ngModel)]="juego.nombre"
+                       name="favorito_{{ i }}"
+                       class="form-control"
+                       required>
+
+                <button class="btn btn-outline-danger"
+                       type="button"
+                       (click)="eliminar(i)">
+                   Eliminar
+                </button>
+
+            </div>
+
 
         </div>
 
