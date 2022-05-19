@@ -27,6 +27,11 @@ export class BasicosComponent implements OnInit {
            && this.miFormulario?.controls['producto']?.touched;
   }
 
+  precioValido(): boolean {
+    return this.miFormulario?.controls['precio']?.value < 0 
+           && this.miFormulario?.controls['precio']?.touched;
+  }
+
   // guardar(miFormulario: NgForm) {
   guardar() {
     console.log('Submit Hecho!!!...'  );
