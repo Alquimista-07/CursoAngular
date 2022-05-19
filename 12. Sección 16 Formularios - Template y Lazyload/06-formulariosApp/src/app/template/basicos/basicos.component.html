@@ -20,9 +20,10 @@
                         y el name y asi de esta forma podemos obtener el valor del campo-->
                     <!--El minLength es propio de html pero lo va a leer angular para crear la condición, adicionalmente también
                         tenemos el maxlength que lo podríamos poner-->
+                    <!--Ahora para establecer la propiedad initForm definida con los valores inicales por defecto usamos el ngModel con llaves []-->
                     <input type="text"
                     class="form-control"
-                    ngModel
+                    [ngModel]="initForm.producto"
                     name="producto"
                     placeholder="Nombre del producto"
                     required
@@ -54,7 +55,7 @@
                 <div class="col-sm-9">
                     <input type="number"
                     class="form-control"
-                    ngModel
+                    [ngModel]="initForm.precio"
                     name="precio"
                     placeholder="Precio del producto"
                     required
@@ -80,7 +81,7 @@
                     <!--NOTA: Ojo si mandamos la propiedad que le asignamos a la directiva que en este caso se llama minimo y si lo colocamos
                               sin llaves [] indica que estamos enviando un string y si lo mandamos entre llaves [] enviamos un valor numérico-->
                     <input type="number"
-                    ngModel
+                    [ngModel]="initForm.existencias"
                     name="existencias"
                     class="form-control"
                     customMin
