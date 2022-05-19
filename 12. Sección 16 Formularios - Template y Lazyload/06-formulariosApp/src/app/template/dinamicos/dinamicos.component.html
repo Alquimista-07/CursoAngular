@@ -39,11 +39,17 @@
 
             <div class="input-group">
 
+                <!--Ahora para que envíe el evento que en este caso es agregar favorit cuando presione enter
+                    vamos a usar el evento keyup.enter-->
                 <input class="form-control" 
-                       placeholder="Agregar favorito">
+                       placeholder="Agregar favorito"
+                       [(ngModel)]="nuevoJuego"
+                       (keyup.enter)="agregarJuego()"
+                       name="nuevoJuego">
                 
                 <button class="btn btn-outline-primary"
-                        type="button">
+                        type="button"
+                        (click)="agregarJuego()">
                     Agregar
                 </button>
 

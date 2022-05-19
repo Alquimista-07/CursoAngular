@@ -19,6 +19,9 @@ interface Favorito {
 })
 export class DinamicosComponent {
 
+  // Creamos una nueva propiedad que me va a ayudar para agregar juegos
+  nuevoJuego: string = '';
+
   // Creamos el objeto inicializador del formularios
   persona: Persona = {
     nombre: 'Ariadna',
@@ -40,6 +43,29 @@ export class DinamicosComponent {
 
   eliminar( index: number ) {
     this.persona.favoritos.splice(index,1);
+  }
+
+  // Agregar juegos favoritos
+  agregarJuego() {
+
+    if( this.nuevoJuego !== '' ){
+
+      const nuevoFavorito: Favorito = {
+        id: this.persona.favoritos.length + 1,
+        nombre: this.nuevoJuego
+      };
+  
+      // Mandamos el arreglo como un nuevo objeto usando el operado spred para 
+      // esparcir todas sus propiedades y de esta forma asegurarme de que no voy 
+      // a mandar ninguna referencia al objeto ya que como sabemos los objetos y 
+      // arreglos se pasan por referencia
+      this.persona.favoritos.push( {...nuevoFavorito} );
+  
+      // Limpiamos el campo
+      this.nuevoJuego = '';
+      
+    }
+
   }
 
 }
