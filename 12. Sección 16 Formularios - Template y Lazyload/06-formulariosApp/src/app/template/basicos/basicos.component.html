@@ -8,7 +8,8 @@
             llamada miFormulario, adicionalmente el name no puede estar duplicado-->
         <!--Ahora si necesito que el campo contenga un valor para que pueda ser enviado le colocamos la propiedad
             required-->
-        <form (ngSubmit)="guardar(miFormulario)" 
+        <!-- <form (ngSubmit)="guardar(miFormulario)"  -->
+        <form (ngSubmit)="guardar()" 
               #miFormulario="ngForm"
               autocomplete="off">
             <!--Campo de prodcuto-->
@@ -28,11 +29,16 @@
                     minlength="3">
                     <!--Validamos la propiedad del campo con el ngIf para mostrar el texto cuando la validación del formulario
                         no se cumpla y sea invalid y que el formulario tenga su estado touched en true-->
-                    <!--NOTA: Ahora si quisieramos hacer esto mismo del mensaje tendríamos que colocarlo para cada uno de los campos y esto es una de
-                              las desventajas de la aproximación por template ya que esto tiende a crecer mucho y el código no es tan facil de ver-->
+                    <!--NOTA: Anteriormente teniamos una validación para el campo la cual se hacía un poco difícil de leer la cual
+                              era: 
+
+                            *ngIf="miFormulario.controls['producto'].invalid && 
+                                 miFormulario.controls['producto'].touched"
+
+                        Pero ahora vamos a optimizarla y simplificarla a través de una función y pasando la referencia local miFormulario
+                        al componente TypeScript a través del viewChild-->
                     <span class="form-text text-danger"
-                          *ngIf="miFormulario.controls['producto'].invalid && 
-                                 miFormulario.controls['producto'].touched">
+                          *ngIf="nombreValido()">
                         Debe de ser de 3 letras
                     </span>
                 
