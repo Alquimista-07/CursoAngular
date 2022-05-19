@@ -1,1 +1,82 @@
-<p>dinamicos works!</p>
+<!--Basicamente estos formularios están relacionados a que seamos capaces de mantener
+    la información a pesar de que necesitemos que un objeto vaya creciendo con más campos
+    y más valores pero de forma dinámica-->
+<h2>Template: <small>Dinámicos</small></h2>
+<hr>
+
+<!--Tarea: Crear la referencia local llamada miFormulario de tipo ngForm, colocar validación para mostrar el texto "Este Campo es obligatorio"
+           dependiendo de si el formulario es valido, colocar el required, el ngModel y el name al input nombre, adicionalmente colocar el 
+           atributo disbled al botón gardar para que se deshabilite el botón y no se permita hacer el posteo si el formulario no es válido-->
+<form (ngSubmit)="guardar()"
+      autocomplete="off"
+      #miFormulario="ngForm">
+
+    <!--Nombre-->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+
+            <input class="form-control" 
+                   placeholder="Nombre de la persona"
+                   ngModel
+                   name="nombre"
+                   required>
+
+            <span class="form-text text-danger"
+                  *ngIf="miFormulario.controls['nombre']?.errors
+                         && miFormulario.controls['nombre']?.touched">
+                 Este Campo es obligatorio
+             </span>
+
+        </div>
+
+    </div>
+
+    <!--Agregar favorito-->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+
+            <div class="input-group">
+
+                <input class="form-control" 
+                       placeholder="Agregar favorito">
+                
+                <button class="btn btn-outline-primary"
+                        type="button">
+                    Agregar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--Lista de Juegos Favoritos-->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+
+            <input class="form-control mb-1">
+
+        </div>
+
+    </div>
+
+    <!--Botón guardar-->
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button"
+                    class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid"
+                    (click)="guardar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+                    </svg>
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</form>
