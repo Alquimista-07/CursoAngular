@@ -1,0 +1,35 @@
+<!--NOTA: Ahora la principal diferencia entre formularios por template y reactive es que cuando usamos aproximación por template
+          le decimos a Angular que el se encargue de manejar todo el formulario de manera automática o la mayor parte del formulario
+          y que todos los cambios que nosotros hagamos o especificaciones de los detalles de los campos que vamos a tener la haga del
+          lado del HTML, es decir, la mayor parte de la lógica se encuentra del lado del html.
+          Y en cuanto a los formularios reactivos procura de que el HTML sea lo más básico posible y que todo el trabajo pesado se tenga
+          del lado del componente de TypScript-->
+<h2>Template</h2>
+<hr>
+
+<ul class="list-group">
+
+    <!--Creamos el li de forma dinamica en base al arreglo de rutas definido
+        en el componente de TypeScript-->
+    <li *ngFor="let item of templateMenu"
+        class="list-group-item"
+        [routerLink]="[item.ruta]"
+        routerLinkActive="active">
+        {{ item.texto }}
+    </li>
+
+</ul>
+
+<h2 class="mt-3">Reactive</h2>
+<hr>
+
+<ul class="list-group">
+
+    <li *ngFor="let item of reactiveMenu"
+        class="list-group-item"
+        [routerLink]="item.ruta"
+        routerLinkActive="active">
+        {{ item.texto }}
+    </li>
+    
+</ul>
