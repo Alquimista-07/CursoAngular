@@ -4,14 +4,17 @@
 <div class="row">
     <div class="col">
 
-        <form autocomplete="off">
+        <form autocomplete="off" [formGroup]="miFormulario">
             <!--Campo de prodcuto-->
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
                 <div class="col-sm-9">
 
+                    <!--Para asociar las propiedades necesitamos pasar el formControlName y hacer referencia
+                        a la propiedad tal cual esta definida en el componente ts-->
                     <input type="text"
                     class="form-control"
+                    formControlName="producto"
                     placeholder="Nombre del producto">
 
                     <span class="form-text text-danger">
@@ -46,7 +49,8 @@
                 <div class="col-sm-9">
 
                     <input type="number"
-                    placeholder="Existencias del producto">
+                           class="form-control"
+                           placeholder="Existencias del producto">
                 </div>
 
             </div>
@@ -69,32 +73,29 @@
     </div>
 </div>
 
-<!-- <div class="row">
-    <div class="col"> -->
+<div class="row">
+    <div class="col">
 
         <!--El valid indica si el formulario es válido o no, en este caso no lo es
             ya que el producto y el precio son obligatorios-->
-        <!-- <span>Valid</span>
-        <pre>{{ miFormulario.valid }}</pre> -->
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
 
         <!--NOTA: El touched y el pristine se pueden manejar de forma independiente para cada uno de los campos
                   y en este caso lo vamos a usar así-->
 
         <!--El pristine indica si se han cambiado alguno de los valores con los cuales se
             presento el formulario desde que fue presentado al usuario-->
-        <!-- <span>Pristine</span>
-        <pre>{{ miFormulario.pristine }}</pre> -->
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
 
         <!--El touched indica si el usuario ha tocado el formulario y su estado cambia con solo
             que el usuario haga click en un campo y se salga así no haga hecho o escrito nada-->
-        <!-- <span>Touched</span>
-        <pre>{{ miFormulario.touched }}</pre> -->
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
 
-        <!-- <span>Value</span>
+        <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre>
 
-        <span>CustomDirective</span>
-        <pre>{{ miFormulario.controls['existencias']?.errors | json }}</pre>
-
     </div>
-</div> -->
+</div>
