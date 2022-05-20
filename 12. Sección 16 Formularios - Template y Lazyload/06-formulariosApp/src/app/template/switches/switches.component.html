@@ -12,9 +12,12 @@
             <div class="form-check">
 
                 <input class="form-check-input" 
-                       type="radio" 
+                       type="radio"
+                       value="M"
+                       [(ngModel)]="persona.genero"
                        name="radioGenero" 
-                       id="radioMaculino">
+                       id="radioMaculino"
+                       required>
 
                 <label class="from-check-label" for="radioMaculino">
                     Masculino
@@ -25,8 +28,11 @@
 
                 <input class="form-check-input" 
                        type="radio" 
+                       value="F"
+                       [(ngModel)]="persona.genero"
                        name="radioGenero" 
-                       id="radioFemenino">
+                       id="radioFemenino"
+                       required>
                 
                 <label class="form-check-label" for="radioFemenino">
                     Femenino
@@ -44,10 +50,12 @@
         <label class="col-sm-3 col-form-label">Notificaciones</label>
         <div class="col-sm-9">
 
-            <div class="form-check form-switch">
+            <div class="form-check form-switch mt-2">
 
                 <input class="form-check-input" 
-                       type="checkbox" 
+                       type="checkbox"
+                       [(ngModel)]="persona.notificaciones"
+                       name="notificaciones"
                        role="switch" 
                        id="flexSwitchCheckChecked">
 
@@ -59,7 +67,7 @@
 
     </div>
 
-    <!-- Switch -->
+    <!-- Checkbox -->
     <div class="row mb-3">
         
         <label class="col-sm-3 col-form-label"></label>
@@ -68,7 +76,10 @@
             <div class="form-check">
                 <input class="form-check-input" 
                        type="checkbox"
-                       id="defaultCheck1">
+                       [(ngModel)]="terminosYCondiciones"
+                       name="terminosYCondiciones"
+                       id="defaultCheck1"
+                       required>
                 
                 <label class="form-check-label" for="defaultCheck1">
                     Terminos y condiciones de uso
@@ -82,10 +93,27 @@
     <!--Botón submit-->
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary float-end">
+            <button class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid">
                 Guardar
             </button>
         </div>
     </div>
 
 </form>
+
+<h5>Valor del formulario</h5>
+<pre>{{ miFormulario.value | json }}</pre>
+<br>
+
+<h5>Persona</h5>
+<pre>{{ persona | json }}</pre>
+<br>
+
+<h5>Valid</h5>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
+
+<h5>Terminos y Condiciones</h5>
+<pre>{{ miFormulario.controls['terminosYCondiciones']?.errors | json }}</pre>
+<br>
