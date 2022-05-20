@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basicos',
@@ -26,9 +26,17 @@ export class BasicosComponent {
     // y debemos mandarlo en un arreglo porque deentro van las validaciones
     // y las validaciones asíncronas. Adicionalmente se le puede establecer
     // un valor por defecto
-    producto: [ 'RTX 4080Ti' ],
-    precio: [ 0 ],
-    existencias: [ 0 ]
+
+    // NOTAS Validadores básicos
+    // Para los validadores el segundo parámetro indica que son validadores síncronos, los cualse son los que se envian cuado se presiona una tecla
+    // luego como tercer parámetro también podemos enviar los validadores asíncronos, por ejemplo cuando se escribe un username y queremos preguntar
+    // a la base de datos si ese username existe para que no se repita
+    // Otra cosa es que podemos definir tantos validadores sincronos necesitemos y para ello debemos indicatlos como un arreglo, en el caso del siguiente
+    // ejemplo para el producto mandamos un validador para indocar que el campo es requerido y que debe contener mínimo de 3 letras para que el formulario
+    // sea considerado como válido.
+    producto: [ 'RTX 4080Ti', [ Validators.required, Validators.minLength(3) ] ],                                                
+    precio: [ 0, [ Validators.required, Validators.min(0)] ], // La función min() indica que el vavlor mínimo es cero para que sea valido el formulario
+    existencias: [ 0, [ Validators.required, Validators.min(0) ] ]
   });
 
 
