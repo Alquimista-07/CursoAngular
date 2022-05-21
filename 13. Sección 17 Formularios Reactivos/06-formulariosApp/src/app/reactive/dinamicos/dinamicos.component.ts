@@ -17,7 +17,7 @@ export class DinamicosComponent {
       // Posteriormente vamos acá adentro tenemos colecciones de form control que se pueden definir simplemente al colocar []
       [ 'Metal Gear', Validators.required ],
       [ 'Call of Dutty', Validators.required ]
-    ], Validators.required )
+    ], Validators.required ) // Acá este Validators.required asegura que por lo menos debe existir un favorito agregado al arreglo para que el formulario sea válido
   });
 
   // Para el agregar nos creamos un control adicional
@@ -69,6 +69,10 @@ export class DinamicosComponent {
     // Reseteamos el formulario luego de agregar
     this.nuevoFavorito.reset();
 
+  }
+
+  eliminarFavorito( indice: number ) {
+    this.favoritosArr.removeAt( indice );
   }
 
 }
