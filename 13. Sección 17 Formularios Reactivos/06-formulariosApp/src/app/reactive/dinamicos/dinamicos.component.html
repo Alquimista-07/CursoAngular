@@ -36,11 +36,12 @@
                     vamos a usar el evento keyup.enter-->
                 <input class="form-control" 
                        placeholder="Agregar favorito"
-                       (keyup.enter)="1">
+                       [formControl]="nuevoFavorito"
+                       (keyup.enter)="agregarFavorito()">
                 
                 <button class="btn btn-outline-primary"
                         type="button"
-                        (click)="1">
+                        (click)="agregarFavorito()">
                     Agregar
                 </button>
 
@@ -95,5 +96,6 @@
 <span>Value</span>
 <pre>{{ miFormulario.value | json }}</pre>
 
-<!-- <span>Persona</span>
-<pre>{{ persona | json }}</pre> -->
+<span>Agregar Juego</span>
+<pre>{{ nuevoFavorito.valid }}</pre>
+<pre>{{ nuevoFavorito.value }}</pre>

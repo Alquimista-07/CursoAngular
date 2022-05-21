@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -20,8 +20,11 @@ export class DinamicosComponent {
     ], Validators.required )
   });
 
+  // Para el agregar nos creamos un control adicional
+  nuevoFavorito: FormControl = this.fb.control('', Validators.required);
+
   get favoritosArr() {
-    // Existe otra forma de tomar un control sin tener que hacer this.miFormulario.controls['favoritos'] el cual es el 
+    // Existe otra forma de tomar un control sin tener que hacer this.miFormulario.controls['favoritos'] el cual es el
     // método get que se muestra a continuación.
     // NOTA: Al colocar el as FormArrya le estamos ayudando a TypesCruip a que entienda que el elemento es un FormArray
     //       y no un control
@@ -46,6 +49,25 @@ export class DinamicosComponent {
 
     console.log( this.miFormulario.value );
     this.miFormulario.reset();
+
+  }
+
+  agregarFavorito () {
+
+    if( this.nuevoFavorito.invalid ){
+      return;
+    }
+
+    // Como ya tenemos un getter lo podemos usar ya que como los arreglos se pasan
+    // por referencia entonces ya esta haciendo referencia al arreglo de favoritos
+    // y le podemos insertar nuevos valores
+    /*
+    this.favoritosArr.push( new FormControl( this.nuevoFavorito.value, Validators.required ) ); // Esta es otra forma de hacer lo mismo que está a continuación
+    */
+    this.favoritosArr.push( this.fb.control( this.nuevoFavorito.value, Validators.required ) ); 
+
+    // Reseteamos el formulario luego de agregar
+    this.nuevoFavorito.reset();
 
   }
 
