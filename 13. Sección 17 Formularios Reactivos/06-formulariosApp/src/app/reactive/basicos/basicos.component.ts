@@ -34,9 +34,10 @@ export class BasicosComponent {
     // Otra cosa es que podemos definir tantos validadores sincronos necesitemos y para ello debemos indicatlos como un arreglo, en el caso del siguiente
     // ejemplo para el producto mandamos un validador para indocar que el campo es requerido y que debe contener mínimo de 3 letras para que el formulario
     // sea considerado como válido.
-    producto: [ 'RTX 4080Ti', [ Validators.required, Validators.minLength(3) ] ],                                                
-    precio: [ 0, [ Validators.required, Validators.min(0)] ], // La función min() indica que el vavlor mínimo es cero para que sea valido el formulario
-    existencias: [ 0, [ Validators.required, Validators.min(0) ] ]
+    producto: [ , [ Validators.required, Validators.minLength(3) ] ],                                                
+    precio: [ , [ Validators.required, Validators.min(0)] ], // La función min() indica que el vavlor mínimo es cero para que sea valido el formulario
+    existencias: [ , [ Validators.required, Validators.min(0) ] ]
+    // Cuando dejamos el primer argumento vacío estamos enviando null
   });
 
 
@@ -45,6 +46,9 @@ export class BasicosComponent {
   // Entonces el FormBuilder es un servicio por lo tanto necesitamos inyectarlo
   constructor( private fb: FormBuilder ) { }
 
-
+  campoEsValido( campo: string ) {
+    return this.miFormulario.controls[ campo ].errors &&
+           this.miFormulario.controls[ campo ].touched
+  }
 
 }
