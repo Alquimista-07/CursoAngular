@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styles: [
   ]
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit {
 
   // La idea de los formularios reactivos es que la parte del html se mantenga lo más limpia
   // posible y las validaciones y lógica se encuentren en la parte del componente TypeScript
@@ -49,6 +49,44 @@ export class BasicosComponent {
   campoEsValido( campo: string ) {
     return this.miFormulario.controls[ campo ].errors &&
            this.miFormulario.controls[ campo ].touched
+  }
+
+  // Si quiero establecer un valor inicial al formulario usamos el ngOnInit
+  ngOnInit(): void {
+    // Existe un inconvenientecon al usar el setValue ya que si por ejemplo no viene una propiedad como el id
+    // o cualquier otro esto causa un error ya que se deben enviar todas las propiedades del formulario.
+    /*
+    this.miFormulario.setValue({
+      producto: 'RTX 4080 Ti',
+      precio: 1600,
+      existencias: 10
+    });
+    */
+
+    // Entonces no sería recomendado usarlo solo en casos que estemos seguros que si tenemos todos los datos y en luegar de
+    // dicho metodo podríamos usar el reset ya que este si no daría error si no mandamos todos los campos del formulario
+    this.miFormulario.reset({
+      producto: 'RTX 4080 Ti',
+      precio: 1600
+    });
+
+  }
+
+  guardar() {
+
+    // Se valida si el formulario no es valido
+    if ( this.miFormulario.invalid ) {
+      // Marcamos todos los campos como tocados para que se ejecuten las validaciones y se muestren
+      // los mensajes
+      this.miFormulario.markAllAsTouched();
+      return;
+    }
+    
+    console.log( this.miFormulario.value );
+    // Reseteamos los campos para que el formulario vuelva a su estado original cuando 
+    // sea enviado correctamente
+    this.miFormulario.reset();
+
   }
 
 }
