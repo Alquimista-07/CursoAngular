@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -18,10 +18,27 @@ export class RegistroComponent implements OnInit {
   // Expresión regular para el email
   emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
+  noPuedeSerAlcehmist( control: FormControl ) {
+
+    const valor: string = control.value?.trim().toLowerCase();
+
+    if( valor === 'alchemist' ){
+      // return ERROR!!!...
+      return {
+        noAlchemist: true
+      }
+    }
+
+    // De lo contrario si regresa null todo esta bien
+    return null;
+
+  }
+
   // Creamos la definición del formulario
   miFormulario: FormGroup = this.fb.group({
     nombre: [ '', [ Validators.required, Validators.pattern( this.regexNombreApellido ) ] ],
-    email: [ '', [ Validators.required, Validators.pattern( this.emailPattern ) ] ]
+    email: [ '', [ Validators.required, Validators.pattern( this.emailPattern ) ] ],
+    username: [ '', [ Validators.required, this.noPuedeSerAlcehmist ] ]
   });
 
   // Inyectamos el FormBuilder
@@ -31,7 +48,8 @@ export class RegistroComponent implements OnInit {
     // Establecemos uns valores al formulario para no estar diligenciando a cada rato
     this.miFormulario.reset({
       nombre: 'Ariadna Hernandez',
-      email: 'test1@test.com'
+      email: 'test1@test.com',
+      username: 'The Alchemist'
     })
   }
 

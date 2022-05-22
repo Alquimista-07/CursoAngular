@@ -31,6 +31,10 @@
                            class="form-control"
                            placeholder="Email del usuario"
                            formControlName="email">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('email')">
+                          El correo es obligatorio
+                    </span>
                 </div>
             </div>
 
@@ -40,11 +44,12 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
-                           placeholder="Username del usuario">
+                           placeholder="Username del usuario"
+                           formControlName="username">
                     <span class="form-text text-danger"
-                          *ngIf="campoNoValido('email')">
-                         El correo es obligatorio
-                     </span>
+                          *ngIf="campoNoValido('username')">
+                        El username no puede ser Alchemist
+                    </span>
                 </div>
             </div>
 
@@ -90,4 +95,7 @@
 
 <h5>Email</h5>
 <pre>{{ miFormulario.controls['email'].errors | json }}</pre>
+
+<h5>Username</h5>
+<pre>{{ miFormulario.controls['username'].errors | json }}</pre>
 
