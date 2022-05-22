@@ -1,0 +1,141 @@
+<h2>Template: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <!--Con el #miFormulario lo que estamos haciendo es enlazar la referencia del ngForm a la variable
+            llamada miFormulario, adicionalmente el name no puede estar duplicado-->
+        <!--Ahora si necesito que el campo contenga un valor para que pueda ser enviado le colocamos la propiedad
+            required-->
+        <!-- <form (ngSubmit)="guardar(miFormulario)"  -->
+        <form (ngSubmit)="guardar()" 
+              #miFormulario="ngForm"
+              autocomplete="off">
+            <!--Campo de prodcuto-->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <!--Para decirle a Angular que los campos son parte del formulario es necesario agregar el ngModel
+                        y el name y asi de esta forma podemos obtener el valor del campo-->
+                    <!--El minLength es propio de html pero lo va a leer angular para crear la condición, adicionalmente también
+                        tenemos el maxlength que lo podríamos poner-->
+                    <!--Ahora para establecer la propiedad initForm definida con los valores inicales por defecto usamos el ngModel con llaves []-->
+                    <input type="text"
+                    class="form-control"
+                    [ngModel]="initForm.producto"
+                    name="producto"
+                    placeholder="Nombre del producto"
+                    required
+                    minlength="3">
+                    <!--Validamos la propiedad del campo con el ngIf para mostrar el texto cuando la validación del formulario
+                        no se cumpla y sea invalid y que el formulario tenga su estado touched en true-->
+                    <!--NOTA: Anteriormente teniamos una validación para el campo la cual se hacía un poco difícil de leer la cual
+                              era: 
+
+                            *ngIf="miFormulario.controls['producto'].invalid && 
+                                 miFormulario.controls['producto'].touched"
+
+                        Pero ahora vamos a optimizarla y simplificarla a través de una función y pasando la referencia local miFormulario
+                        al componente TypeScript a través del viewChild-->
+                    <span class="form-text text-danger"
+                          *ngIf="nombreValido()">
+                        Debe de ser de 3 letras
+                    </span>
+                
+                </div>
+            </div>
+
+            <!--Campo de precio-->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <!--La propiedad min solo sirve para que en la caja de texto con ayuda del contro de subir y bajar no bajemos más de 0
+                    pero aún así si escribimos -10 lo acepta y el estado del formulario se vuelve valido entonces deberíamos tener un 
+                    poco más de control con eso-->
+                <div class="col-sm-9">
+                    <input type="number"
+                    class="form-control"
+                    [ngModel]="initForm.precio"
+                    name="precio"
+                    placeholder="Precio del producto"
+                    required
+                    min="0">
+                    <span class="form-text text-danger"
+                          *ngIf="precioValido()">
+                        El precio debe de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+            <!--Campo de existencias-->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <!--Ahora para usar la directiva personalizada debemos asignar el selector
+                        el cual vamos a llamar customMin y esta directiva personalizada puedo
+                        extender las funcionalidades que puede recibir el input y puedo controlar
+                        el input como yo quiera, es decir, cuando pase por este customMin se va a
+                        ejecutar la directiva.-->
+                    <!--Otra cosa que voy a necesitar enviar la propiedad minimo, la cual va a ser extendida
+                        por la directiva customMin-->
+                    <!--NOTA: Ojo si mandamos la propiedad que le asignamos a la directiva que en este caso se llama minimo y si lo colocamos
+                              sin llaves [] indica que estamos enviando un string y si lo mandamos entre llaves [] enviamos un valor numérico-->
+                    <input type="number"
+                    [ngModel]="initForm.existencias"
+                    name="existencias"
+                    class="form-control"
+                    customMin
+                    [minimo]="0"
+                    placeholder="Existencias del producto"
+                    required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!--Al colocar la propiedad disabled al miFormulario validamos que se active hasta que sea valido-->
+                    <button type="submit"
+                            [disabled]="miFormulario.invalid"
+                            class="btn btn-primary float-end">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+                            </svg>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <!--El valid indica si el formulario es válido o no, en este caso no lo es
+            ya que el producto y el precio son obligatorios-->
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
+
+        <!--NOTA: El touched y el pristine se pueden manejar de forma independiente para cada uno de los campos
+                  y en este caso lo vamos a usar así-->
+
+        <!--El pristine indica si se han cambiado alguno de los valores con los cuales se
+            presento el formulario desde que fue presentado al usuario-->
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
+
+        <!--El touched indica si el usuario ha tocado el formulario y su estado cambia con solo
+            que el usuario haga click en un campo y se salga así no haga hecho o escrito nada-->
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>CustomDirective</span>
+        <pre>{{ miFormulario.controls['existencias']?.errors | json }}</pre>
+
+    </div>
+</div>

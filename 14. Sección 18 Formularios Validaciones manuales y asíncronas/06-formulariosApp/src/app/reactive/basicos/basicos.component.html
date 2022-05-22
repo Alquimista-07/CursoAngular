@@ -1,0 +1,116 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form  (ngSubmit)="guardar()" autocomplete="off" [formGroup]="miFormulario">
+            <!--Campo de prodcuto-->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+
+                    <!--Para asociar las propiedades necesitamos pasar el formControlName y hacer referencia
+                        a la propiedad tal cual esta definida en el componente ts-->
+                    <input type="text"
+                    class="form-control"
+                    formControlName="producto"
+                    placeholder="Nombre del producto">
+
+                    <span class="form-text text-danger"
+                          *ngIf="campoEsValido( 'producto' )">
+                        Debe de ser de 3 letras
+                    </span>
+                
+                </div>
+            </div>
+
+            <!--Campo de precio-->
+            <div class="mb-3 row">
+
+                <label class="col-sm-3 col-form-label">Precio</label>
+
+                <div class="col-sm-9">
+                    <input type="number"
+                    class="form-control"
+                    formControlName="precio"
+                    placeholder="Precio del producto">
+
+                    <span class="form-text text-danger"
+                          *ngIf="campoEsValido( 'precio' )">
+                        El precio debe de ser 0 o mayor
+                    </span>
+
+                </div>
+            </div>
+
+            <!--Campo de existencias-->
+            <div class="mb-3 row">
+                
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                
+                <div class="col-sm-9">
+
+                    <input type="number"
+                           class="form-control"
+                           formControlName="existencias"
+                           placeholder="Existencias del producto">
+                    
+                    <span class="form-text text-danger"
+                          *ngIf="campoEsValido( 'existencias' )">
+                        Las existencias deben ser 0 o mayor
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!--Al colocar la propiedad disabled al miFormulario validamos que se active hasta que sea valido-->
+                    <!--Agregamos el disabled para deshabilitar el botón cuando el formulario no es válido-->
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                            <!-- [disabled]="miFormulario.invalid"> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+                            </svg>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <!--El valid indica si el formulario es válido o no, en este caso no lo es
+            ya que el producto y el precio son obligatorios-->
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
+
+        <!--NOTA: El touched y el pristine se pueden manejar de forma independiente para cada uno de los campos
+                  y en este caso lo vamos a usar así-->
+
+        <!--El pristine indica si se han cambiado alguno de los valores con los cuales se
+            presento el formulario desde que fue presentado al usuario-->
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
+
+        <!--El touched indica si el usuario ha tocado el formulario y su estado cambia con solo
+            que el usuario haga click en un campo y se salga así no haga hecho o escrito nada-->
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ miFormulario.controls['precio'].errors | json }}</pre>
+
+    </div>
+</div>
