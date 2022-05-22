@@ -15,15 +15,24 @@ export class RegistroComponent implements OnInit {
   // luego el + indica cualquier cantidad de caracteres
   regexNombreApellido: string = '([a-zA-Z]+) ([a-zA-Z]+)';
 
+  // Expresión regular para el email
+  emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+
   // Creamos la definición del formulario
   miFormulario: FormGroup = this.fb.group({
-    nombre: [ '', [ Validators.required, Validators.pattern( this.regexNombreApellido ) ] ]
+    nombre: [ '', [ Validators.required, Validators.pattern( this.regexNombreApellido ) ] ],
+    email: [ '', [ Validators.required, Validators.pattern( this.emailPattern ) ] ]
   });
 
   // Inyectamos el FormBuilder
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    // Establecemos uns valores al formulario para no estar diligenciando a cada rato
+    this.miFormulario.reset({
+      nombre: 'Ariadna Hernandez',
+      email: 'test1@test.com'
+    })
   }
 
   campoNoValido( campo: string ) {
