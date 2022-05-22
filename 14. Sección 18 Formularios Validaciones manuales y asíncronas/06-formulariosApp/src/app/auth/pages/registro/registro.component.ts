@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// Importamos el servicio de validaciones personalizado que se creó
+import { ValidatorService } from 'src/app/shared/validator/validator.service';
+
+// NOTA: Esto a la final se comento ya que se prefirió hacerlo a través de un servicio
+/*
+// Importamos las validaciones de nuestro archivo de validaciones.ts
+import { emailPattern, regexNombreApellido } from 'src/app/shared/validator/validaciones';
+import { noPuedeSerAlcehmist } from '../../../shared/validator/validaciones';
+*/
 
 @Component({
   selector: 'app-registro',
@@ -9,40 +19,19 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegistroComponent implements OnInit {
 
-  //TODO: Temporal
-  // Creamos la expresción regular donde el preimer () valida que es para el nombre y el otro () es para el apellido
-  // La expresión valida que puede contener cualquier caracter de la a a la z múscula y de la A a la Z mayúscula y 
-  // luego el + indica cualquier cantidad de caracteres
-  regexNombreApellido: string = '([a-zA-Z]+) ([a-zA-Z]+)';
-
-  // Expresión regular para el email
-  emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
-
-  noPuedeSerAlcehmist( control: FormControl ) {
-
-    const valor: string = control.value?.trim().toLowerCase();
-
-    if( valor === 'alchemist' ){
-      // return ERROR!!!...
-      return {
-        noAlchemist: true
-      }
-    }
-
-    // De lo contrario si regresa null todo esta bien
-    return null;
-
-  }
-
   // Creamos la definición del formulario
   miFormulario: FormGroup = this.fb.group({
-    nombre: [ '', [ Validators.required, Validators.pattern( this.regexNombreApellido ) ] ],
-    email: [ '', [ Validators.required, Validators.pattern( this.emailPattern ) ] ],
-    username: [ '', [ Validators.required, this.noPuedeSerAlcehmist ] ]
+    nombre: [ '', [ Validators.required, Validators.pattern( this.vs.regexNombreApellido ) ] ],
+    email: [ '', [ Validators.required, Validators.pattern( this.vs.emailPattern ) ] ],
+    username: [ '', [ Validators.required, this.vs.noPuedeSerAlcehmist ] ]
+    // NOTA: La siguiente línea de código es un ejemplo de como se haría usando el archivo de validators.ts y no el servicio
+    //       para el cual las importaciones necesarias también se dejaron comentadas a modo de ejemplo
+    // username: [ '', [ Validators.required, noPuedeSerAlcehmist ] ]
   });
 
   // Inyectamos el FormBuilder
-  constructor( private fb: FormBuilder ) { }
+  constructor( private fb: FormBuilder,
+               private vs: ValidatorService ) { }
 
   ngOnInit(): void {
     // Establecemos uns valores al formulario para no estar diligenciando a cada rato
