@@ -85,8 +85,10 @@
 
             <div class="row">
                 <div class="col">
+                    <!--Agregamos la propiedad disbled al botón para que se active cuando el formulario ya no este pendiente-->
                     <button class="btn btn-primary float-end"
-                            type="submit">
+                            type="submit"
+                            [disabled]="miFormulario.pending">
                         Crear
                     </button>
                 </div>
@@ -99,6 +101,10 @@
 
 
 <h2>Form Valid: {{ miFormulario.valid }}</h2>
+
+<h2>Form Status: {{ miFormulario.status }}</h2>
+
+<h2>Pending: {{ miFormulario.pending }}</h2>
 
 <h2>Form Errors</h2>
 <pre>{{ miFormulario.errors | json }}</pre>

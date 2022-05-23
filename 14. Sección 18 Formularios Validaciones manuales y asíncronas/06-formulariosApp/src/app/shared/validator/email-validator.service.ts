@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 
 // NOTA: Como necesitamos hacer una petición http para verificar que el email no exista
 //       no podemos simplemente enviarlo como el tercer parámetro del arreglo de validaciones
@@ -10,6 +10,9 @@ import { map } from 'rxjs/operators';
 //       devuelva una respuesta para validar, adicionalmente si no ocuparamos hacer peticiones http
 //       si podríamos mandar el tercer argumento del arreglo de validaciones al campo como se ha hecho
 //       con las validaciones síncronas.
+
+// NOTA 2: El operador delay de rxjs es un operador que nos permite esperar o hacer que algo tarde un poco más
+//         antes de que emita el siguiente valor
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +32,7 @@ export class EmailValidatorService implements AsyncValidator{
     // se deja de tipo any
     return this.http.get<any[]>(`http://localhost:3000/usuarios?q=${email}`)
                     .pipe(
+                      delay(3000), // Antes de tener la respuesta del map se va a tardar 3000 milisegundos (3 seg)
                       map( resp => {
                         return ( resp.length === 0 )
                           ? null 
