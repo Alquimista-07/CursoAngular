@@ -44,6 +44,7 @@ export class RegistroComponent implements OnInit {
 
   });
 
+
   // Inyectamos el FormBuilder
   constructor( private fb: FormBuilder,
                private vs: ValidatorService,
@@ -65,19 +66,24 @@ export class RegistroComponent implements OnInit {
            && this.miFormulario.controls[campo]?.touched;
   }
 
-  emailRequired() {
-    return this.miFormulario.controls['email']?.errors?.['required']
-           && this.miFormulario.get('email')?.touched;
-  }
+  // NOTA: Se creó un getter para refactorizar y validar los mensajes de error del email y mostrar el texto de error 
+  //       de forma personalizado y de manera condicional.
+  get emailErrorMsg(): string {
+    
+    const errors = this.miFormulario.get('email')?.errors;
 
-  emailFormato() {
-    return this.miFormulario.controls['email']?.errors?.['pattern']
-           && this.miFormulario.get('email')?.touched;
-  }
+    if( errors?.['required'] ) {
+      return 'Email es obligatorio';
+    }
+    else if( errors?.['pattern'] ){
+      return 'El valor ingresado no tiene formato de correo electrónico';
+    }
+    else if( errors?.['emailTomado'] ) {
+      return 'El correo electrónico ya se encuentra registrado';
+    }
 
-  emailTomado() {
-    return this.miFormulario.controls['email']?.errors?.['emailTomado']
-           && this.miFormulario.get('email')?.touched;
+    return '';
+
   }
 
   submitFormulario() {
