@@ -23,10 +23,22 @@ export class RegistroComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
     nombre: [ '', [ Validators.required, Validators.pattern( this.vs.regexNombreApellido ) ] ],
     email: [ '', [ Validators.required, Validators.pattern( this.vs.emailPattern ) ] ],
-    username: [ '', [ Validators.required, this.vs.noPuedeSerAlcehmist ] ]
+    username: [ '', [ Validators.required, this.vs.noPuedeSerAlcehmist ] ],
     // NOTA: La siguiente línea de código es un ejemplo de como se haría usando el archivo de validators.ts y no el servicio
     //       para el cual las importaciones necesarias también se dejaron comentadas a modo de ejemplo
     // username: [ '', [ Validators.required, noPuedeSerAlcehmist ] ]
+    //
+    // Creamos los campos para las contraseñas
+    password: [ '', [ Validators.required, Validators.minLength(6) ] ],
+    password2: [ '', [ Validators.required ] ]
+  }, {
+    // Este otro objeto son opciones que le podemos mandar al form group
+    // esto con el fin de validar el formulario completo.
+    // Acá dentro de las opciones tenemos los validores asíncronos que reciben información que funciona a destiempo y los síncronos
+    validators: [
+      this.vs.camposIguales( 'password', 'password2' )
+    ]
+
   });
 
   // Inyectamos el FormBuilder
