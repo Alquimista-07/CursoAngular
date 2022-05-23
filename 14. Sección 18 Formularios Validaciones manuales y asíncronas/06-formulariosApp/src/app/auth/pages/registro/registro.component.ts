@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+// Importamos el servicio de validaciones personalizado para el email que se creó
+import { EmailValidatorService } from 'src/app/shared/validator/email-validator.service';
 // Importamos el servicio de validaciones personalizado que se creó
 import { ValidatorService } from 'src/app/shared/validator/validator.service';
 
@@ -9,6 +11,7 @@ import { ValidatorService } from 'src/app/shared/validator/validator.service';
 // Importamos las validaciones de nuestro archivo de validaciones.ts
 import { emailPattern, regexNombreApellido } from 'src/app/shared/validator/validaciones';
 import { noPuedeSerAlcehmist } from '../../../shared/validator/validaciones';
+import { EmailValidatorService } from '../../../shared/validator/email-validator.service';
 */
 
 @Component({
@@ -22,7 +25,7 @@ export class RegistroComponent implements OnInit {
   // Creamos la definición del formulario
   miFormulario: FormGroup = this.fb.group({
     nombre: [ '', [ Validators.required, Validators.pattern( this.vs.regexNombreApellido ) ] ],
-    email: [ '', [ Validators.required, Validators.pattern( this.vs.emailPattern ) ] ],
+    email: [ '', [ Validators.required, Validators.pattern( this.vs.emailPattern ) ], [ this.emailValidator ] ],
     username: [ '', [ Validators.required, this.vs.noPuedeSerAlcehmist ] ],
     // NOTA: La siguiente línea de código es un ejemplo de como se haría usando el archivo de validators.ts y no el servicio
     //       para el cual las importaciones necesarias también se dejaron comentadas a modo de ejemplo
@@ -43,7 +46,8 @@ export class RegistroComponent implements OnInit {
 
   // Inyectamos el FormBuilder
   constructor( private fb: FormBuilder,
-               private vs: ValidatorService ) { }
+               private vs: ValidatorService,
+               private emailValidator: EmailValidatorService ) { }
 
   ngOnInit(): void {
     // Establecemos uns valores al formulario para no estar diligenciando a cada rato
