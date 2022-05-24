@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs';
+
 import { PaisesService } from '../../services/paises.service';
 import { PaiseSmall } from '../../interfaces/paises.interface';
 
@@ -33,17 +37,45 @@ export class SelectorPageComponent implements OnInit {
     this.regiones = this.paisesService.regiones;
 
     // Cuando cambie la región
+    // Esta es una forma de hacer la petición pero se puede hacer mejor usando el operador
+    // switchMap de rxjs
+    /*
     this.miFormulario.get('region')?.valueChanges
-        .subscribe(
-          region => {
-            console.log(region);
-            this.paisesService.getPaisesPorRegion( region )
-                .subscribe( paises =>{
-                  console.log( paises );
-                  this.paises = paises;
-                })
-          }
+    .subscribe(
+      region => {
+        console.log(region);
+        this.paisesService.getPaisesPorRegion( region )
+        .subscribe( paises =>{
+          console.log( paises );
+          this.paises = paises;
+        })
+      }
+      )
+      */
+    
+     //----------------------------
+    // OPTIMIZACIÓN DEL CÓDIGO
+    //----------------------------
+    // Cuando cambie la región
+    // Esta es la forma usando el operador switchMap de rxjs
+    this.miFormulario.get('region')?.valueChanges
+        .pipe(
+          // Usamos el operador tap de rxjs para disparar un efecto secundario y hacer 
+          // el reset del formulario.
+          // NOTA: Acá cuando indicamos el _ en el tap le decimos que no nos interesa lo que venga ahí
+          //       ya que solo nos interesa disparar el evento secundario para resetear el formulario
+          tap( ( _ ) => {
+            this.miFormulario.get('pais')?.reset('');
+          }),
+          // El switchMap va a tomar el valor del viejo observable (valueChanges) y va a hacer el cambio
+          // por el producto del nuevo observable que es cuando hacermos el getPaisesPorRegion
+          switchMap( region => this.paisesService.getPaisesPorRegion( region ) )
         )
+        .subscribe( paises => {
+          console.log( paises );
+          // El switch nos regresa los paises entonces lo asignamos al arreglo
+          this.paises = paises;
+        })
 
   }
 
