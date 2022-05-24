@@ -35,7 +35,7 @@ export class PaisesService {
   }
 
   // Creamos el servicio para consultar pais por codigo
-  getPaisPorCodigo( codigo: string ): Observable<Pais | null> {
+  getPaisPorCodigo( codigo: string ): Observable<Pais[] | null > {
 
     // Si no recibimos el codigo retornamos un objeto
     if( !codigo ){
@@ -47,7 +47,7 @@ export class PaisesService {
 
     const url = `${this._baseUrl}/alpha/${codigo}`;
 
-    return this.http.get<Pais>( url );
+    return this.http.get<Pais[]>( url );
 
   }
 
