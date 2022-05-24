@@ -20,7 +20,8 @@ export class SelectorPageComponent implements OnInit {
   // como segundo parámetro y de momento no hay validaciones asíncronas
   miFormulario: FormGroup = this.fb.group({
     region: [ '', [ Validators.required ] ],
-    pais: [ '', [ Validators.required ] ]
+    pais: [ '', [ Validators.required ] ],
+    frontera: [ '', [ Validators.required ] ]
   });
 
   // Llenar selectores
@@ -75,6 +76,15 @@ export class SelectorPageComponent implements OnInit {
           console.log( paises );
           // El switch nos regresa los paises entonces lo asignamos al arreglo
           this.paises = paises;
+        });
+
+    // Cuando cambia el pais
+    this.miFormulario.get('pais')?.valueChanges
+        .pipe(
+
+        )
+        .subscribe( codigo => {
+          console.log( codigo );
         })
 
   }

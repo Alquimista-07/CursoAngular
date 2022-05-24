@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaiseSmall } from '../interfaces/paises.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Pais } from '../interfaces/pais.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,23 @@ export class PaisesService {
     const url = `${this._baseUrl}/region/${region}?fields=cca3,name`;
     
     return this.http.get<PaiseSmall[]>( url );
+
+  }
+
+  // Creamos el servicio para consultar pais por codigo
+  getPaisPorCodigo( codigo: string ): Observable<Pais | null> {
+
+    // Si no recibimos el codigo retornamos un objeto
+    if( !codigo ){
+      // Ahora retornamos null como un nuevo observable usando el operador of de rxjs.
+      // Adicionalmente hay que indicarle al metodo que puede retornar un observable o
+      // null para que no marque error.
+      return of(null);
+    }
+
+    const url = `${this._baseUrl}/alpha/${codigo}`;
+
+    return this.http.get<Pais>( url );
 
   }
 
