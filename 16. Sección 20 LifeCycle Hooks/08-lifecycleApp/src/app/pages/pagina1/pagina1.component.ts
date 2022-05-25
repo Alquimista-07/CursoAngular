@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pagina1',
@@ -13,6 +14,8 @@ export class Pagina1Component
              AfterViewInit, AfterViewChecked, OnDestroy {
 
   nombre: string = 'Ariadna';
+  segundos: number = 0;
+  timerSubscription!: Subscription;
 
   constructor() {
     // NOTA: En el constructor hacemos inyecciones de dependencias que sean necesitadas y usualmente 
@@ -33,6 +36,14 @@ export class Pagina1Component
     //       y llenar propiedades de manera segura en nuestro componente, especialmente si las peticiones 
     //       son asíncronas
     console.log('ngOnInit');
+
+    // Usamos un operador de rxjs para incrementar los segundos
+    // Pero este obsevable siempre va a estar emitiendo valores
+    // y explicitamente lo tengo que terminar si no tenemos una
+    // fuga de memoria ya que es practicamente infinito
+    this.timerSubscription =  interval( 1000 ).subscribe( i => {
+      this.segundos = i;
+    });
   }
 
   // Este método ngOnChanges es un hook.
@@ -78,6 +89,11 @@ export class Pagina1Component
     //      emitiendo valores o necesitamos hacer una limpieza, dejar un timer o purgar información cuando
     //      el componente va a ser destruido, este es el ciclo de vida que se debería implementar
     console.log('ngOnDestroy');
+    // Entonces para para poder destuir el observable y evitar la fuga de memoria usamos el ngOnDestroy
+    // usando la referencia del suscription que creamos para el subscirbe del observable que nos creo el 
+    // interval
+    this.timerSubscription.unsubscribe();
+    console.log('Timer Limpiado');
   }  
 
 
