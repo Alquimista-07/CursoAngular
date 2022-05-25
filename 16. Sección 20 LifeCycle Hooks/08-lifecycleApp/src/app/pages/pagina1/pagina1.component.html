@@ -31,3 +31,12 @@
 <button (click)="guardar()">
     Click Reacciona
 </button>
+
+<br>
+<br>
+
+<!--Enviamos el nombre para que el componente hijo lo reciba en el input
+    OJO, como vamos a enviar un valor por eso se coloca entre [] adicionalemte
+    estamos enviando la variable nombre enlazada al componente y que esta más arriba
+    y que podemos alterar a través del input html que esta al inicio-->
+<app-muestra-nombre [nombre]="nombre" ></app-muestra-nombre>
