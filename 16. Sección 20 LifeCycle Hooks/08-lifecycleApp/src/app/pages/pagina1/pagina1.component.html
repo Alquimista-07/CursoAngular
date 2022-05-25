@@ -1,1 +1,33 @@
 <p>pagina1 works!</p>
+
+<!--NOTA: Este otro ejemplo también dispara el ciclo de vida de detección de cambios, para ver más
+          detalle sobre esto continuar leyendo los demás comentarios dentro de este componente -->
+<p>{{ nombre }}</p>
+
+<!--NOTA: En el caso de este input si quitamos el ngModel Angular no tiene interacción con el componente y simplemente lo muestra, adicionalmente
+          en la consola no vemos nada relacionado al ciclo de vida, pero si lo colocamos es quiere decir que ya hay una interacción, por lo tanto 
+          si hacemos click en el y salimos o digitamos algo, en la consola veremos el ngDoCheck, ngAfterContentChecked y ngAfterViewChecked cada vez
+          que suceda un cambio tal como sucede con la explicación del botón Click Reacciona -->
+<input type="text" 
+       placeholder="Hola Mundo!!!..."
+       [(ngModel)]="nombre">
+
+<!--NOTA: Ahora en este caso cuando se da click sobre este botón no vemos ninguno de los console.log
+          que tenemos para cada uno de los hook y no se dispara nada, y esto sucede porque Angular 
+          sabe de que nada de lo que esta definido en el componente redibujar tiene que redibujar o
+          volver a disparar el ciclo de vida de detección de cambios de Angular.
+        
+          Y eso suecede en ciertos puntos específicos cuando Angular tiene cierto control del mismo-->
+<button>
+    Click
+</button>
+
+<br>
+<br>
+
+<!--NOTA: En base a la anterior nota por ejemplo en que momento Angular tendría que saber o reaccionar cuando algo sucede
+          con el botón por ejemplo al ejecutar un método, y esto dispara el ngDoCheck, ngAfterContentChecked y ngAfterViewChecked 
+          y esto sucede porque Angular tiene que ver que cosas son las que se tienen que renderizar nuevamente y que cosas cambian-->
+<button (click)="guardar()">
+    Click Reacciona
+</button>

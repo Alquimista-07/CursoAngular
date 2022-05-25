@@ -6,4 +6,15 @@
 <h1>Ciclo De Vida De Angular</h1>
 <hr>
 
-<app-pagina1></app-pagina1>
+<!--NOTA: El siguiente ejemplo nos permite ver el ngOnDestry, el cual basicamente asigna una propiedad boolean
+          a una propiedad la cual cambia inversamente dependiendo si damos click en el botón, e inmediatamente
+          el componente pagina1 se va a destruir y podemos ver el console.log del ngOnDestroy-->
+<button (click)="mostrar = !mostrar">
+  {{ mostrar ? 'Ocultar' : 'Mostrar'}}
+</button>
+
+<!--NOTA: No hay que pensar de manera erronea que cuando llamamos por ejemplo un ngIf para ocultar o hacer algo con un componente
+          este simplemente se oculta, sino lo que pasa realmente es que el elemento htlm es destruido y desaparece y cuando volvemos
+          a llamarlo para mostrarlo todo el ciclo de vida se ejecuta nuevamente, es decir, sejecuta el constructor, el ngOnInit, y demás
+          hooks que se tengan-->
+<app-pagina1 *ngIf="mostrar"></app-pagina1>

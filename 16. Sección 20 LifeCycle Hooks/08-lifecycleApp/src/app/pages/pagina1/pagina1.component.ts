@@ -12,6 +12,8 @@ export class Pagina1Component
   implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, 
              AfterViewInit, AfterViewChecked, OnDestroy {
 
+  nombre: string = 'Ariadna';
+
   constructor() {
     // NOTA: En el constructor hacemos inyecciones de dependencias que sean necesitadas y usualmente 
     //       eso es todo, o si necesitamos algún tipo de inicialización antes de que el html sea construido
@@ -35,11 +37,16 @@ export class Pagina1Component
 
   // Este método ngOnChanges es un hook.
   ngOnChanges(changes: SimpleChanges): void {
+    // NOTA: Este ngOnCganges no se va a disparar o no va a ser llamado por el framework, si el componente no tiene 
+    //       inputs o si funciona sin proveer inputs. Y en cuantoa a esto input no se refiere a un input en el html
+    //       sino que se refiere a un input de un componente padre al hijo, es decir, cuando usamos un decorador @Input
     console.log('ngOnChanges');
   }
 
   // Este método ngDoCheck es un hook.
   ngDoCheck(): void {
+    // NOTA: Este método se ejecuta antes de los cambios, es decir, es disparado inmediatamente después de que
+    //       el ngOnChanges se dispara y después cada vez que se detecta o se hace el ciclo de detección de cambios
     console.log('ngDoCheck');
   }
 
@@ -60,13 +67,23 @@ export class Pagina1Component
 
   // Este método ngAfterViewChecked es un hook.
   ngAfterViewChecked(): void {
+    // NOTA: Este método se ejecuta cuando ya se hacen los cambios y se verifica
     console.log('ngAfterViewChecked');
   }
 
   // Este método ngOnDestroy es un hook.
   ngOnDestroy(): void {
+    //NOTA: Este ngOnDestoy es llamado de forma inmaeidata después de que el componente ha sido destruido
+    //      y es util para hacr limpieza de observables, por ejemplo si tenemos un observable que este 
+    //      emitiendo valores o necesitamos hacer una limpieza, dejar un timer o purgar información cuando
+    //      el componente va a ser destruido, este es el ciclo de vida que se debería implementar
     console.log('ngOnDestroy');
   }  
+
+
+  guardar() {
+
+  }
   
 
 }
