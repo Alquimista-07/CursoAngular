@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { tap } from 'rxjs';
 
 import { PaisesService } from '../../services/paises.service';
-import { PaiseSmall } from '../../interfaces/paises.interface';
+import { PaiseSmall, PaisV2Small } from '../../interfaces/paises.interface';
 
 @Component({
   selector: 'app-selector-page',
@@ -27,7 +27,8 @@ export class SelectorPageComponent implements OnInit {
   // Llenar selectores
   regiones: string[] = [];
   paises: PaiseSmall[] = [];
-  fronteras: string[] = [];
+  // fronteras: string[] = [];
+  fronteras: PaisV2Small[] = [];
 
   // UI
   cargando: boolean = false;
@@ -97,20 +98,40 @@ export class SelectorPageComponent implements OnInit {
             // y lo queitamos cuando tenga la data es decir en el subscribe
             this.cargando = true;
           }),
-          switchMap( codigo => this.paisesService.getPaisPorCodigo( codigo ) )
+          switchMap( codigo => this.paisesService.getPaisPorCodigo( codigo ) ),
+          switchMap(pais => {
+
+            if( pais !== null && pais.length>0) {
+
+              this.cargando = false;
+              return this.paisesService.getPaisesPorCodigos(pais[0].borders);
+            
+            } 
+            else {
+
+              this.cargando = false;
+              return this.fronteras = [];
+
+            }
+          })
         )
-        .subscribe( pais => {
-          console.log( pais );
-          if( pais !== null && pais.length > 0 ) {
-            this.fronteras = pais[0]?.borders;
-            // Quitamos el mensaje cargando cuando ya se obtuvo la data
-            this.cargando = false;
+        .subscribe( paises => {
+          console.log( paises );
+          if( paises.length === 0 ){
+            this.miFormulario.get('frontera')?.setErrors(null);
           }
-          else{
-            this.fronteras = [];
-            // Quitamos el mensaje cargando cuando ya se obtuvo la data
-            this.cargando = false;
-          }
+          this.fronteras = paises;
+          this.cargando = false;
+          // if( pais !== null && pais.length > 0 ) {
+          //   // this.fronteras = pais[0]?.borders;
+          //   // Quitamos el mensaje cargando cuando ya se obtuvo la data
+          //   this.cargando = false;
+          // }
+          // else{
+          //   this.fronteras = [];
+          //   // Quitamos el mensaje cargando cuando ya se obtuvo la data
+          //   this.cargando = false;
+          // }
 
         });
 
