@@ -1,3 +1,10 @@
+/*Ahora hay otro problema el cual es que el mapa no se muestra ya que se esta renderizando un div que tiene
+ancho de 0px y un alto de 0px entonces lo solucionamos agregandole unos atrubutos al body y al html*/
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 /* You can add global styles to this file, and also import other style files */
 app-menu {
     position: fixed;
