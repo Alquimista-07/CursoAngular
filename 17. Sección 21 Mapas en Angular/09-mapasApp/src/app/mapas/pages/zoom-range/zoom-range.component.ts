@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 // Importamos el mapbox
 import * as mapboxgl from 'mapbox-gl';
@@ -25,19 +25,43 @@ import * as mapboxgl from 'mapbox-gl';
   `
   ]
 })
-export class ZoomRangeComponent implements OnInit {
+export class ZoomRangeComponent implements AfterViewInit {
+
+  // Entonces ahora vamos a usar el viewChild el cual nos sirve para tomar un elemento html
+  // y usarlo como una propiedad común y corriente
+  @ViewChild('mapa') divMapa!: ElementRef;
+
+  // Creamos una propiedad para poder crear el acceso al objeto de mapbox que tenemos
+  // en el ngOnInit
+  mapa!: mapboxgl.Map;
 
   constructor() { }
 
-  ngOnInit(): void {
+  // El problema es que anteriormente estabamos usando el ngOnInit para incializar el mapa, pero a pesar de que
+  // el componente esta listo en el ngOnInit nos arroja un error con el elemento html al que estamos haciendo referencia
+  // para motrar el mapa y que lo estamos pasando a través del ViewChild, por lo tanto usamos otro hook del ciclo de vida
+  // de angular el cual es el ngAfterViewInit y acá si ya tenemos listo el elemento para ser usado.
+  ngAfterViewInit(): void {
 
-    var map = new mapboxgl.Map({
-      container: 'mapa-zoom-range',
+    console.log('AfterViewInit', this.divMapa);
+
+    this.mapa = new mapboxgl.Map({
+      container: this.divMapa.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [ -72.56019992138917, 6.318082682981575 ], 
       zoom: 18
     });
 
+  }
+
+  zoomIn() {
+    console.log('Zoom In');
+    this.mapa.zoomIn();
+  }
+
+  zoomOut() {
+    console.log('Zoom Out');
+    this.mapa.zoomOut();
   }
 
 }

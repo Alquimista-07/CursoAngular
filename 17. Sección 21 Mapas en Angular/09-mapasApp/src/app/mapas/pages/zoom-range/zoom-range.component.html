@@ -1,4 +1,7 @@
-<div id="mapa-zoom-range" class="mapa-container">
+<!--En este caso anteriormente estabamso usando un id pero tenemos el inconveniente que si se tiene más de un elemento
+    va a chocar y se van a generar conflicto, entonces lo ideal sería usar una referencia local (llamada #mapa) la cual 
+    va a cambiar dependiendo del componente-->
+<div #mapa class="mapa-container">
 
 </div>
 
@@ -13,11 +16,13 @@
 
     <div class="col-12">
 
-        <button class="btn btn-primary">
+        <button class="btn btn-primary"
+                (click)="zoomOut()">
             -
         </button>
 
-        <button class="btn btn-primary float-end">
+        <button class="btn btn-primary float-end"
+                (click)="zoomIn()">
             +
         </button>
     </div>
