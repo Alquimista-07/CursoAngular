@@ -23,9 +23,6 @@ import { Component, OnInit } from '@angular/core';
 //       va a conocer en el archivo como mapboxgl (indicandolo con el as) y listo eso es todo.
 import * as mapboxgl from 'mapbox-gl';
 
-// Importamos los environment para usarlo
-import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'app-full-screen',
   templateUrl: './full-screen.component.html',
@@ -42,15 +39,6 @@ export class FullScreenComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Posteriormente en la web de mapbox nos dice que insertemos otra parte de codigo
-    // la cual es la siguiente:
-    //
-    // Adicionalmente acá tenemos otro problema ya que en la web viende de la siguiente manera:
-    //
-    // mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYWxjaGVtaXN0MDciLCJhIjoiY2wzbTVkNm1pMDFhYzNvdXZrMGk5MGRiYiJ9.pOxa86N0FzW03dQiFKcQKA';
-    //
-    // Y a pesar de que es un token valido nos arreoja un error el cual lo podemos solventar de la siguiente forma:
-    (mapboxgl as any).accessToken = environment.mapboxToken; // y debemos pasarle el token de los environments que habíamos definido para cuando requiramos cambiarlo solo lo cambiemos allá
     
     var map = new mapboxgl.Map({
       // Ahora nos dice que debemos cambiar el container: 'YOUR_CONTAINER_ELEMENT_ID' por nuesto elemento
@@ -59,7 +47,13 @@ export class FullScreenComponent implements OnInit {
       // container: 'YOUR_CONTAINER_ELEMENT_ID',
       // y eso sería todo lo que nos indica que hagamos en la página de mapbox y hay más tutoriales
       container: 'mapa',
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/mapbox/streets-v11',
+      // Ahora para establecer el punto central en el mapa tenemos que usar una propiedad llamada center la cual viene
+      // en formato de longitud y latitud que son numéricos. Otra cosa es que esta es una diferencia con Google Maps ya 
+      // que en google maps empieza con latitud y luego longitud pero en Mapbox es latitud y logngitud
+      center: [ -72.56019992138917, 6.318082682981575 ], 
+      // Ahora necesitamos el nivel de zoom o nivel de acercamiento que queramos el cual lo hacemos de la siguiente manera:
+      zoom: 18
     });
 
   }
