@@ -54,24 +54,31 @@ export class ZoomRangeComponent implements AfterViewInit {
       zoom: this.zoomLevel
     });
 
+    // Para obtener el valor actual y preciso del zoom necesitamos colocar un listener
+    // que me indique cuando el zoom cambia
+    this.mapa.on( 'zoom', (evt) => {
+      // console.log( 'zoom' );
+      // console.log('Evento', evt);
+      // Por lo tanto en la documentación oficial vemos que ya tenemos un método que nos permite obtener 
+      // el zoom (getZoom()) con el cual podemos alterar la propiedad zoomLevel que creamos
+      const zoomActual = this.mapa.getZoom();
+      // console.log( zoomActual );
+      // console.log( 'zoomActual' );
+      // Hay que ver que se esta disparando como 60 veces y por eso antes no servía cuando lo teníamos directamente
+      // en el botón ya que no se actualizaba de forma correcta
+      this.zoomLevel = zoomActual
+    });
+
   }
 
   zoomIn() {
     console.log('Zoom In');
     this.mapa.zoomIn();
-    // Por lo tanto en la documentación oficial vemos que ya tenemos un método que nos permite obtener 
-    // el zoom (getZoom()) con el cual podemos alterar la propiedad zoomLevel que creamos
-    console.log( this.mapa.getZoom() );
-    this.zoomLevel = this.mapa.getZoom();
   }
   
   zoomOut() {
     console.log('Zoom Out');
     this.mapa.zoomOut();
-    // Por lo tanto en la documentación oficial vemos que ya tenemos un método que nos permite obtener 
-    // el zoom (getZoom()) con el cual podemos alterar la propiedad zoomLevel que creamos
-    console.log( this.mapa.getZoom() );
-    this.zoomLevel = this.mapa.getZoom();
   }
 
 }
