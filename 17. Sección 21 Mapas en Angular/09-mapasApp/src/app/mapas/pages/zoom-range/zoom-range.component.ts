@@ -34,6 +34,8 @@ export class ZoomRangeComponent implements AfterViewInit {
   // Creamos una propiedad para poder crear el acceso al objeto de mapbox que tenemos
   // en el ngOnInit
   mapa!: mapboxgl.Map;
+  // Creamos una propiedad que va a tener el nivel del zoom en el que estamos
+  zoomLevel: number = 18;
 
   constructor() { }
 
@@ -49,7 +51,7 @@ export class ZoomRangeComponent implements AfterViewInit {
       container: this.divMapa.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [ -72.56019992138917, 6.318082682981575 ], 
-      zoom: 18
+      zoom: this.zoomLevel
     });
 
   }
@@ -57,11 +59,19 @@ export class ZoomRangeComponent implements AfterViewInit {
   zoomIn() {
     console.log('Zoom In');
     this.mapa.zoomIn();
+    // Por lo tanto en la documentación oficial vemos que ya tenemos un método que nos permite obtener 
+    // el zoom (getZoom()) con el cual podemos alterar la propiedad zoomLevel que creamos
+    console.log( this.mapa.getZoom() );
+    this.zoomLevel = this.mapa.getZoom();
   }
-
+  
   zoomOut() {
     console.log('Zoom Out');
     this.mapa.zoomOut();
+    // Por lo tanto en la documentación oficial vemos que ya tenemos un método que nos permite obtener 
+    // el zoom (getZoom()) con el cual podemos alterar la propiedad zoomLevel que creamos
+    console.log( this.mapa.getZoom() );
+    this.zoomLevel = this.mapa.getZoom();
   }
 
 }
