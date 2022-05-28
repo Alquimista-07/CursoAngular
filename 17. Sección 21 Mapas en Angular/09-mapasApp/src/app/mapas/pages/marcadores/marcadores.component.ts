@@ -97,8 +97,15 @@ export class MarcadoresComponent implements AfterViewInit {
   
   }
 
-  irMarcador() {
-    
+  // Metodo donde usamos el flyTo para hacer la animación de salto a determinado marcador 
+  irMarcador( marker: mapboxgl.Marker ) {
+
+    console.log( marker );
+
+    this.mapa.flyTo({
+      center: marker.getLngLat()
+    });
+
   }
 
 }
