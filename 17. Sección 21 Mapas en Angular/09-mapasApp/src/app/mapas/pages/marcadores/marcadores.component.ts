@@ -1,16 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+
+// Importamos el mapbox
+import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-marcadores',
   templateUrl: './marcadores.component.html',
-  styles: [
+  styles: [`
+  .mapa-container {
+    width: 100%;
+    height: 100%;
+  }
+  `
   ]
 })
-export class MarcadoresComponent implements OnInit {
+export class MarcadoresComponent implements AfterViewInit {
+
+  // Entonces ahora vamos a usar el viewChild el cual nos sirve para tomar un elemento html
+  // y usarlo como una propiedad común y corriente
+  @ViewChild('mapa') divMapa!: ElementRef;
+
+  mapa!: mapboxgl.Map;
+  zoomLevel: number = 15;
+  center: [ number, number ] = [ -72.56019992138917, 6.318082682981575 ];
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+
+    this.mapa = new mapboxgl.Map({
+      container: this.divMapa.nativeElement,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: this.center, 
+      zoom: this.zoomLevel
+    });
+
+    /*
+    const markerHtml: HTMLElement = document.createElement('div');
+    markerHtml.innerHTML = 'Hola Mundo';
+    */
+   
+   //----------------------------------------------------------------------------------------------
+   // Para agregar un marcador hacemos lo siguiente:
+   //----------------------------------------------------------------------------------------------
+   // EL siguiente codigo comentado permite cambiar el pin por una palabra o una imágnen
+   // en base al markerHTML creado anteriormente que también está comentado
+   /*
+   new mapboxgl.Marker({
+      element: markerHtml
+    })
+   */
+
+    new mapboxgl.Marker()
+        .setLngLat( this.center )
+        .addTo( this.mapa );
+
   }
 
 }
