@@ -11,7 +11,12 @@
             Zoom: {{ zoomLevel | number: '2.2-2' }} <!--Usamos el pipe number y le decimo que queremos 2 enteros con especificamente 2 decimales siempre-->
             - lng, Lat: [123, 456]
         </label>
-        <input type="range" class="form-range">
+        <input type="range" class="form-range"
+               [value]="zoomLevel"
+               min="0"
+               max="18"
+               #zoomInput
+               (input)="zoomCambio( zoomInput.value )">
     </div>
 
     <div class="col-12">

@@ -20,6 +20,7 @@ import * as mapboxgl from 'mapbox-gl';
     padding: 10px;
     position: fixed;
     z-index: 999;
+    width: 400px;
   }
 
   `
@@ -69,6 +70,13 @@ export class ZoomRangeComponent implements AfterViewInit {
       this.zoomLevel = zoomActual
     });
 
+    // Ahora lo que se va a hacer es limitar el zoom para que no pase de cierto limite definido
+    this.mapa.on( 'zoomend', (evt) => {
+      if( this.mapa.getZoom() > 18 ){
+        this.mapa.zoomTo( 18 );
+      }
+    });
+
   }
 
   zoomIn() {
@@ -79,6 +87,12 @@ export class ZoomRangeComponent implements AfterViewInit {
   zoomOut() {
     console.log('Zoom Out');
     this.mapa.zoomOut();
+  }
+
+  // Creamos el método que va a interactuar con el evento del input
+  zoomCambio( valor: string ) {
+    console.log( valor );
+    this.mapa.zoomTo( Number(valor) );
   }
 
 }
