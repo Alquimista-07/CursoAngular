@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 interface MarcadorColor {
-  color : string;
-  marker: mapboxgl.Marker;
+  color  : string;
+  marker?: mapboxgl.Marker;
+  centro?: [number, number];
 }
 
 // Importamos el mapbox
@@ -52,7 +53,14 @@ export class MarcadoresComponent implements AfterViewInit {
       center: this.center, 
       zoom: this.zoomLevel
     });
+    
+    // Ahora vamos a llamar el metodo para leer el localstorage para reconstruir
+    // los marcadore
+    this.leerLocalStorage();
 
+    //========================================================================================
+    // NOTAS Marcadores
+    //========================================================================================
     /*
     const markerHtml: HTMLElement = document.createElement('div');
     markerHtml.innerHTML = 'Hola Mundo';
@@ -65,14 +73,16 @@ export class MarcadoresComponent implements AfterViewInit {
    // en base al markerHTML creado anteriormente que también está comentado
    /*
    new mapboxgl.Marker({
-      element: markerHtml
+     element: markerHtml
     })
-   */
-
-    // new mapboxgl.Marker()
-    //     .setLngLat( this.center )
-    //     .addTo( this.mapa );
-
+    */
+   
+   // new mapboxgl.Marker()
+   //     .setLngLat( this.center )
+   //     .addTo( this.mapa );
+   //========================================================================================
+   
+   
   }
 
   agregarMarcador() {
@@ -94,6 +104,8 @@ export class MarcadoresComponent implements AfterViewInit {
     });
 
     // console.log( this.marcadores );
+    // Llamamos el metodo para guardar el marcador en el localstorage
+    this.guardarMarcadoresLocalStorage();
   
   }
 
@@ -104,6 +116,60 @@ export class MarcadoresComponent implements AfterViewInit {
 
     this.mapa.flyTo({
       center: marker.getLngLat()
+    });
+
+  }
+
+  guardarMarcadoresLocalStorage() {
+
+    const lngLatArr: MarcadorColor[] = [];
+
+    this.marcadores.forEach( m =>{
+      
+      const color = m.color;
+      const { lng, lat } = m.marker!.getLngLat(); // Le decimos que simpre lo vamos a tener indicando el !
+
+      lngLatArr.push({
+        color: color,
+        centro: [lng, lat]
+      });
+
+    });
+
+    // Como lngLatArr es un objeto y en el localstorage almacenamos solo string lo serializamos mediante el JSON.stringify()
+    localStorage.setItem('marcadores', JSON.stringify( lngLatArr )); 
+
+  }
+
+  // Ahora creamos un metodo para leer el localstorage, tomar los marcadores almacenados allá
+  // y recrearlos
+  leerLocalStorage() {
+    
+    if( !localStorage.getItem('marcadores') ){
+      return;
+    }
+
+    // Ahora necesitamos hacer el proceso inverso usando el JSON.parse para reconstruirlo, es decir,
+    // si era un arreglo lo reconstruye como un arreglo y si era un objeto lo reconstruye como un objeto
+    const lngLatArr: MarcadorColor[] = JSON.parse( localStorage.getItem('marcadores')! );
+
+    // console.log( lngLatArr );
+    lngLatArr.forEach( m => {
+
+       const newMarker = new mapboxgl.Marker({
+         color: m.color,
+         draggable: true,
+       })
+       .setLngLat( m.centro! )
+       .addTo( this.mapa );
+
+       // Ahora es necesario reconstruir el arreglo de marcadorex para que no se purgue cuando recarguemos el navegador
+       // y nos reescriba los marcadores que teníamos en el localstorage
+       this.marcadores.push({
+         marker: newMarker,
+         color: m.color
+       })
+
     });
 
   }
