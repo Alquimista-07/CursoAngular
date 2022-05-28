@@ -9,7 +9,7 @@
     <div class="col-12">
         <label class="form-label">
             Zoom: {{ zoomLevel | number: '2.2-2' }} <!--Usamos el pipe number y le decimo que queremos 2 enteros con especificamente 2 decimales siempre-->
-            - lng, Lat: [123, 456]
+            - lng, Lat: [ {{ center[0] | number: '2.4-4' }}, {{ center[1] | number: '2.4-4' }} ]
         </label>
         <input type="range" class="form-range"
                [value]="zoomLevel"

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 
 // Importamos el mapbox
 import * as mapboxgl from 'mapbox-gl';
@@ -26,7 +26,7 @@ import * as mapboxgl from 'mapbox-gl';
   `
   ]
 })
-export class ZoomRangeComponent implements AfterViewInit {
+export class ZoomRangeComponent implements AfterViewInit, OnDestroy {
 
   // Entonces ahora vamos a usar el viewChild el cual nos sirve para tomar un elemento html
   // y usarlo como una propiedad común y corriente
@@ -37,8 +37,22 @@ export class ZoomRangeComponent implements AfterViewInit {
   mapa!: mapboxgl.Map;
   // Creamos una propiedad que va a tener el nivel del zoom en el que estamos
   zoomLevel: number = 18;
+  // Creamos una propiedad para la longitud y la latitud
+  center: [ number, number ] = [ -72.56019992138917, 6.318082682981575 ];
 
   constructor() { }
+
+  // Una regla de oro cuando trabajemos con listener y que se implemente en el ngOnInut() o en el ngAfterViewInit
+  // y sea un on que sea un evento que siempre esta escuchando algo, si nos salimos y regresamos al componente es
+  // algo que siempre va a estar emitiendo valores por lo tanto lo recomendado sería destruirlo cuando el componente
+  // se destruya
+  ngOnDestroy(): void {
+    // console.log('se ejecuto destoy');
+    // Por lo tanto acá destruimos cada uno de los listener que estoy usando
+    this.mapa.off('zoom', () => {});
+    this.mapa.off('zoomend', () => {});
+    this.mapa.off('move', () => {});
+  }
 
   // El problema es que anteriormente estabamos usando el ngOnInit para incializar el mapa, pero a pesar de que
   // el componente esta listo en el ngOnInit nos arroja un error con el elemento html al que estamos haciendo referencia
@@ -51,7 +65,7 @@ export class ZoomRangeComponent implements AfterViewInit {
     this.mapa = new mapboxgl.Map({
       container: this.divMapa.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [ -72.56019992138917, 6.318082682981575 ], 
+      center: this.center, 
       zoom: this.zoomLevel
     });
 
@@ -75,6 +89,20 @@ export class ZoomRangeComponent implements AfterViewInit {
       if( this.mapa.getZoom() > 18 ){
         this.mapa.zoomTo( 18 );
       }
+    });
+
+    // Creamos un listener para escuchar el movimiento del mapa
+    this.mapa.on( 'move', (evt) => {
+      // console.log(evt);
+      const target = evt.target;
+
+      // Desestructuramos 
+      const { lng, lat } = target.getCenter();
+
+      target.getCenter();
+      // console.log( target.getCenter() );
+      this.center = [ lng, lat ];
+
     });
 
   }
