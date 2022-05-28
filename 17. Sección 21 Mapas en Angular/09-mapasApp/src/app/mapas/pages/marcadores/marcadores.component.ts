@@ -106,6 +106,13 @@ export class MarcadoresComponent implements AfterViewInit {
     // console.log( this.marcadores );
     // Llamamos el metodo para guardar el marcador en el localstorage
     this.guardarMarcadoresLocalStorage();
+
+    // Agregamos un listener para escuchar cuando cambiemos de posición un marcador
+    // y actualizar el localstorage
+    nuevoMarcador.on('dragend', () =>{
+      // console.log('drag');
+      this.guardarMarcadoresLocalStorage();
+    });
   
   }
 
@@ -168,9 +175,33 @@ export class MarcadoresComponent implements AfterViewInit {
        this.marcadores.push({
          marker: newMarker,
          color: m.color
-       })
+       });
+
+      // Agregamos un listener para escuchar cuando cambiemos de posición un marcador
+      // y actualizar el localstorage
+      newMarker.on('dragend', () =>{
+        // console.log('drag');
+        this.guardarMarcadoresLocalStorage();
+      });
 
     });
+
+  }
+
+  // Creamos el meotodo que se va a llamar cuando hagamos doble click y que se va a encargar de
+  // borrar el marcador tanto del arreglo como del mapa y actualizar el localstorage
+  borrarMarcador( indice: number ){
+
+    console.log( 'Borrando marcador...' );
+    
+    //Lo borramos primero del mapa
+    this.marcadores[indice].marker?.remove();
+
+    // Lo borramos del arreglo
+    this.marcadores.splice( indice, 1 );
+
+    // Actualizamos el localstorage
+    this.guardarMarcadoresLocalStorage();
 
   }
 
