@@ -1,10 +1,25 @@
 <!--En este proyecto vamos a trabajar con graficas en Angular para ver la documentación
     referente a la librería usada para dibujar y presentar las gráficas podemos visitar 
     el siguiente enlace: https://valor-software.com/ng2-charts/ -->
+    <!--NOTA: Para trabajar con ng2-charts es necesario realizar la instalación de unos paquetes usando los siguientes
+              comandos:
+              
+              npm install --save ng2-charts 
+              npm install --save chart.js
+              
+    -->
+<!--NOTA: OJO lo siguiente se usa si sale un warning en la consola que indica algo con el CommonJS module este lo podemos solucionar abriendo el archivo
+          angular.json en la parte architec -> build -> builder -> option y allí agregamos en formato JSON la opción 
+          
+          "allowedCommonJsDependencies": ["chart.js"]
+        
+          Pero para el caso al momento de realizar el curso esto ya se había solucionado por lo tanto no apareció, pero dejo la nota
+          por si en un futuro sucede con otra libreria y de esta forma poderlo solucionar-->
 
 <!--NOTA: Adicionalmente trabajamos usando Bootstrap pero bien podríamos hacerlo con primeng, angular-material
           u otro que es tailwind css la cual su documentación la encontramos en el siguiente enlace:
           https://tailwindcss.com/ -->
+
 
 <div class="row mt-5">
 
