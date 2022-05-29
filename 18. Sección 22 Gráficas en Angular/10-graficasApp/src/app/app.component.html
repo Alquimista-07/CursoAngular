@@ -5,6 +5,15 @@
 <!--NOTA: Adicionalmente trabajamos usando Bootstrap pero bien podríamos hacerlo con primeng, angular-material
           u otro que es tailwind css la cual su documentación la encontramos en el siguiente enlace:
           https://tailwindcss.com/ -->
-<h1>Hola Mundo!!!...</h1>
 
-<router-outlet></router-outlet>
+<div class="row mt-5">
+
+    <div class="col-md-3 col-sm-12">
+        <app-menu></app-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-12">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
