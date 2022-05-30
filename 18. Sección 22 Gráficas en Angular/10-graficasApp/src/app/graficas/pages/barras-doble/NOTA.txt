@@ -1,0 +1,276 @@
+//===========================================================================================================
+// ESTA ES UNA FORMA DE SOLUCIONAR PARA COLOCAR LA BARRA
+// HORIZONTAL
+//===========================================================================================================
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+barras-doble.component.html
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>Gráficas Dobles</h1>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <app-grafica-barra [horizontal]="true"
+                           [barChartData]="productoData"
+                           [etiquetas]="proveedoresLabels"
+                           ></app-grafica-barra>
+    </div>
+ 
+    <div class="col-md-6">
+        <app-grafica-barra
+                            [barChartData]="proveedoresData"
+                            [etiquetas]="proveedoresLabels"></app-grafica-barra>
+    </div>
+</div>
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+grafica-barra.component.html:
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<div *ngIf="horizontal; else elseTemplate">
+  <div class="rotar">
+    <div style="display: block">
+      <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        [legend]="barChartLegend"
+        >
+      </canvas>
+    </div>
+  </div>
+</div>
+<ng-template #elseTemplate>
+    <div style="display: block">
+      <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        [legend]="barChartLegend"
+        >
+      </canvas>
+    </div>
+</ng-template>
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+barras-doble.component.ts:
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import { Component } from '@angular/core';
+import { ChartData } from 'chart.js';
+ 
+@Component({
+  selector: 'app-barras-doble',
+  templateUrl: './barras-doble.component.html',
+  styles: [
+  ]
+})
+export class BarrasDobleComponent {
+ 
+  proveedoresLabels: string[] = ['2021', '2022','2023','2024','2025'];
+ 
+  proveedoresData: ChartData<'bar'> = {
+    labels: this.proveedoresLabels,
+    datasets: [
+      { data: [ 100,200,300,400,500 ], label: 'Vendedor A' },
+      { data: [ 50,250,30, 450,200 ], label: 'Vendedor B' },
+    ]
+  }
+ 
+  productoData: ChartData<'bar'> = {
+    labels: this.proveedoresLabels,
+    datasets: [
+    { data: [ 200, 300,400,300, 100 ], label: 'Carros', backgroundColor: 'blue' },
+    ]
+ 
+  };
+ 
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+grafica-barra.component.ts:
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+ 
+@Component({
+  selector: 'app-grafica-barra',
+  templateUrl: './grafica-barra.component.html',
+  styles: [
+    `
+      .rotar{
+        transform: rotate(90deg);
+        padding-top: 150px;
+        padding-left: 50px;
+      }
+    `
+  ]
+})
+export class GraficaBarraComponent implements OnInit {
+ 
+  @Input() horizontal: boolean = false;
+  
+  @Input() etiquetas: string[] = [];
+ 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+ 
+  liminf: number = 5;
+ 
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+ 
+  @Input() barChartData: ChartData<'bar'> = {
+    labels: [ 
+      // '2020', '2021', '2022', '2023', '2024', '2025', '2026' 
+    ],
+    datasets: [
+       { data: [ 15, 59, 80, 81, 56, 55, 40 ], label: 'Series A', backgroundColor: '#ED5F76', hoverBackgroundColor: 'red' },
+      // { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B', backgroundColor: '#F763C4', hoverBackgroundColor: 'red' },
+      // { data: [ 8, 38, 70, 59, 66, 80, 100 ], label: 'Series C', backgroundColor: '#D665E0', hoverBackgroundColor: 'red' },
+    ]
+  };
+ 
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+  };
+ 
+  constructor() { }
+ 
+  ngOnInit(): void {
+    // if( this.horizontal ) {
+    //    this.barChartType = 'horizontalBar';
+    // }
+  }
+  
+}
+
+
+//===========================================================================================================
+// ESTA ES OTRA FORMA DE SOLUCIONAR PARA COLOCAR LA BARRA
+// HORIZONTAL
+//===========================================================================================================
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+barras-doble.component.ts
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import { Component } from '@angular/core';
+import { ChartConfiguration, ChartData } from 'chart.js';
+ 
+@Component({
+  selector: 'app-barras-doble',
+  templateUrl: './barras-doble.component.html',
+  styles: [
+  ]
+})
+export class BarrasDobleComponent {
+ 
+  // proveedoresData: ChartDataSets[] = [
+  //   { data: [ 100,200,300,400,500 ], label: 'Vendedor A' },
+  //   { data: [ 50,250,30, 450,200 ], label: 'Vendedor B' },
+  // ];
+  
+  proveedoresLabels: string[] = ['2021', '2022','2023','2024','2025'];
+  
+  // productoData: ChartDataSets[] = [
+  //   { data: [ 200, 300,400,300, 100 ], label: 'Carros', backgroundColor: 'blue' },
+  // ];
+ 
+  productosOpciones: ChartConfiguration['options'] = {
+    responsive: true,
+    indexAxis: 'y', //Esto hace que sea horizontal el gráfico
+  }
+ 
+  proveedoresData: ChartData<'bar'> = {
+    labels: this.proveedoresLabels,
+    datasets: [
+      { data: [ 100,200,300,400,500 ], label: 'Vendedor A' },
+      { data: [ 50,250,30, 450,200 ], label: 'Vendedor B' },
+    ]
+  }
+ 
+  productosData: ChartData<'bar'> = {
+    labels: this.proveedoresLabels,
+    datasets: [
+      { data: [ 200, 300,400,300, 100 ], label: 'Carros', backgroundColor: 'blue' },
+    ]
+  }
+ 
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+barras-doble.component.html
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>Gráfica de barras dobles</h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col-md-6">
+                <app-grafica-barra [barChartData]="productosData"
+                                    [barChartOptions]="productosOpciones"></app-grafica-barra>
+            </div>
+            <div class="col-md-6">
+                <app-grafica-barra [barChartData]="proveedoresData"></app-grafica-barra>
+            </div>
+ 
+        </div>
+ 
+    </div>
+</div>
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+grafica-barra.component.ts
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+ 
+@Component({
+  selector: 'app-grafica-barra',
+  templateUrl: './grafica-barra.component.html',
+  styles: [
+  ]
+})
+export class GraficaBarraComponent implements OnInit {
+ 
+ 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+ 
+  @Input() barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+  };
+   
+  @Input() barChartType: ChartType = 'bar';
+ 
+ 
+  @Input() barChartData: ChartData<'bar'> = {
+    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+    ]
+  };
+  constructor() { }
+ 
+  ngOnInit(): void {
+  }
+ 
+  // events   pueden copiarlo o no
+  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+    console.log(event, active);
+  }
+ 
+  public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+    console.log(event, active);
+  }
+ 
+ 
+}
