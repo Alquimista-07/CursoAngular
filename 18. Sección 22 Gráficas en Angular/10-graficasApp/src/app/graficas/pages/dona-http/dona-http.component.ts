@@ -52,6 +52,10 @@ export class DonaHttpComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Comantamos el siguiente código para ahora implementar lo mismo solo que ahora 
+    // se va a usar rxjs el cual nos devuelve ya la data ya lista de la forma que la
+    // necesitamos y no tenemos que hacer transformaciones
+    /*
     this.graficasService.getUsuariosRedesSociales()
         .subscribe( data =>{
 
@@ -74,6 +78,31 @@ export class DonaHttpComponent implements OnInit {
           });
 
         });
+    */
+
+    // Ahora como esto nos devolvía anteriormente un objeto y teníamos que hacerle
+    // un ajuste para obtener del objeto y cuadrarla en terminos que la gráfica la 
+    // necesitaba. Ahora lo que vamos a hacer es usar un operador de rxjs en el 
+    // servicio para hacer lo mismo de una forma más sencilla.
+    this.graficasService.getUsuarioRedesSocialesDonaData()
+        // Desestructuramos el objeto data proveniente del servicio
+        .subscribe( ({ labels, valores }) =>{
+
+          // console.log( data );
+          // console.log( labels );
+          // console.log( valores );
+
+          // Insertamos los labels al arreglo
+          labels.forEach( label => {
+            this.labels.push( label );
+          });
+
+          // Insertamos la data en el arreglo
+          valores.forEach( values =>{
+            this.data.push( values );
+          });
+
+        })
 
   }
 
