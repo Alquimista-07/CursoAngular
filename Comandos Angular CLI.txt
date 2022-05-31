@@ -117,3 +117,11 @@ COMANDOS ANGULAR CLI
 -----------------------------------------------------------------------------------------------------------
 
 	ng g m nombreModulo --routing
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear una directiva y colocarla en una ruta específica y sin archivo de 
+  pruebas. Adicionalmente si queremos el archivo de pruebas solo no le agregamos el --skipTests al comando
+-----------------------------------------------------------------------------------------------------------
+
+	ng generate directive directorio/nombreDirectiva --skipTests        -> Este es el comando completo
+	ng g d directorio/nombreDirectiva --skipTests                       -> Esta es la forma corta
