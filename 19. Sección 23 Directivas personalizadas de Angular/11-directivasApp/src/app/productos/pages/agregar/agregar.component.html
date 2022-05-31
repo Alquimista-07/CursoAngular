@@ -15,7 +15,10 @@
         </div>
 
         <div class="col-auto">
+            <!--Ahora lo que hacemos es asignar la directiva error-msg para que este span herede
+                todo lo que la directiva ofrezca-->
             <span class="form-text"
+                  error-msg
                   *ngIf="tieneError('nombre')">
                 Este campo es requerido
             </span>
