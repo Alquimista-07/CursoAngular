@@ -21,11 +21,14 @@
                 por lo tanto solo mandamos el color y le asignamos el correspondiente color. Adicionalmente también podemos 
                 usarlo mandando [color] entre llaves para hacer referencia a una propiedad que tengmaos en el componente de 
                 TypeScript-->
-            <span class="form-text"
-                  error-msg
+            <!--Adicionalmente como asignamos valor por defecto al color, al mensaje y la clase no sería necesario enviarlos a no ser de que quisieramos
+                que el usuario tuviera control y los pudiera cambiar. Y para efectos ilustrativos voy a dejar el color, el mensaje y la clase si la voy
+                a quitar ya que del lado del la directiva ya esta asignado y explicado como se realizo. Pero reitero que ya no es necesario colocarlos ya
+                que tienen sus valores por defecto y este span simplemente podría quedar con la directiva y el *ngIf-->
+            <span error-msg
                   color="red"
+                  mensaje="Debe de ingresar este campo"
                   *ngIf="tieneError('nombre')">
-                Este campo es requerido
             </span>
         </div>
 
