@@ -17,8 +17,13 @@
         <div class="col-auto">
             <!--Ahora lo que hacemos es asignar la directiva error-msg para que este span herede
                 todo lo que la directiva ofrezca-->
+            <!--Entonces para mandarle el color le establecemos la propiedad correspondiente al input que tenemos definido,
+                por lo tanto solo mandamos el color y le asignamos el correspondiente color. Adicionalmente también podemos 
+                usarlo mandando [color] entre llaves para hacer referencia a una propiedad que tengmaos en el componente de 
+                TypeScript-->
             <span class="form-text"
                   error-msg
+                  color="red"
                   *ngIf="tieneError('nombre')">
                 Este campo es requerido
             </span>
@@ -36,6 +41,7 @@
 
 </form>
 
+<!--Ahora podemos usar la directiva en cualquier logar simplemente llamandola-->
 <h3 class="mt-5">Formulario</h3>
 <pre>Value: {{ miFormulario.value | json }}</pre>
 <pre>Valid: {{ miFormulario.valid }}</pre>
