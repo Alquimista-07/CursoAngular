@@ -24,11 +24,14 @@ export class AgregarComponent {
   }
 
   cambiarNombre() {
-    this.texto1 = 'Required Field';
+    this.texto1 = Math.random().toString();
   }
 
   cambiarColor() {
-    this.color = 'green';
+    // Ahora usamos la misma función que usamos en la sección de marcadores y la cual genera
+    // colores de manera aleatoria.
+    const color = "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+    this.color = color;
   }
 
 }
