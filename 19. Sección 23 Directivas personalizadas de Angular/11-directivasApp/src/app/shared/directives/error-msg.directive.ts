@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, Input } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // NOTA: Nuestra directiva pareciera un componente, un pipe o cualquier otra cosa pero la principal diferencia
 //       radica en lo que vamos a pederle inyectar y los argumentos que va recibir y como se van a recibir
@@ -6,7 +6,7 @@ import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 @Directive({
   selector: '[error-msg]'
 })
-export class ErrorMsgDirective implements OnInit {
+export class ErrorMsgDirective implements OnInit, OnChanges {
 
   // Si necesitamos usar el ElementRef en más de un lugar podemos crear una propiedad
   private _htmlElement: ElementRef<HTMLElement>;
@@ -26,6 +26,26 @@ export class ErrorMsgDirective implements OnInit {
     // Inicializamos el ElementRef
     this. _htmlElement = elem;
 
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+
+    // Acá tenemos un inconveniente ya que como recibe el ultimo valor del ultimo input entonces tenemos errores
+    // los cuales los podríamos solucionar encapsulando con condiciones if pero el problema es que si tuvieramos
+    // un componente con demasiados input esto se tornaría tedioso y con demasiado código.
+    // NOTA: En la siguiente clase se va a explicar como hacer esto de mejor forma usando input setters
+
+    if( changes['mensaje'] ){
+      // console.log( changes );
+      const mensaje = changes['mensaje'].currentValue
+      // console.log( mensaje );
+      this._htmlElement.nativeElement.innerText = mensaje;
+    }
+    if( changes['color'] ){
+      const color = changes['color'].currentValue;
+      this._htmlElement.nativeElement.style.color = color;
+    }
+
+    console.log( changes );
   }
 
   ngOnInit(): void {
