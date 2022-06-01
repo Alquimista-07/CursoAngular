@@ -38,6 +38,13 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
      this.setMensaje();
   }
 
+  // Creamos un nuevo input para la nueva propiedad llamada valido
+  @Input() set valido ( valor: boolean ){
+    ( valor === true )
+             ? this._htmlElement.nativeElement.classList.add('hidden') 
+             : this._htmlElement.nativeElement.classList.remove('hidden');
+  }
+
   constructor( private elem: ElementRef<HTMLElement> ) { 
     console.log( 'Constructor directive' );
     // console.log( elem );
