@@ -1,8 +1,9 @@
 # CursoAngular
 
-NOTAS IMPORTANTES
-=====================================
+# NOTAS IMPORTANTES
 
+Configuración Inicial
+=====================
 
 Como este es un backend que se va a crear con node para crearlo debemos ejecutar los siguientes pasos:
 
@@ -87,4 +88,37 @@ Y lo que le decimos es que cuando yo ejecute "npm run" le indicamos que ejecute 
 
 ```
 npm start
+```
+
+Instalaciones necesarias para el backend
+=========================================
+
+* El siguiente comando nos va a hacer las instalaciones necesarias para poner a correr nuestro backend que posterioemente va a interactuar con nuestra aplicación que desarrollemos en Angular.
+
+```
+npm i bcryptjs cors dotenv express express-validator jsonwebtoken mongoose
+```
+
+### NOTAS:
+
+* Cuando le colocamos al comando el "bcryptjs" le indicamos que instale un paquete que va a permitir encriptar y hacer hash de una sola vía de las contraseñas para que nadie aunque tenga el código hash no lo va a poder reconstruir.
+
+* Cuando le colocamos al comando el "cors" le indicamos que instale un paquete que nos va a permitir hacer peticiones Cross Domain, y esto es algo necesario entre comillas si vamos a aceptar peticiones provenientes de otros dominios. 
+
+* Cuando le colocamos al comando el "dotenv" le indicamos que instale un paquete que sirve para configurar variables de entorno.
+
+* Cuando le colocamos al comando el "express" le indicamos que instale un paquete que es la parte crucial para montar rápidamente el servidor con servicios REST, además de que es un Framework muy popular.
+
+* Cuando le colocamos al comando el "express-validator" le indicamos que instale un paquete el cual sirve para hacer validaciones en express por ejemplo de que los campos tengan la información que se necesita.
+
+* Cuando le colocamos al comando el "jsonwebtoken" le indicamos que instale un pauqete que sirve para crear JSON Web Tokens (JWT).
+
+* Cuando le colocamos al comando el "mongoose" le indicamos que instale el paquete el cual es un ORM que nos va a servir para interactuar y realizar la comunicación, conexión y trabajo con la base de datos MongoDB.
+
+### NOTA 2:
+
+* Adicionalmente si necesitamos instalar una versión específica de un paquete lo podemos indicando un @ seguido de la versión a instalar. Un ejemplo sería el siguiente:
+
+```
+npm i express@4.17.1
 ```
