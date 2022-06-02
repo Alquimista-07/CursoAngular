@@ -8,29 +8,18 @@ const express = require('express');
 // Crear el servidor/aplicación de express
 const app = express();
 
-// Ahora creamos una petición Http
-// Petición GET la cual tiene la ruta inicial '/' y le asignamos un callback (función anónima)
-// la cual tiene un par de argumentos (req -> petición, res -> repuesta)
-app.get('/', ( req, res ) =>{
+// Acá vamos a configurar las rutas
+// NOTA: Para configurar las rutas vamos a usar algo que se conoce como un middleware de express.
+//       Y un middleware no es más que una función que se ejecuta cuando el interprete pase evaluando
+//       cada una de las líneas de código. 
+//       En este caso el middleware es el use() el cual recibe como primer parámetro la ruta princiapl que 
+//       le queremos dar a la aplicación que en este caso es '/api/auth', y recibe un segundo parámetro el 
+//       cual es la importación del archivo donde especificamos las rutas y que en este caso lo llamamos auth.js
+//=================================================================================================================
+// Rutas
+//=================================================================================================================
+app.use( '/api/auth', require('./routes/auth') );
 
-    // Y en este caso respondemos con un archivo json
-    res.json({
-        ok: true,
-        msg: 'Todo Ok!',
-        uid: 1234
-    });
-
-    // NOTA: Acionalmente si queremos cambiar el status de la respuesta
-    //       podemos Agregar el statud de la siguiente manera:
-    /*
-    res.status(500).json({
-            ok: true,
-            msg: 'Todo Ok!',
-            uid: 1234
-        });
-    */
-
-});
 
 // Levantamos la aplicación de express indicando que va a ser a través del pueto 4000
 // y hacemos un llanado a un callback (función anónima) y le indicamos un console.log 
