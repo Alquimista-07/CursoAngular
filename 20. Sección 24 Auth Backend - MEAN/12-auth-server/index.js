@@ -8,6 +8,20 @@ const express = require('express');
 // Ahora para los CORS (Cross Domain) es necesario realizar la siguiente importación
 const cors = require('cors');
 
+// Para congigurar las variables de entorno configuramos usando el paquete dotenv que
+// habíamos instalado el cual toma el archivo .env por defecto y para ello hacemos lo 
+// siguiente:
+require('dotenv').config();
+
+// Hacemos un console.log de un objeto especial que existe en node
+// que contiene bastante información sobre configuraciones
+/*
+console.log( process.env );
+*/
+// Adicionalmente este process.env es el que vamos a usar para hacer referencia al PORT que 
+// hayamos definido en el archivo .env y vamos a usar en la funcón que levanta el servidor 
+// (app.listen())
+
 // Crear el servidor/aplicación de express
 const app = express();
 
@@ -58,6 +72,6 @@ app.use( '/api/auth', require('./routes/auth') );
 // y hacemos un llanado a un callback (función anónima) y le indicamos un console.log 
 // que nos va a servir como una confirmación e indicar que efectivamente el servidor 
 // se esta ejecutando.
-app.listen( 4000, () => {
-    console.log( `Servidor ejecutandose en el puerto ${ 4000 }` );
+app.listen( process.env.PORT, () => {
+    console.log( `Servidor ejecutandose en el puerto ${ process.env.PORT }` );
 });
