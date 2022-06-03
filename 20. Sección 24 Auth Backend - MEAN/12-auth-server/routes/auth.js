@@ -9,6 +9,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 // Importamos los controladores
 const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
+const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
 
@@ -28,7 +29,9 @@ const router = Router();
 router.post( '/new', [
     check('name', "El nombre es obligatorio").not().isEmpty(),
     check('email', "El email es obligatorio").isEmail(),
-    check('password', "La contraseña es obligatoria").isLength({ min: 6 })
+    check('password', "La contraseña es obligatoria").isLength({ min: 6 }),
+    // Agragamos un middleware personalizado para otimizar el código de errors que tenemos en los controladores
+    validarCampos
 ],crearUsuario );
 
 //============================================================================================================
@@ -44,7 +47,9 @@ router.post( '/', [
     // Por lo tanto el primer argumento es el nombre del campo que estoy esperando
     // y que en este caso se llamo email, y luego el mensaje de error. 
     check('email', "El email es obligatorio").isEmail(),
-    check('password', "La contraseña es obligatoria").isLength({ min: 6 })
+    check('password', "La contraseña es obligatoria").isLength({ min: 6 }),
+    // Agragamos un middleware personalizado para otimizar el código de errors que tenemos en los controladores
+    validarCampos
 
 ], loginUsuario );
 

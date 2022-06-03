@@ -19,16 +19,6 @@ const { validationResult } = require('express-validator');
 //================================
 const crearUsuario = (req, res = response)=>{
 
-    const errors = validationResult( req );
-    // console.log( errors );
-
-    if( !errors.isEmpty() ){
-        return res.status(400).json({
-            ok: false,
-            errors: errors.mapped()
-        });
-    }
-
     //NOTA: Entonces para probar lo que estamos mandando por el body usamos postman, el cual en los en los endpoint de
     //      tipo POST (crearUsuario, loginUsuario) configuramos en el postman el body y le indicamos ras y luego el formato 
     //      que es JSON y en la caja de texto que se muestra configuramos el objeto que vamos a enviar por el body. otra cosa
@@ -55,19 +45,6 @@ const crearUsuario = (req, res = response)=>{
 // Login de usuario
 //================================
 const loginUsuario = (req, res = response)=>{
-
-    // Ahora acá viene un objeto que el middleware check de express validator envía a través
-    // del req y con el cual trabajaremos las validaciones
-    const errors = validationResult( req );
-    // console.log( errors );
-    if( !errors.isEmpty() ){
-        // Entonces si el objeto errors no viene vacío, es decir, se presentó un error
-        // entonces enviamos un estatus 400 que es un bad error
-        return res.status(400).json({
-            ok: false,
-            errors: errors.mapped()
-        });
-    }
 
     const { email, password } = req.body;
     console.log( email );
