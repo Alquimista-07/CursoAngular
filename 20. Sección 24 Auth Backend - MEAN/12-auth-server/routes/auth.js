@@ -5,7 +5,7 @@
 // del paquete de express
 const { Router } = require('express');
 // Importamos los controladores
-const { crearUsuario, loginUsuario, revalidarToken } = require('./controllers/auth');
+const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
 
 const router = Router();
 
