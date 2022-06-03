@@ -2,6 +2,9 @@
 // como ayuda ya que si no la hacemos tendríamos un inconveniente el cual es que no tendríamos la ayuda del tipado
 const { response } = require('express');
 
+// Importamos el validarionRestult del express-validator
+const { validationResult } = require('express-validator');
+
 // Como se había mencionado cada uno de los callback o controladores en nuestro archivo de rutas auth.js pueden crecer bastante
 // por lo tanto se recomienda separar el controlador del manejador de la ruta con el fin de mantenerlo lo más ordenado posible, 
 // y para esto lo vamos a hacer dentro de este archivo que también lo llamamos auth.js al igual que el archivo de rutas.
@@ -42,6 +45,19 @@ const crearUsuario = (req, res = response)=>{
 // Login de usuario
 //================================
 const loginUsuario = (req, res = response)=>{
+
+    // Ahora acá viene un objeto que el middleware check de express validator envía a través
+    // del req y con el cual trabajaremos las validaciones
+    const errors = validationResult( req );
+    // console.log( errors );
+    if( !errors.isEmpty() ){
+        // Entonces si el objeto errors no viene vacío, es decir, se presentó un error
+        // entonces enviamos un estatus 400 que es un bad error
+        return res.status(400).json({
+            ok: false,
+            errors: errors.mapped()
+        });
+    }
 
     const { email, password } = req.body;
     console.log( email );
