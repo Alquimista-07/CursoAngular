@@ -16,6 +16,21 @@ const { response } = require('express');
 //================================
 const crearUsuario = (req, res = response)=>{
 
+    //NOTA: Entonces para probar lo que estamos mandando por el body usamos postman, el cual en los en los endpoint de
+    //      tipo POST (crearUsuario, loginUsuario) configuramos en el postman el body y le indicamos ras y luego el formato 
+    //      que es JSON y en la caja de texto que se muestra configuramos el objeto que vamos a enviar por el body. otra cosa
+    //      que se puede hacer con postman es genera la documentación de los endpoint que hayamos creado pero eso es tema que 
+    //      se debe investigar ya que en el curso no lo explican.
+
+    // Y al darle enviar en el postman podemos hacer un console.log para ver como llega la información
+    console.log( req.body );
+    
+    // Entonces por lo tanto ya podemos extraer los datos que me intersan podemos desestructurar
+    const { email, name, password } = req.body;
+    console.log( email );
+    console.log( name );
+    console.log( password );
+
     return res.json({
         ok: true,
         msg: 'Crear usuario /new'
@@ -27,6 +42,10 @@ const crearUsuario = (req, res = response)=>{
 // Login de usuario
 //================================
 const loginUsuario = (req, res = response)=>{
+
+    const { email, password } = req.body;
+    console.log( email );
+    console.log( password );
 
     return res.json({
         ok: true,
