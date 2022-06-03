@@ -25,6 +25,10 @@ console.log( process.env );
 // Crear el servidor/aplicación de express
 const app = express();
 
+// Directorio Público para mostrar página web con algo cuando se ingrese
+// a la dirección ip o url del servidor desde un navegador web.
+app.use( express.static( 'public' ) );
+
 //=================================================================================================================
 // CORS
 //=================================================================================================================
