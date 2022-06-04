@@ -171,10 +171,16 @@ const loginUsuario = async(req, res = response)=>{
 //================================
 const revalidarToken = (req, res = response)=>{
 
+    // Ahora ya como estamos pasando el payload en la request que es enviada por el middleware
+    // validar-jwt entonces los obtenemos de la siguiente manera:
+    const { uid, name } = req;
+
     // Y en este caso respondemos con un archivo json
     return res.json({
         ok: true,
-        msg: 'Validar y revalidar token /renew'
+        msg: 'Validar y revalidar token /renew',
+        uid,
+        name
     });
 
     // NOTA: Acionalmente si queremos cambiar el status de la respuesta

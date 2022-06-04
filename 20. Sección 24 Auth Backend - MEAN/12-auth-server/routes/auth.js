@@ -9,7 +9,10 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 // Importamos los controladores
 const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth');
+
+// Importamos los middlewares
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
@@ -56,7 +59,8 @@ router.post( '/', [
 //============================================================================================================
 // Validar y revalidar token
 //============================================================================================================
-router.get( '/renew', revalidarToken );
+// Ahora acá en la ruta le pasamos como parametro el middleware personalizado que creamos para validar el JWT
+router.get( '/renew', validarJWT, revalidarToken );
 
 
 // Ahora en node para exportar las cosas y que puedan ser utilizadas
