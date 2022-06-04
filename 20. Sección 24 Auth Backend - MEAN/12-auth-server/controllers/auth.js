@@ -5,6 +5,9 @@ const { response } = require('express');
 // Importamos el modelo
 const Usuario = require('../models/Usuario');
 
+// Importamos el bcrypt para crear el hash de la contraseña que va a ser de una sola vía
+const bcrypt = require('bcryptjs');
+
 // Como se había mencionado cada uno de los callback o controladores en nuestro archivo de rutas auth.js pueden crecer bastante
 // por lo tanto se recomienda separar el controlador del manejador de la ruta con el fin de mantenerlo lo más ordenado posible, 
 // y para esto lo vamos a hacer dentro de este archivo que también lo llamamos auth.js al igual que el archivo de rutas.
@@ -58,6 +61,14 @@ const crearUsuario = async(req, res = response)=>{
         const dbUser = new Usuario( req.body );
         
         // 3. Hashear (encriptar) la constraseña
+        // Creamos algo que se conoce como un salt que es una forma aleatoria para crear unos números que van a hacer parte
+        // de la validación de la contraseña.
+        const salt = bcrypt.genSaltSync();
+        // NOTA: Ahora procedemos a encriptar la contraseña con nuestro salt cuyo valor por defecto es de 10 vueltas, pero si ocuparamos hacerlo de más vueltas podríamos mandar
+        //       el valor como parámetro (por ejemplo genSaltSync(100)) y de esta forma la contraseña sería aún más segura, pero esto va a incrementar considerablemente el tiempo
+        //       de respuesta del este servicio (en este caso crearUsuario) porque va a consumir más memoria a la hora de crear la contraseña. Adicionalmente podemos ver más
+        //       información en la documentación de bcrypt sobre los métodos y funciones que tiene.
+        dbUser.password = bcrypt.hashSync( password, salt );
         
         // 4. Generar el JSON Web Token (JWT) el cual se le va a enviar a Angular para que lo use
         //    como un méotodo de autenticación pasiva
