@@ -107,16 +107,62 @@ const crearUsuario = async(req, res = response)=>{
 //================================
 // Login de usuario
 //================================
-const loginUsuario = (req, res = response)=>{
+const loginUsuario = async(req, res = response)=>{
 
     const { email, password } = req.body;
-    console.log( email );
-    console.log( password );
+    // console.log( email );
+    // console.log( password );
 
-    return res.json({
-        ok: true,
-        msg: 'Login de usuario /'
-    });
+    try {
+        
+        const dbUser = await Usuario.findOne({ email });
+
+        // Y como lo anterior es síncrono entonces vamos a tener un true si existe o un false si no existe
+        if( !dbUser ){
+            // En este punto podríamos decirle la contraseña y password no son correctos para que no
+            // sepa que fue el coore el que fallo, pero para fines educativos se va a informar si fue 
+            // la contraseña o el correo la que falló por separado.
+            return res.status(400).json({
+                ok: false,
+                msg: 'El corre no existe'
+            });
+        }
+
+        // Ahora si paso la anterior validación y el correo existe confirmamos si el password hace match. Y para ello usamos
+        // la función compareSync() de bcrypt para comparar la contraseña encriptada con la contraseña ingresada desde el front, 
+        // por lo tanto el primer parámetro es la contraseña sin encriptar y el segundo es la encriptada
+        const validPassword = bcrypt.compareSync( password, dbUser.password );
+
+        // Y como lo anterior es síncrono entonces vamos a tener un true si son iguales o un false si no lo son
+        if( !validPassword ){
+            return res.status(400).json({
+                ok: false,
+                msg: 'La contraseña no es válida'
+            });
+        }
+
+        // Pero si paso las anteriores validaciones quiere decir que el correo y la contraseña son validos.
+        // entonces procedemos a generar el JWT usando nuestro helper, y por eso fue que se separo como una
+        // funcionalidad aparte con el fin de poderla usar de una forma sencilla
+        const token = await generarJWT( dbUser.id, dbUser.name );
+
+        // Respuesta del servicio
+        return res.json({
+            ok: true,
+            uid: dbUser.id,
+            name: dbUser.name,
+            token
+        });
+
+
+    }
+    catch (error) {
+        console.log( error );
+        return res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        })
+    }
 
 }
 
