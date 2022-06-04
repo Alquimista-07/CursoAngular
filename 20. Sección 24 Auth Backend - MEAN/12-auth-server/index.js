@@ -8,6 +8,9 @@ const express = require('express');
 // Ahora para los CORS (Cross Domain) es necesario realizar la siguiente importación
 const cors = require('cors');
 
+// Importamos la configuración de la base de datos
+const { dbConnection } = require('./database/config');
+
 // Para congigurar las variables de entorno configuramos usando el paquete dotenv que
 // habíamos instalado el cual toma el archivo .env por defecto y para ello hacemos lo 
 // siguiente:
@@ -24,6 +27,9 @@ console.log( process.env );
 
 // Crear el servidor/aplicación de express
 const app = express();
+
+// Conexión base de datos
+dbConnection();
 
 // Directorio Público para mostrar página web con algo cuando se ingrese
 // a la dirección ip o url del servidor desde un navegador web.
