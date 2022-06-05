@@ -66,7 +66,7 @@ export class AuthService {
         // error y para ello ocupamos usar otro operador de rxjs que es el catchError, y adicionalmente
         // como no podemos igualar directamente que retorne un false ya que debe ser un observable entonces
         // usamos otro operador de rxjs que es el of para transformarlo en un observable
-        catchError( err => of(false) )
+        catchError( err => of(err.error.msg) )
       );
 
   }
