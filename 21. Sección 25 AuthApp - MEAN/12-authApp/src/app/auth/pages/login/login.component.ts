@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from '../../../shared/validator.service';
 import { Router } from '@angular/router';
 
+// Importamos el servicio que creamos para manejar la autenticación
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,15 +24,24 @@ export class LoginComponent {
 
   constructor( private fb: FormBuilder,
                private vs: ValidatorService,
-               private router: Router ) { }
+               private router: Router,
+               private authService: AuthService ) { }
 
   login() {
     console.log( this.miFormulario.value );
     // console.log( this.miFormulario.valid );
 
+    // Extraemos los valores del formulario
+    const { email, password } = this.miFormulario.value;
+
+    this.authService.login( email, password )
+        .subscribe( resp => {
+          console.log( resp )
+        });
+
     // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
     // igual que el navigate
-    this.router.navigateByUrl('/dashboard');
+    // this.router.navigateByUrl('/dashboard');
 
   }
 
