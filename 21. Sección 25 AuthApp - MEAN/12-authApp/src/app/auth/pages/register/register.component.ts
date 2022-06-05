@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from '../../../shared/validator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,12 +19,17 @@ export class RegisterComponent {
   });
 
   constructor( private fb: FormBuilder,
-               private vs: ValidatorService ) { }
+               private vs: ValidatorService,
+               private router: Router ) { }
 
 
   registrar() {
     console.log( this.miFormulario.value );
-    console.log( this.miFormulario.valid );
+    // console.log( this.miFormulario.valid );
+
+    // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
+    // igual que el navigate
+    this.router.navigateByUrl('/dashboard');
   }
 
 }
