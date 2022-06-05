@@ -35,13 +35,23 @@ export class LoginComponent {
     const { email, password } = this.miFormulario.value;
 
     this.authService.login( email, password )
-        .subscribe( resp => {
-          console.log( resp )
+        .subscribe( valido => {
+          // Entonces como en el servicio ya tenemos la información del usuairo entonces validamos
+          if( valido ) {
+
+            // Entonces si esta ok navegamos al dashboard
+
+            // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
+            // igual que el navigate
+            this.router.navigateByUrl('/dashboard');
+
+          }
+          else {
+            // TODO: Mostrar mensaje de error
+          }
+
         });
 
-    // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
-    // igual que el navigate
-    // this.router.navigateByUrl('/dashboard');
 
   }
 

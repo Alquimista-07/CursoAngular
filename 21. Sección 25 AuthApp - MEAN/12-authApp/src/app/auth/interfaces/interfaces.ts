@@ -8,3 +8,11 @@ export interface AuthResponse {
     msg   : string; 
 
 }
+
+// Creamos una interface para el tipado de la información del usuario
+export interface Usuario {
+
+    uid: string;
+    name: string;
+
+}
