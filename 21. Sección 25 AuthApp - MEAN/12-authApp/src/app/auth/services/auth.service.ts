@@ -114,4 +114,18 @@ export class AuthService {
 
   }
 
+  logout() {
+
+    //Destruimos el item específico correspondiente al token para cerrar la sesión
+    sessionStorage.removeItem('token');
+
+    // Adicionalmente también podemos purgar todo lo que se encuentre en el localstorage o en el
+    // session storage, pero hay que tener en cuenta que si tenemos algo que quisieramos persistir 
+    // lo borraría, entonces para purgar todo se haría de la siguiente forma:
+    /*
+    sessionStorage.clear();
+    */
+
+  }
+
 }

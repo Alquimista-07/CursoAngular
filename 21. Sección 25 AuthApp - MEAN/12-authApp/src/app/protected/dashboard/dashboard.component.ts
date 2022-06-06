@@ -25,9 +25,14 @@ export class DashboardComponent {
                private authService: AuthService ) { }
 
   logout() {
+
     // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
     // igual que el navigate
     this.router.navigateByUrl('/auth');
+
+    // Llamamos el servicio que destruye el token almacenado en el session storage
+    this.authService.logout();
+
   }
 
 }
