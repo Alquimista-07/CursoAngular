@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 // Importamos el modulo para hacer peticiones http
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Importamos el operador map de rxjs
 import { catchError, map } from 'rxjs/operators';
@@ -51,6 +51,9 @@ export class AuthService {
         // NOTA: Ojo el orden de los operadores es importante ya que el anterior operador le pasa el producto de la respuesta al siguiente y así sucesivamente
         tap( resp => {
           if( resp.ok ){
+            // Cuando tenenmos una respuesta correcta y se puede iniciar sesión procedemos a almacenar el JWT en el 
+            // localstorage o en el session storage
+            sessionStorage.setItem('token', resp.token! );
             // Si es true establecemos la información al usuario
             this._usuario = {
               // Acá como ya sabemos que se realizo la verificación para que no marque el error de que pueden venir vacíos usamos el ! ya que la verificación ya la
@@ -68,6 +71,21 @@ export class AuthService {
         // usamos otro operador de rxjs que es el of para transformarlo en un observable
         catchError( err => of(err.error.msg) )
       );
+
+  }
+
+  // Creamos un metodo que sirva para verificar el JWT
+  validarToken() {
+
+    const url  = `${this._baseUrl}/auth/renew`;
+
+    // Creamos una constante para el header del x-token,
+    // entonces obtenemos el valor del localstorage o el session storage y se lo pasamos
+    // adicionalmente como puede ser vacío le indicamos el || ''
+    const headers = new HttpHeaders()
+      .set('x-token', sessionStorage.getItem('token') || '' );
+
+    return this.http.get( url, { headers } );
 
   }
 
