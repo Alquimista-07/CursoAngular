@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidarTokenGuard } from './guards/validar-token.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./protected/protected.module').then( m => m.ProtectedModule )
+    loadChildren: () => import('./protected/protected.module').then( m => m.ProtectedModule ),
+    // Evitamos cargar el dashboard si no esta autenticado, o por lo menos obligar a que pase 
+    // por la autenticación usando el guard
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
   },
   {
     path: '**',

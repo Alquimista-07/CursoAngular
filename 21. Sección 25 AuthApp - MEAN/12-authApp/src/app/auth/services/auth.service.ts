@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // Importamos el operador map de rxjs
 import { catchError, map } from 'rxjs/operators';
 // Importamos el operado of de rxjs que sirve para retornar la respuesta en un observable
-import { of, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 // Importamos el environment para usar las variables de entorno
 import { environment } from 'src/environments/environment';
@@ -75,8 +75,12 @@ export class AuthService {
   }
 
   // Creamos un metodo que sirva para verificar el JWT
-  validarToken() {
+  validarToken(): Observable<boolean> {
 
+    // Como en el guard ocupamos un observable que resuelve un boolean entonces necesitamos
+    // realizar una transformación en el metodo validarToken para que el valor que le llegue
+    // sea del mismo tipo ya que acá anteriormente retornabamos un observable que resolvia un
+    // objeto, por lo tanto para realizar dicha transformación ocupamos usar el operador map de rxjs
     const url  = `${this._baseUrl}/auth/renew`;
 
     // Creamos una constante para el header del x-token,
@@ -85,7 +89,28 @@ export class AuthService {
     const headers = new HttpHeaders()
       .set('x-token', sessionStorage.getItem('token') || '' );
 
-    return this.http.get( url, { headers } );
+    return this.http.get<AuthResponse>( url, { headers } )
+      .pipe(
+        map( resp => {
+
+          // Cuando tenemos una respuesta correcta y se puede iniciar sesión procedemos a almacenar el JWT en el 
+          // localstorage o en el session storage
+          sessionStorage.setItem('token', resp.token! );
+          // Y como es true establecemos la información al usuario
+          this._usuario = {
+            // Acá como ya sabemos que se realizo la verificación para que no marque el error de que pueden venir vacíos usamos el ! ya que la verificación ya la
+            // tenemos y sabemos que no vienen vacios
+            name: resp.name!,
+            uid: resp.uid!
+          }
+
+          return resp.ok;
+        }),
+        // Si se da un error que ya sabemos que en el backend es un status 401 Unauthorized mandamos un false
+        // para que el guard sepa que no esta autorizado y lo saque a la pantalla que definimos en el guard
+        // para redirigirlo
+        catchError( err => of(false) )
+      );
 
   }
 
