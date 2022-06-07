@@ -90,6 +90,7 @@ const crearUsuario = async(req, res = response)=>{
             ok: true,
             uid: dbUser.id,
             name,
+            email,
             token
         });
 
@@ -151,6 +152,7 @@ const loginUsuario = async(req, res = response)=>{
             ok: true,
             uid: dbUser.id,
             name: dbUser.name,
+            email,
             token
         });
 
@@ -173,17 +175,21 @@ const revalidarToken = async(req, res = response)=>{
 
     // Ahora ya como estamos pasando el payload en la request que es enviada por el middleware
     // validar-jwt entonces los obtenemos de la siguiente manera:
-    const { uid, name } = req;
+    const { uid } = req;
+
+    // Leer la base de datos
+    const dbUser = await Usuario.findById( uid );
 
     // Generamos un JWT
-    const token = await generarJWT( uid, name );
+    const token = await generarJWT( uid, dbUser.name );
 
     // Y en este caso respondemos con un archivo json
     return res.json({
         ok: true,
         msg: 'Validar y revalidar token /renew',
         uid,
-        name,
+        name: dbUser.name,
+        email: dbUser.email,
         token
     });
 

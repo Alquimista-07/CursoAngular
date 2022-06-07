@@ -45,15 +45,11 @@ export class AuthService {
     // Enviamos la url y el body de la petición.
     return this.http.post<AuthResponse>( url, body )
       .pipe(
-        tap( resp => {
-          if( resp.ok ){
+        tap( ({ ok, token }) => {
+          if( ok ){
 
-            sessionStorage.setItem('token', resp.token!);
+            sessionStorage.setItem('token', token!);
 
-            this._usuario = {
-              name: resp.name!,
-              uid: resp.uid!
-            }
           }
         }),
         map( resp => resp.ok ),
@@ -80,13 +76,7 @@ export class AuthService {
             // Cuando tenenmos una respuesta correcta y se puede iniciar sesión procedemos a almacenar el JWT en el 
             // localstorage o en el session storage
             sessionStorage.setItem('token', resp.token! );
-            // Si es true establecemos la información al usuario
-            this._usuario = {
-              // Acá como ya sabemos que se realizo la verificación para que no marque el error de que pueden venir vacíos usamos el ! ya que la verificación ya la
-              // tenemos y sabemos que no vienen vacios
-              name: resp.name!,
-              uid: resp.uid!
-            }
+            
           }
         }),
         // Realizamos la putación de la data y retornar un true si esta bien o un false si esta mal
@@ -127,7 +117,8 @@ export class AuthService {
             // Acá como ya sabemos que se realizo la verificación para que no marque el error de que pueden venir vacíos usamos el ! ya que la verificación ya la
             // tenemos y sabemos que no vienen vacios
             name: resp.name!,
-            uid: resp.uid!
+            uid: resp.uid!,
+            email: resp.email!
           }
 
           return resp.ok;
