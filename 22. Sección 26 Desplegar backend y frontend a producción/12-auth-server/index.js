@@ -8,6 +8,9 @@ const express = require('express');
 // Ahora para los CORS (Cross Domain) es necesario realizar la siguiente importación
 const cors = require('cors');
 
+// Importamos el paquete path
+const path = require('path');
+
 // Importamos la configuración de la base de datos
 const { dbConnection } = require('./database/config');
 
@@ -71,6 +74,11 @@ app.use( express.json() );
 // Rutas
 //=================================================================================================================
 app.use( '/api/auth', require('./routes/auth') );
+
+// Manejar demás rutas
+app.get( '*', ( req, res ) => {
+    res.sendFile( path.resolve( __dirname, 'public/index.html' ) );
+});
 
 
 // Levantamos la aplicación de express indicando que va a ser a través del pueto 4000
