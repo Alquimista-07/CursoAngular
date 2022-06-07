@@ -3,6 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from '../../../shared/validator.service';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../services/auth.service';
+
+// Importamos el sweet alert
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,16 +25,32 @@ export class RegisterComponent {
 
   constructor( private fb: FormBuilder,
                private vs: ValidatorService,
-               private router: Router ) { }
+               private router: Router,
+               private authService: AuthService ) { }
 
 
   registrar() {
-    console.log( this.miFormulario.value );
+    // console.log( this.miFormulario.value );
     // console.log( this.miFormulario.valid );
 
-    // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
-    // igual que el navigate
-    this.router.navigateByUrl('/dashboard');
+    const { name, email, password } = this.miFormulario.value;
+
+    this.authService.registro( name, email, password )
+        .subscribe( registro =>{
+          
+          if( registro === true ){
+            
+            // Anteriormente se había usado el método navigate pero ahora usamos uno nuevo que funciona 
+            // igual que el navigate
+            this.router.navigateByUrl('/dashboard');
+
+          }
+          else{
+            Swal.fire('Error', registro, 'error');
+          }
+
+        });
+
   }
 
 }

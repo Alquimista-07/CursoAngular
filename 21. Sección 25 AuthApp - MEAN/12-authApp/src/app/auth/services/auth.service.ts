@@ -36,6 +36,32 @@ export class AuthService {
   // Inyectamos el servicio para hacer peticiones http
   constructor( private http: HttpClient ) { }
 
+  // Creamos el método para realizar el registro de un nuevo usuario
+  registro( name: string, email: string, password: string ) {
+
+    const url = `${this._baseUrl}/auth/new`;
+    const body = { name, email, password };
+
+    // Enviamos la url y el body de la petición.
+    return this.http.post<AuthResponse>( url, body )
+      .pipe(
+        tap( resp => {
+          if( resp.ok ){
+
+            sessionStorage.setItem('token', resp.token!);
+
+            this._usuario = {
+              name: resp.name!,
+              uid: resp.uid!
+            }
+          }
+        }),
+        map( resp => resp.ok ),
+        catchError( err => of(err.error.msg) )
+      );
+
+  }
+
   // Creamos el método que realiza la peticón al servicio del login en el backend
   login( email: string, password: string ) {
 
