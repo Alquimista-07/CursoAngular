@@ -198,6 +198,35 @@ git push heroku main
 
 Y cuando termine el proceso en la consola se nos informa cual es la url para acceder al sitio. Ahora si se nos olvido copiar la url o se nos cerro por error la consola podemos ir al dashboard de la aplicación en Heroku y dar click en el botón que cide `Open App`
 
+## NOTA IMPORTANTE
+
+Ahora acá tenemos un error ya que como no teníamos la url que nos asigna Heroku al momento de desplegar la aplicación en las variables de entorno de producción en el archivo `environment.prod.ts` de la aplicación de Angular las dejamos como `http://localhost:4000/api` por lo tanto es necesario tomar la url asignada por Heroku y actualizar dicha variable de entorno. La cual quedaría por ejemplo `https://curso-angularapp-mean.herokuapp.com/api`
+
+Pero lamentablemente tenemos que volver a hacer el build de producción de Angular, volver a copiar y pegar los archivos resultantes de build de Angular dentro de la carpeta pública de nuestro backend server y volver a hacer el despliegue a Heroku.
+
+Entonces para hacer nuevamente el despliegue a Heroku hacemos los siguiente:
+
+1. Ejcuentamos el siguiente comando: 
+
+```
+git add .
+```
+
+2. Hacemos el commit
+
+```
+git commit -am "Ajuste environment produccion"
+```
+
+3. Y para finalizar es hacer el despliegue nuevemente usando el siguiente comando:
+
+```
+git push heroku master
+```
+
+Y listo eso sería todo y tanto el backend como el front estaría desplegado y funcional en internet.
+
+#### NOTA:
 Adicionalmete también podemos ver los logs de Heroku para revisar errores y demás cosas usando el siguiente comando:
 
 ```
