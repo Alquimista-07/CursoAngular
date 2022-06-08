@@ -232,3 +232,16 @@ Adicionalmete también podemos ver los logs de Heroku para revisar errores y dem
 ```
 heroku logs --tail
 ```
+
+#### NOTA:
+Hay que tener en cuenta que para ejecutar el anterior comando tenemos que estar en la ruta de la aplicación que fue desplegada. Adicionalmente el `--tail` es para escuchar los ultimos logs que se estén emitiendo.
+
+También podemos usar el siguiente comando para revisar los logs, entonces ubicados dentro de la carpeta del proyecto que fue desplegado ejecutamos el siguiente comando:
+
+```
+heroku logs -n 1000 --tail -a=curso-angularapp-mean
+```
+
+Donde el `-n 1000` indica el número de líneas que queremos que se muestren, el `--tail` es para escuchar los ultimos logs que se estén emitiendo y el `-a=` especifica el nombre de la aplicación que se quiere revisar que como sabemos para el ejemplo del curso se llama `curso-angularapp-mean`.
+
+Y acá ya con el anterior comando podemos ver los mensajes de console.log(), el puerto y demás mensajes que dejamos en el backend, adicionalmente también podemos ver la demás información del despliegue a Heroku.
