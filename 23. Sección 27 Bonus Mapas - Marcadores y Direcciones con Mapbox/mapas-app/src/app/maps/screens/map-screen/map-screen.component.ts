@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlacesService } from '../../services';
 
 @Component({
   selector: 'app-map-screen',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapScreenComponent implements OnInit {
 
-  constructor() { }
+  // Inyectamos el servicio places.service.ts que se creo con el método para obtener la geolocalización
+  constructor( private placesService: PlacesService ) { }
 
   ngOnInit(): void {
   }
