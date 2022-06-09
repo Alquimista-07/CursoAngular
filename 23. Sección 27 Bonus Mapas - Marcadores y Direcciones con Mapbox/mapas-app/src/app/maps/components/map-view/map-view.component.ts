@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Map, Popup, Marker } from 'mapbox-gl';
-import { PlacesService } from '../../services';
+import { MapService, PlacesService } from '../../services';
 
 @Component({
   selector: 'app-map-view',
@@ -10,7 +10,8 @@ import { PlacesService } from '../../services';
 export class MapViewComponent implements AfterViewInit {
 
   // Inyectamos el servicio donde tenemos el método para geolocalización
-  constructor( private placesService: PlacesService ) { }
+  constructor( private placesService: PlacesService,
+               private mapService: MapService ) { }
 
   // Obtenemos el elemento html a través de su referencia local
   @ViewChild('mapDiv') mapDivElement!: ElementRef;
@@ -43,6 +44,9 @@ export class MapViewComponent implements AfterViewInit {
       .setPopup( popup )
     // Agregamos el marcador al mapa
       .addTo( map );
+
+    // Establecemos el mapa usando el setter del servicio map.service.ts
+    this.mapService.setMap( map );
 
   }
 
