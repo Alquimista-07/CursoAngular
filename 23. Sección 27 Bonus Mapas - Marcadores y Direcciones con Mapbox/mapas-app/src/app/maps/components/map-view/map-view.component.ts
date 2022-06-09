@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Map } from 'mapbox-gl';
+import { Map, Popup, Marker } from 'mapbox-gl';
 import { PlacesService } from '../../services';
 
 @Component({
@@ -25,10 +25,24 @@ export class MapViewComponent implements AfterViewInit {
     // NOTA: Al presionar Ctrl y mover el mouse podemos girar los ejes del mapa
     const map = new Map({
       container: this.mapDivElement.nativeElement, // Contenedor
-      style: 'mapbox://styles/mapbox/streets-v11', // Estilo
+      style: 'mapbox://styles/mapbox/light-v10', // Estilo: Acá se ajusta el estilo del mapa, también existe un dark-v10
       center: this.placesService.userLocation, //Posición inicial [lng, lat]
       zoom: 14 // Zoom inicial
     });
+
+    // Creamos el popup
+    const popup = new Popup()
+      .setHTML(`
+        <h6>Aquí Estoy!</h6>
+        <span>Estoy en este lugar del mundo</span>
+      `);
+
+    // Los popus regularmente se conectan a un marcador, pero también se pueden añadir directamente al mapa
+    new Marker({ color: 'red' })
+      .setLngLat( this.placesService.userLocation )
+      .setPopup( popup )
+    // Agregamos el marcador al mapa
+      .addTo( map );
 
   }
 
