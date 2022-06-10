@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlacesService } from '../../services';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,7 +19,8 @@ export class SearchBarComponent {
   */
   private deboundeTimer?: NodeJS.Timeout;
 
-  constructor() { }
+  // Inyectamos el servicio places services para usar el metodo getPlacesByQuery para la busqueda por http usando la API de mapbox
+  constructor( private placesService: PlacesService ) { }
   
   // Acá quiero controlar la manera como voy a emitir los valores
   onQueryChanged( query: string = '' ){
@@ -34,6 +36,8 @@ export class SearchBarComponent {
     this.deboundeTimer = setTimeout( () => {
 
       console.log('Mandar este query: ', query);
+
+      this.placesService.getPlacesByQuery( query );
 
     }, 350);
 
