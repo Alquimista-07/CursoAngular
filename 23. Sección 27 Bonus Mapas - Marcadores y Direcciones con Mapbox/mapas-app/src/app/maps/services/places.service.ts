@@ -69,7 +69,12 @@ export class PlacesService {
   //       idioma y limite de resultados para obtener toda una url a la cual se 
   //       realiza la petición y que podemos validar con Postman.
   getPlacesByQuery( query: string = '' ){
-    // TODO: Evaluar cuando el query es nulo
+    
+    if( query.length === 0 ){
+      this.isLoadingPlaces = false;
+      this.places = [];
+      return;
+    }
 
     if( !this.userLocation ) throw Error('No Hay UserLocation');
 
