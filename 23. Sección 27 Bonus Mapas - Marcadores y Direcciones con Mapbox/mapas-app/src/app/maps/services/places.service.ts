@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { PlacesApiCLient } from '../api';
 
 //Importamos la interface places response
 import { Feature, PlacesResponse } from '../interfaces/places';
@@ -26,8 +26,8 @@ export class PlacesService {
     return !!this.userLocation;
   }
 
-  // Como vamos a usar peticiones http es necesario inyectar el modulo
-  constructor( private http: HttpClient ) { 
+  // cambiamos el httClient para usar el custom http client (placesApiClient.ts) que nos permite más control
+  constructor( private placesApiClient: PlacesApiCLient ) { 
     // Llamamos el método para obtener la geolocalización tan pronto alguien use el servicio
     // places.service.ts
     this.getUserLocation();
@@ -71,15 +71,22 @@ export class PlacesService {
   getPlacesByQuery( query: string = '' ){
     // TODO: Evaluar cuando el query es nulo
 
+    if( !this.userLocation ) throw Error('No Hay UserLocation');
+
     this.isLoadingPlaces = true;
 
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${ query }.json?proximity=-74.04509074027611%2C4.76147855297377&types=place%2Cpostcode%2Caddress&language=es&access_token=pk.eyJ1IjoidGhlYWxjaGVtaXN0MDciLCJhIjoiY2wzbTVkNm1pMDFhYzNvdXZrMGk5MGRiYiJ9.pOxa86N0FzW03dQiFKcQKA`;
+    const url = `/${ query }.json`;
 
-    this.http.get<PlacesResponse>( url )
-        .subscribe( places => {
-          this.isLoadingPlaces = false;
-          this.places = places.features;
-        });
+    this.placesApiClient.get<PlacesResponse>( url, {
+      params: {
+        proximity: this.userLocation.join(',')
+      }
+    })
+      .subscribe( places => {
+        // console.log(places.features);
+        this.isLoadingPlaces = false;
+        this.places = places.features;
+      });
 
   } 
 
