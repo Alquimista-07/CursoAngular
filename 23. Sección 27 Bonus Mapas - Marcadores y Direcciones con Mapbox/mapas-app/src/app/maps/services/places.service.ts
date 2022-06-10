@@ -3,6 +3,7 @@ import { PlacesApiCLient } from '../api';
 
 //Importamos la interface places response
 import { Feature, PlacesResponse } from '../interfaces/places';
+import { MapService } from './map.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,8 @@ export class PlacesService {
   }
 
   // cambiamos el httClient para usar el custom http client (placesApiClient.ts) que nos permite más control
-  constructor( private placesApiClient: PlacesApiCLient ) { 
+  constructor( private placesApiClient: PlacesApiCLient,
+               private mapService: MapService ) { 
     // Llamamos el método para obtener la geolocalización tan pronto alguien use el servicio
     // places.service.ts
     this.getUserLocation();
@@ -91,6 +93,9 @@ export class PlacesService {
         // console.log(places.features);
         this.isLoadingPlaces = false;
         this.places = places.features;
+
+        // Llamamos el metodo que crea los marcadores en el mapa
+        this.mapService.createMarkersFromPlaces( this.places );
       });
 
   } 
