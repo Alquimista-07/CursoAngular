@@ -66,6 +66,7 @@ COMANDOS ANGULAR CLI
 -----------------------------------------------------------------------------------------------------------
 
 	ng build --prod
+	npm run build         -> Esta es otra forma de generar la compilación de producción.
 
 -----------------------------------------------------------------------------------------------------------
 * El siguiente comando me permite generar un servicio
