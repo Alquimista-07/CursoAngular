@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
+import { AnySourceData, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
 import { Feature } from '../interfaces/places';
 import { DirectionsApiCLient } from '../api';
 import { DirectionsResponse, Route } from '../interfaces/directions';
@@ -121,8 +121,52 @@ export class MapService {
     // Colocamos los bounds entre los puntos
     this.map?.fitBounds( bounds, {
       padding: 200
-    })
+    });
+    
+    // PolyLine
+    const sourceData: AnySourceData = {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: coords
+            }
+          }
+        ]
+      }
+    }
+
+    // Limpiar ruta previa
+    if( this.map.getLayer('RouteString') ){
+      this.map.removeLayer('RouteString');
+      this.map.removeSource('RouteString');
+    }
+
+    // Agregar la línea al mapa
+    this.map.addSource('RouteString', sourceData);
+
+    this.map.addLayer({
+      id: 'RouteString', // Este no es necesario que se llame igual a como lo definimos
+      type: 'line',
+      source: 'RouteString', // Este si tiene que llamarse igual a como lo definimos
+      layout: {
+        // Acá van entre comilla sencilla porque en JavaScript no se pude definir una llave que lleve un menos (-) yq que va contra la definición de objetos literales en JavaSript
+        'line-cap': 'round', 
+        'line-join': 'round'
+      },
+      paint: {
+        'line-color': 'black',
+        "line-width": 3
+      }
+    });
 
   }
+
+
 
 }
