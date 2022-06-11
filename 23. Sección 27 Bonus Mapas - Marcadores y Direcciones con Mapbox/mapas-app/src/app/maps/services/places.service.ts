@@ -95,7 +95,7 @@ export class PlacesService {
         this.places = places.features;
 
         // Llamamos el metodo que crea los marcadores en el mapa
-        this.mapService.createMarkersFromPlaces( this.places );
+        this.mapService.createMarkersFromPlaces( this.places, this.userLocation! );
       });
 
   } 
