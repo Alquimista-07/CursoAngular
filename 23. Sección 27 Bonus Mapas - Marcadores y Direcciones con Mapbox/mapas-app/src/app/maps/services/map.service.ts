@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
 import { Feature } from '../interfaces/places';
+import { DirectionsApiCLient } from '../api';
+import { DirectionsResponse, Route } from '../interfaces/directions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,8 @@ export class MapService {
     // Si tiene algún valor regresa true y si no false
     return !!this.map;
   }
+
+  constructor( private directionsApi: DirectionsApiCLient ) { }
 
   // Eventualmente necesito de alguna establecer el valor del map ya que es una propiedad
   // privada ya que no quiero que desde afuera se le establezca o se tenga un control a ese
@@ -81,6 +85,43 @@ export class MapService {
     this.map.fitBounds( bounds, {
       padding: 200
     });
+
+  }
+
+  // Obtener posición entre dos puntos
+  getRouteBetweenPoinsts( start: [ number, number ], end: [ number, number ] ){
+
+    this.directionsApi.get<DirectionsResponse>(`/${ start.join(',') };${ end.join(',') }`)
+        .subscribe( resp => {
+          this.drawPolyline( resp.routes[0] );
+        });
+
+  }
+
+  private drawPolyline( route: Route ){
+       
+    // Imprimimos la distancia y los kilómetros
+    console.log({
+      kms: route.distance / 1000, // Metroa s kilómetros
+      duration: route.duration / 60    // Minutos a horas
+    });
+
+    if( !this.map ) throw Error('Mapa no inicializado');
+
+    const coords = route.geometry.coordinates;
+
+    // Creamos el objeto de los bounds
+    const bounds = new LngLatBounds();
+
+    // Insertamos los bounds
+    coords.forEach( ( [ lng, lat ] ) => {
+      bounds.extend( [lng, lat] ); 
+    });
+
+    // Colocamos los bounds entre los puntos
+    this.map?.fitBounds( bounds, {
+      padding: 200
+    })
 
   }
 
