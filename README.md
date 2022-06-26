@@ -6,6 +6,50 @@ Temas: Componentes, directivas, servicios, mapas, gráficas, JWT, autenticación
 
 Instructor: Fernando Herrera
 
+## Descripicón
+
+`Angular de cero a experto: (Angular 11+)`
+
+Angular es un framework para desarrollo de aplicaciones de todo tipo, por defecto `genera aplicaciones web muy poderosas y robustas`, y si se mezcla con otras tecnologías, puedes hacer aplicaciones móviles y de escritorio también con el mismo código.
+
+`Este curso te ayudará a aprender Angular (la última versión) a profundidad` mediante ejercicios y tareas que tú mismo harás. Partiendo de cero conocimiento de TypeScript hasta crear un sistema robusto de autenticación, uso de mapas, consumo de servicios y mucho más. Puntualmente tocamos estos temas:
+
+1. Bases de TypeScript y ESCMAScript
+2. Hola Mundo en Angular
+3. Componentes
+4. Directivas
+5. Servicios
+6. Módulos
+7. Todos los pipes de Angular
+8. Rutas
+9. Rutas Hijas
+10. Carga perezosa o Lazyload de módulos
+11. Guards
+12. Protección de rutas
+13. Autenticación mediante JsonWebTokens
+14. Mapas
+15. Uso de librerías de terceros escritas en Angular
+16. Uso de librerías NO escritas para Angular
+17. Consumo de APIs
+18. CRUD
+19. SPA
+20. Git
+21. GitHub
+22. Despliegues a producción
+23. MongoDB
+24. Node
+25. Re-utilización de componentes, directivas, servicios..
+26. Comunicación entre componentes y módulos
+27. Uso de extensiones reactivas
+28. PrimeNG
+29. Material Design
+30. Bootstrap
+31. Y mucho más...
+
+Este es un curso robusto y fuerte, que `contiene todo lo que necesitarás para trabajar en Angular` y poder desenvolverte como deseas en el Framework, eso incluye poder leer la documentación, errores y optimizaciones de código para mejorar la forma de escribir nuestras aplicaciones.
+
+`Al finalizar el curso`, podrás crear tus propias aplicaciones usando Angular y poder comprender código de otros desarrolladores porque seguimos estándares recomendados por el framework, sin contar que también hay información extra dentro del mismo para seguir el camino una vez terminado el curso.
+
 # Instalaciones recomendadas - Curso de Angular
 
 ## Instalaciones Necesarias
