@@ -1,6 +1,6 @@
 # CursoAngular
 
-Repositorio git creado para almacenar los ejercicios realizados para el curso de Udemy Angular: De cero a experto.
+Repositorio git creado para almacenar los ejercicios realizados para el curso de [Udemy](https://www.udemy.com/course/angular-fernando-herrera/) Angular: De cero a experto.
 
 Temas: Componentes, directivas, servicios, mapas, gráficas, JWT, autenticación, despliegues, mongo, Git, GitHub y mucho más. 
 
